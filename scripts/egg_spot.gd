@@ -28,6 +28,10 @@ var index := 0
 var bird_id := 0
 var hatched := false
 var hovered := false
+var blind := false  # Blinded by the boss: the egg wears a blindfold and the bird shows no color.
+
+const BLIND_BIRD := Color("6e6a78")
+const BLINDFOLD := Color("3d2a4a")
 
 
 func _ready() -> void:
@@ -75,6 +79,18 @@ func close() -> void:
 
 func set_matched() -> void:
 	mouse_default_cursor_shape = CURSOR_ARROW
+	blind = false  # A matched pair reveals its true color.
+	queue_redraw()
+
+
+## The boss blindfolds this egg.
+func set_blind() -> void:
+	blind = true
+	var t := create_tween()
+	t.tween_property(self, "scale", Vector2(1.15, 1.15), 0.12)
+	t.tween_callback(queue_redraw)
+	t.tween_property(self, "scale", Vector2.ONE, 0.15)
+	await t.finished
 
 
 # --- Drawing ---
@@ -84,10 +100,20 @@ func _draw() -> void:
 	var base := Vector2(size.x / 2, size.y * 0.8)
 	_draw_nest(base, s)
 	if hatched:
-		_draw_bird(base + Vector2(0, -42) * s, s, BIRD_COLORS[bird_id % BIRD_COLORS.size()])
+		var col := BLIND_BIRD if blind else BIRD_COLORS[bird_id % BIRD_COLORS.size()]
+		_draw_bird(base + Vector2(0, -42) * s, s, col)
 		_draw_bottom_shell(base + Vector2(0, -22) * s, s)
+		if blind:
+			# A "?" badge next to the head: you can't tell which bird this is.
+			var badge := base + Vector2(-38, -92) * s
+			draw_circle(badge, 17 * s, OUTLINE)
+			draw_circle(badge, 14 * s, Color.WHITE)
+			draw_string(get_theme_default_font(), badge + Vector2(-20, 10) * s, "?",
+					HORIZONTAL_ALIGNMENT_CENTER, 40 * s, int(28 * s), OUTLINE)
 	else:
 		_draw_egg(base + Vector2(0, -50) * s, s)
+		if blind:
+			_draw_blindfold(base + Vector2(0, -50) * s, s)
 
 
 func _ellipse(center: Vector2, radius: Vector2, top_scale: float = 1.0, points: int = 40) -> PackedVector2Array:
@@ -122,6 +148,17 @@ func _draw_egg(c: Vector2, s: float) -> void:
 	_shape(_ellipse(c, r, 1.25), EGG)
 	for spot in [Vector2(-14, -20), Vector2(12, -4), Vector2(-6, 16), Vector2(16, 22)]:
 		draw_circle(c + spot * s, 5 * s, EGG_SPOTS)
+
+
+func _draw_blindfold(c: Vector2, s: float) -> void:
+	# A band across the egg, tied in a knot on the side.
+	var band := PackedVector2Array([c + Vector2(-38, -12) * s, c + Vector2(38, -16) * s,
+			c + Vector2(38, 2) * s, c + Vector2(-38, 6) * s])
+	_shape(band, BLINDFOLD)
+	_shape(PackedVector2Array([c + Vector2(36, -8) * s, c + Vector2(56, -20) * s,
+			c + Vector2(52, -4) * s]), BLINDFOLD)
+	_shape(PackedVector2Array([c + Vector2(36, -6) * s, c + Vector2(54, 6) * s,
+			c + Vector2(42, 10) * s]), BLINDFOLD)
 
 
 func _draw_bottom_shell(c: Vector2, s: float) -> void:

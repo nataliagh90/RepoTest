@@ -12,6 +12,10 @@ mismatch you could have avoided, because you'd already seen one of the eggs
 involved or the right partner, costs one of your 3 allowed mistakes. The
 4th one loses the game, after the snake says something sassy.
 
+There are 4 levels: no tricks, then the snake **swaps** eggs you've opened,
+then it **blindfolds** eggs you've opened (you can't see their color anymore),
+then both. Use **Back** / **Skip** at the top to jump between levels.
+
 All art is **placeholder** drawn in code, meant to be replaced later.
 
 ## Running it
@@ -33,8 +37,10 @@ tests/test_runner.gd      Headless tests for the rules
 IDEAS.md                  Ideas list for future design decisions
 ```
 
-Easy knobs in `scripts/main.gd`: `PAIRS`, `MISTAKES_ALLOWED`, `COLUMNS`,
-`MISMATCH_DELAY`, `SLIP_LINES` and `LOSE_LINES` (the snake's sassy lines). Damage per match
+Levels are listed in `LEVELS` in `scripts/main.gd`; trick timing (first
+turn, cooldown, chance, max per level) is at the top of
+`scripts/memory_board.gd`. Other knobs in `scripts/main.gd`: `PAIRS`, `MISTAKES_ALLOWED`, `COLUMNS`,
+`MISMATCH_DELAY`, `SLIP_LINES`, `SWAP_LINES`, `BLIND_LINES` and `LOSE_LINES` (the snake's lines). Damage per match
 is `DAMAGE_PER_MATCH` in `scripts/memory_board.gd`.
 
 ## Tests

@@ -20,12 +20,20 @@ through and you pick it. Items marked **(built)** are in the game.
   piece so you can tell you already opened it. It should still offer what is
   inside.
 - **Stronger hits:** something that increases the damage a match deals.
+- **"Not this color" marks:** after a blind egg fails to match, it gets marked
+  with the colors it is *not* (e.g. "not red"), so you don't have to keep
+  track yourself. (Came out of sparring; the base game shows nothing.)
 
 ## Boss tricks (make it harder)
 
+- **(built)** **Swap:** the boss swaps two eggs you've already opened (shown:
+  the eggs hop over). They keep their "already opened" status, so a mismatch
+  on them still costs a mistake. Levels 2 and 4.
+- **(built)** **Blindfold:** the boss blindfolds an egg you've already opened;
+  reopening it no longer shows its color, you must remember it. A mismatch
+  still costs a mistake. A matched pair reveals its color. Levels 3 and 4.
 - **Hidden mistakes:** the boss hides how many mistakes you have left.
 - Fewer allowed mistakes on later levels.
-- The boss occasionally swaps two eggs.
 
 ## Style and boss personality
 

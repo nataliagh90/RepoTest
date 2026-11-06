@@ -9,6 +9,7 @@ func _initialize() -> void:
 	_test_pairs_and_matching()
 	_test_mistakes()
 	_test_losing()
+	_test_tricks()
 	print("\nALL TESTS PASSED" if failures == 0 else "\n%d TEST(S) FAILED" % failures)
 	quit(1 if failures > 0 else 0)
 
@@ -79,6 +80,68 @@ func _test_losing() -> void:
 	b.pick(y)
 	_check(b.lost and b.is_over(), "the 4th mistake loses the game")
 	_check(not b.can_pick(b.slots.find(2)), "no picking after the game is over")
+
+
+func _test_tricks() -> void:
+	print("Tricks")
+	var b := _board()
+	_check(b.maybe_trick(RandomNumberGenerator.new()).is_empty(), "level without tricks never tricks")
+
+	# Swap keeps 'seen' with the egg, so a later mismatch is still a mistake.
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 1
+	var s := MemoryBoard.new(6, 3, rng, ["swap"])
+	var x := s.slots.find(0)
+	var y := s.slots.find(1)
+	s.pick(x)
+	s.pick(y)
+	s.swap(x, y)
+	_check(s.slots[x] == 1 and s.slots[y] == 0, "swap moves the birds")
+	_check(s.seen[x] and s.seen[y], "swapped eggs stay 'already opened'")
+	var r := s.pick(x)
+	r = s.pick(y)
+	_check(r["mistake"], "mismatching swapped opened eggs is still a mistake")
+
+	# Blind eggs: still a mistake if you'd seen them.
+	var bl := MemoryBoard.new(6, 3, rng, ["blind"])
+	var p := bl.slots.find(0)
+	var q := bl.slots.find(1)
+	bl.pick(p)
+	bl.pick(q)
+	bl.blind[q] = true
+	bl.pick(p)
+	r = bl.pick(q)
+	_check(r["mistake"], "mismatching a blind egg you'd seen is still a mistake")
+
+	# Tricks only target opened eggs, and respect timing limits.
+	var ok_targets := true
+	var max_tricks := 0
+	var earliest := 99
+	for seed_value in 200:
+		var g := RandomNumberGenerator.new()
+		g.seed = seed_value
+		var t := MemoryBoard.new(6, 99, g, ["swap", "blind"])
+		while not t.is_over():
+			var unmatched: Array[int] = []
+			for k in t.slots.size():
+				if not t.matched[k]:
+					unmatched.append(k)
+			t.pick(unmatched[g.randi() % unmatched.size()])
+			unmatched.erase(t.first)
+			t.pick(unmatched[g.randi() % unmatched.size()])
+			var seen_before := t.seen.duplicate()
+			var trick := t.maybe_trick(g)
+			if trick.is_empty():
+				continue
+			earliest = mini(earliest, t.turns)
+			var targets: Array = [trick.get("a", -1), trick.get("b", -1), trick.get("egg", -1)]
+			for k in targets:
+				if k != -1 and not seen_before[k]:
+					ok_targets = false
+		max_tricks = maxi(max_tricks, t.tricks_done)
+	_check(ok_targets, "tricks only ever hit eggs you've opened")
+	_check(earliest >= MemoryBoard.TRICK_FIRST_TURN, "no tricks before turn %d" % MemoryBoard.TRICK_FIRST_TURN)
+	_check(max_tricks <= MemoryBoard.TRICK_MAX and max_tricks > 0, "tricks happen, but at most %d per level" % MemoryBoard.TRICK_MAX)
 
 
 func _check(cond: bool, msg: String) -> void:
