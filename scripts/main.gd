@@ -16,7 +16,17 @@ const LOSE_LINES := [
 	"Ssssseriously? I didn't even have to get off my cart.",
 ]
 
+## PLACEHOLDER lines the snake says when you mismatch eggs you'd already seen
+## (a memory slip that costs a mistake). Edit freely.
+const SLIP_LINES := [
+	"Hah! You've opened that egg before. Memory of a goldfish!",
+	"Ssss... didn't you JUST see that one?",
+	"Oops! Did your brain take the day off?",
+]
+const SLIP_LINE_SECONDS := 2.2
+
 var board: MemoryBoard
+var speech_id := 0  # Lets an old speech timer know a newer line replaced it.
 var spots: Array[EggSpot] = []
 var busy := false
 var rng := RandomNumberGenerator.new()
@@ -101,6 +111,8 @@ func _on_spot_pressed(i: int) -> void:
 			if board.lost:
 				await _lose()
 				return
+			if res["mistake"]:
+				_say(SLIP_LINES[rng.randi() % SLIP_LINES.size()], SLIP_LINE_SECONDS)
 			await get_tree().create_timer(MISMATCH_DELAY).timeout
 			spots[res["a"]].close()
 			await spots[res["b"]].close()
@@ -108,10 +120,22 @@ func _on_spot_pressed(i: int) -> void:
 
 
 func _lose() -> void:
-	speech.text = LOSE_LINES[rng.randi() % LOSE_LINES.size()]
-	speech.visible = true
+	_say(LOSE_LINES[rng.randi() % LOSE_LINES.size()], 0.0)
 	await get_tree().create_timer(2.8).timeout
 	_show_end("You lose!", "Try Again")
+
+
+## Shows a speech bubble. With seconds > 0 it hides itself afterwards,
+## unless a newer line has replaced it in the meantime.
+func _say(text: String, seconds: float) -> void:
+	speech_id += 1
+	var my_id := speech_id
+	speech.text = text
+	speech.visible = true
+	if seconds > 0.0:
+		await get_tree().create_timer(seconds).timeout
+		if speech_id == my_id:
+			speech.visible = false
 
 
 func _refresh() -> void:

@@ -34,7 +34,7 @@ IDEAS.md                  Ideas list for future design decisions
 ```
 
 Easy knobs in `scripts/main.gd`: `PAIRS`, `MISTAKES_ALLOWED`, `COLUMNS`,
-`MISMATCH_DELAY` and `LOSE_LINES` (the snake's sassy lines). Damage per match
+`MISMATCH_DELAY`, `SLIP_LINES` and `LOSE_LINES` (the snake's sassy lines). Damage per match
 is `DAMAGE_PER_MATCH` in `scripts/memory_board.gd`.
 
 ## Tests

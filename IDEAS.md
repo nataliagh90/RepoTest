@@ -29,7 +29,7 @@ through and you pick it. Items marked **(built)** are in the game.
 
 ## Style and boss personality
 
-- **Sassy boss on memory slips:** when you mess up a pair of eggs that were
+- **(built)** **Sassy boss on memory slips:** when you mess up a pair of eggs that were
   already opened, the boss laughs at you or makes a sassy comment.
 - **Mock wasteful play:** e.g. starting a turn with an egg you've already seen
   while unopened eggs remain. Not a memory slip, just inefficient; the boss
