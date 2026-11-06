@@ -11,7 +11,19 @@ through and you pick it.
 
 ## Mechanics
 
--
+- **Boss with an HP bar** (in design): a boss/enemy is on screen and you have
+  a limited number of tries to bring its HP to zero. Tries = the worst case for
+  a perfect memory (2 x pairs - 1, e.g. 11 for 6 pairs) + some allowed
+  mistakes, so bad luck alone never makes you lose. Concern: might be too easy;
+  test it and add spice later.
+- **Two kinds of mistakes:** (1) opening two eggs for the first time that don't
+  match (exploring, not your fault), and (2) pairing wrongly when you had
+  already seen where the match was (forgetting).
+
+## Boss personality
+
+- **Sassy boss:** when you mess up a pair of eggs that were already opened (a
+  real memory slip), the boss laughs at you or makes a sassy comment.
 
 ## Characters / levels
 
