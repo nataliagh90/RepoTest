@@ -19,6 +19,9 @@ var hovered := false
 var blind := false  # Secretly blindfolded: the bird never shows its color.
 var blind_known := false  # Opened at least once, so the blindfold now shows on the egg.
 
+var armed := false  # Matched birds hold an AK-47.
+var flashing := false  # Muzzle flash visible this instant.
+
 var shake_x := 0  # Animation offsets, in art pixels.
 var lift_y := 0
 
@@ -79,14 +82,33 @@ func close() -> void:
 func set_matched() -> void:
 	mouse_default_cursor_shape = CURSOR_ARROW
 	blind = false  # A matched pair reveals its true color.
+	armed = true
 	queue_redraw()
+
+
+## Screen position of the rifle's muzzle, where bullets come out.
+func muzzle_global() -> Vector2:
+	return global_position + Vector2((BIRD_AT + Sprites.MUZZLE) * px) + Vector2(px, px * 0.5)
+
+
+## Fires one shot: a muzzle flash and a one-pixel recoil.
+func fire() -> void:
+	flashing = true
+	_set_offsets(-1, 0)
+	await get_tree().create_timer(0.06).timeout
+	if not is_instance_valid(self):
+		return
+	flashing = false
+	_set_offsets(0, 0)
 
 
 func _draw() -> void:
 	_blit(Sprites.nest(), NEST_AT)
 	var offset := Vector2i(shake_x, -lift_y)
 	if hatched:
-		_blit(Sprites.bird(bird_id, blind), BIRD_AT + offset)
+		_blit(Sprites.bird(bird_id, blind, armed), BIRD_AT + offset)
+		if flashing:
+			_blit(Sprites.muzzle_flash(), BIRD_AT + Sprites.MUZZLE + Vector2i(0, -2) + offset)
 	else:
 		if hovered and lift_y == 0:
 			offset.y -= 1

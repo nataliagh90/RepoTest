@@ -49,6 +49,8 @@ var grid: GridContainer
 var level_label: Label
 var prev_button: Button
 var skip_button: Button
+var snake: SnakeBoss
+var fx_layer: Control  # Bullets fly here, above everything else.
 var hp_bar: ProgressBar
 var hp_label: Label
 var pips: Array[TextureRect] = []
@@ -84,6 +86,11 @@ func _ready() -> void:
 	right.custom_minimum_size.x = 420
 	row.add_child(right)
 	right.add_child(_build_boss_panel())
+
+	fx_layer = Control.new()
+	fx_layer.set_anchors_preset(PRESET_FULL_RECT)
+	fx_layer.mouse_filter = MOUSE_FILTER_IGNORE
+	add_child(fx_layer)
 
 	end_panel = _build_end_panel()
 	add_child(end_panel)
@@ -142,6 +149,9 @@ func _on_spot_pressed(i: int) -> void:
 		"match":
 			spots[res["a"]].set_matched()
 			spots[res["b"]].set_matched()
+			await _shoot([spots[res["a"]], spots[res["b"]]])
+			if my_game != game_id:
+				return
 			_refresh()
 			if board.is_complete():
 				await _wait(0.6)
@@ -201,6 +211,42 @@ func _animate_swap(a: int, b: int) -> void:
 		spots[k].blind = board.blind[k]
 		spots[k].blind_known = board.is_known_blind(k)
 		spots[k].queue_redraw()
+
+
+## Both birds of a matched pair fire bursts at the snake. Each bullet that
+## lands takes its share of the match's damage off the HP bar.
+const SHOTS_PER_BIRD := 3
+
+func _shoot(shooters: Array) -> void:
+	var my_game := game_id
+	var shots := SHOTS_PER_BIRD * shooters.size()
+	var per_shot := MemoryBoard.DAMAGE_PER_MATCH / float(shots)
+	await _wait(0.25)
+	for s in SHOTS_PER_BIRD:
+		for bird in shooters:
+			if my_game != game_id:
+				return
+			bird.fire()
+			_fire_bullet(bird.muzzle_global(), per_shot)
+			await _wait(0.09)
+	await _wait(0.35)  # Let the last bullets land.
+
+
+func _fire_bullet(from: Vector2, damage: float) -> void:
+	var bullet := ColorRect.new()
+	bullet.color = Sprites.BULLET
+	bullet.size = Vector2(3, 1) * Sprites.PX
+	bullet.mouse_filter = MOUSE_FILTER_IGNORE
+	fx_layer.add_child(bullet)
+	bullet.global_position = from
+	var target := snake.global_position + snake.size * Vector2(rng.randf_range(0.3, 0.85), rng.randf_range(0.15, 0.6))
+	var t := bullet.create_tween()
+	t.tween_property(bullet, "global_position", target, 0.22)
+	t.tween_callback(func():
+		bullet.queue_free()
+		snake.hit()
+		hp_bar.value = maxf(hp_bar.value - damage, board.boss_hp)
+		hp_label.text = "HP %d / %d" % [ceili(hp_bar.value), board.boss_max_hp])
 
 
 func _win() -> void:
@@ -324,7 +370,8 @@ func _build_boss_panel() -> Control:
 	speech.add_theme_stylebox_override("normal", bubble)
 	box.add_child(speech)
 
-	box.add_child(SnakeBoss.new())
+	snake = SnakeBoss.new()
+	box.add_child(snake)
 
 	hp_bar = ProgressBar.new()
 	hp_bar.custom_minimum_size = Vector2(340, 30)

@@ -32,6 +32,14 @@ const BIRD_COLORS: Array[Color] = [
 	Color("fcfcfc"),  # white
 ]
 
+const RIFLE_WOOD := Color("9c5a2a")
+const RIFLE_METAL := Color("3c3c48")
+const RIFLE_BARREL := Color("7c7c88")
+const RIFLE_MAG := Color("b5541c")
+const FLASH_OUTER := Color("fc7400")
+const FLASH_INNER := Color("fcf0a0")
+const BULLET := Color("fcd858")
+
 const SNAKE := Color("7bc950")
 const SNAKE_DARK := Color("4f9a2f")
 const SNAKE_BELLY := Color("e9f5a3")
@@ -88,19 +96,52 @@ static func egg(blindfolded: bool = false) -> ImageTexture:
 		return c.texture())
 
 
-# --- Hatched bird in its shell: 26 x 26 ---
+# --- Hatched bird in its shell: 28 x 26 ---
 # A blind egg hatches a "?" cloud instead of a bird, so its color stays secret.
+# A matched bird is "armed": it holds an AK-47 pointing right, at the snake.
 
-static func bird(bird_id: int, blind: bool = false) -> ImageTexture:
-	var key := "bird_blind" if blind else "bird_%d" % bird_id
+const MUZZLE := Vector2i(27, 14)  # Where the barrel ends, in bird-sprite pixels.
+
+
+static func bird(bird_id: int, blind: bool = false, armed: bool = false) -> ImageTexture:
+	var key := "bird_blind" if blind else "bird_%d_%s" % [bird_id, armed]
 	return _cached(key, func():
-		var c := PixelCanvas.new(26, 26)
+		var c := PixelCanvas.new(28, 26)
 		if blind:
 			_paint_cloud(c)
 		else:
 			_paint_bird(c, BIRD_COLORS[bird_id % BIRD_COLORS.size()])
 		_paint_bottom_shell(c)
+		if armed and not blind:
+			_paint_rifle(c)
 		c.outline(OUTLINE)
+		return c.texture())
+
+
+static func _paint_rifle(c: PixelCanvas) -> void:
+	c.rect(4, 15, 4, 2, RIFLE_WOOD)  # Stock
+	c.rect(8, 14, 9, 2, RIFLE_METAL)  # Body
+	c.rect(14, 14, 3, 1, RIFLE_WOOD)  # Handguard
+	c.rect(17, 14, 10, 1, RIFLE_BARREL)  # Barrel
+	c.px(25, 13, RIFLE_METAL)  # Front sight
+	c.px(9, 16, RIFLE_METAL)  # Grip
+	c.px(9, 17, RIFLE_METAL)
+	# Curved magazine
+	for p in [Vector2i(12, 16), Vector2i(13, 16), Vector2i(12, 17), Vector2i(13, 17),
+			Vector2i(13, 18), Vector2i(14, 18), Vector2i(14, 19)]:
+		c.px(p.x, p.y, RIFLE_MAG)
+	# A wing tip gripping the gun
+	c.px(10, 15, Color.WHITE.darkened(0.1))
+
+
+static func muzzle_flash() -> ImageTexture:
+	return _cached("flash", func():
+		var c := PixelCanvas.new(5, 5)
+		for p in [Vector2i(2, 0), Vector2i(0, 2), Vector2i(4, 2), Vector2i(2, 4),
+				Vector2i(1, 1), Vector2i(3, 1), Vector2i(1, 3), Vector2i(3, 3)]:
+			c.px(p.x, p.y, FLASH_OUTER)
+		c.rect(1, 2, 3, 1, FLASH_INNER)
+		c.rect(2, 1, 1, 3, FLASH_INNER)
 		return c.texture())
 
 

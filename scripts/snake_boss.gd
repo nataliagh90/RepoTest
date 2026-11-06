@@ -7,6 +7,7 @@ const FPS := 8.0
 
 var _time := 0.0
 var _frame := 0
+var _shake := 0  # Art pixels, while being hit.
 
 
 func _ready() -> void:
@@ -23,6 +24,19 @@ func _process(delta: float) -> void:
 		queue_redraw()
 
 
+## Flash red and jolt when a bullet lands.
+func hit() -> void:
+	modulate = Color(1.0, 0.35, 0.35)
+	_shake = 1 if _shake <= 0 else -1
+	queue_redraw()
+	var t := create_tween()
+	t.tween_property(self, "modulate", Color.WHITE, 0.15)
+	t.tween_callback(func():
+		_shake = 0
+		queue_redraw())
+
+
 func _draw() -> void:
 	var tex: Texture2D = Sprites.snake_frames()[_frame]
-	draw_texture_rect(tex, Rect2(Vector2.ZERO, tex.get_size() * Sprites.PX), false)
+	var at := Vector2(_shake * Sprites.PX, 0)
+	draw_texture_rect(tex, Rect2(at, tex.get_size() * Sprites.PX), false)
