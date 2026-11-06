@@ -4,9 +4,11 @@ extends Control
 
 const MISTAKES_ALLOWED := 3
 const MISMATCH_DELAY := 0.9
-const BACKGROUND := Color("8fd3c7")
-const INK := Color("2b1d2e")
-const CREAM := Color("fff4dc")
+# NES-style UI: black boxes, white borders, white text.
+const BOX := Color("000000")
+const TEXT := Color("fcfcfc")
+const TEXT_DIM := Color("7c7c7c")
+const HIGHLIGHT := Color("f8b800")
 
 ## The levels, in order. "pairs" is how many bird pairs are on the board,
 ## "columns" how wide the grid is, and "tricks" what the snake may do (see
@@ -64,9 +66,13 @@ var end_action: Callable
 
 func _ready() -> void:
 	theme = _build_theme()
-	var bg := ColorRect.new()
-	bg.color = BACKGROUND
+	# The snake's lair, a pixel-art background covering the whole screen.
+	var bg := TextureRect.new()
+	bg.texture = Sprites.lair()
+	bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	bg.set_anchors_preset(PRESET_FULL_RECT)
+	bg.mouse_filter = MOUSE_FILTER_IGNORE
 	add_child(bg)
 
 	var root := VBoxContainer.new()
@@ -82,10 +88,15 @@ func _ready() -> void:
 	row.add_child(left)
 	grid = GridContainer.new()
 	left.add_child(grid)
-	var right := CenterContainer.new()
+	# Right column, pinned to the top so nothing moves when the snake talks.
+	var right := MarginContainer.new()
 	right.custom_minimum_size.x = 420
+	right.add_theme_constant_override("margin_top", 8)
 	row.add_child(right)
-	right.add_child(_build_boss_panel())
+	var boss_panel := _build_boss_panel()
+	boss_panel.size_flags_horizontal = SIZE_SHRINK_CENTER
+	boss_panel.size_flags_vertical = SIZE_SHRINK_BEGIN
+	right.add_child(boss_panel)
 
 	fx_layer = Control.new()
 	fx_layer.set_anchors_preset(PRESET_FULL_RECT)
@@ -103,7 +114,7 @@ func start_level(n: int) -> void:
 	level = clampi(n, 0, LEVELS.size() - 1)
 	game_id += 1
 	end_panel.visible = false
-	speech.visible = false
+	_hush()
 	busy = false
 	for spot in spots:
 		spot.queue_free()
@@ -279,11 +290,12 @@ func _pick_line(lines: Array) -> String:
 ## Shows a speech bubble. It stays until the player picks the next egg.
 func _say(text: String) -> void:
 	speech.text = text
-	speech.visible = true
+	speech.modulate.a = 1.0
 
 
+## Hides the speech box but keeps its space, so the layout doesn't jump.
 func _hush() -> void:
-	speech.visible = false
+	speech.modulate.a = 0.0
 
 
 func _refresh() -> void:
@@ -304,23 +316,25 @@ func _build_theme() -> Theme:
 	font.hinting = TextServer.HINTING_NONE
 	t.default_font = font
 	t.default_font_size = 24
-	var states := {"normal": CREAM, "hover": Color.WHITE, "pressed": Color("e3cfa6"),
-			"disabled": Color(CREAM, 0.45), "focus": Color(0, 0, 0, 0)}
+	var states := {"normal": TEXT, "hover": HIGHLIGHT, "pressed": HIGHLIGHT,
+			"disabled": TEXT_DIM, "focus": Color(0, 0, 0, 0)}
 	for state in states:
 		var sb := StyleBoxFlat.new()
-		sb.bg_color = states[state]
-		sb.border_color = INK if state != "disabled" else Color(INK, 0.35)
+		sb.bg_color = BOX
+		sb.border_color = states[state]
 		sb.set_border_width_all(4)
 		sb.draw_center = state != "focus"
 		sb.set_content_margin_all(8)
 		t.set_stylebox(state, "Button", sb)
-	for c in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
-		t.set_color(c, "Button", INK)
-	t.set_color("font_disabled_color", "Button", Color(INK, 0.35))
+	for c in ["font_color", "font_focus_color"]:
+		t.set_color(c, "Button", TEXT)
+	t.set_color("font_hover_color", "Button", HIGHLIGHT)
+	t.set_color("font_pressed_color", "Button", HIGHLIGHT)
+	t.set_color("font_disabled_color", "Button", TEXT_DIM)
 	return t
 
 
-func _label(text: String, font_size: int, color: Color = INK) -> Label:
+func _label(text: String, font_size: int, color: Color = TEXT) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.add_theme_font_size_override("font_size", font_size)
@@ -360,11 +374,12 @@ func _build_boss_panel() -> Control:
 
 	speech = _label("", 22)
 	speech.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	speech.custom_minimum_size = Vector2(340, 0)
+	speech.custom_minimum_size = Vector2(340, 92)
+	speech.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	speech.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var bubble := StyleBoxFlat.new()
-	bubble.bg_color = Color.WHITE
-	bubble.border_color = INK
+	bubble.bg_color = BOX
+	bubble.border_color = TEXT
 	bubble.set_border_width_all(4)
 	bubble.set_content_margin_all(14)
 	speech.add_theme_stylebox_override("normal", bubble)
@@ -373,21 +388,34 @@ func _build_boss_panel() -> Control:
 	snake = SnakeBoss.new()
 	box.add_child(snake)
 
+	# Status box: HP and mistakes, in an NES-style black panel.
+	var status := PanelContainer.new()
+	var status_style := StyleBoxFlat.new()
+	status_style.bg_color = BOX
+	status_style.border_color = TEXT
+	status_style.set_border_width_all(4)
+	status_style.set_content_margin_all(12)
+	status.add_theme_stylebox_override("panel", status_style)
+	box.add_child(status)
+	var status_box := VBoxContainer.new()
+	status_box.add_theme_constant_override("separation", 8)
+	status.add_child(status_box)
+
 	hp_bar = ProgressBar.new()
-	hp_bar.custom_minimum_size = Vector2(340, 30)
+	hp_bar.custom_minimum_size = Vector2(310, 26)
 	hp_bar.show_percentage = false
 	var fill := StyleBoxFlat.new()
-	fill.bg_color = Color("e2483d")
+	fill.bg_color = Sprites.CART
 	var back := StyleBoxFlat.new()
-	back.bg_color = CREAM
-	back.border_color = INK
-	back.set_border_width_all(4)
+	back.bg_color = BOX
+	back.border_color = Sprites.GREY_DARK
+	back.set_border_width_all(2)
 	hp_bar.add_theme_stylebox_override("fill", fill)
 	hp_bar.add_theme_stylebox_override("background", back)
-	box.add_child(hp_bar)
+	status_box.add_child(hp_bar)
 	hp_label = _label("", 22)
 	hp_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	box.add_child(hp_label)
+	status_box.add_child(hp_label)
 
 	var mistakes := HBoxContainer.new()
 	mistakes.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -401,7 +429,7 @@ func _build_boss_panel() -> Control:
 		p.custom_minimum_size = Vector2(6, 6) * Sprites.PX
 		mistakes.add_child(p)
 		pips.append(p)
-	box.add_child(mistakes)
+	status_box.add_child(mistakes)
 	return box
 
 
@@ -416,18 +444,18 @@ func _build_end_panel() -> Control:
 	box.add_theme_constant_override("separation", 24)
 	center.add_child(box)
 
-	end_title = _label("", 56, CREAM)
+	end_title = _label("", 56, TEXT)
 	end_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	end_title.add_theme_constant_override("outline_size", 12)
-	end_title.add_theme_color_override("font_outline_color", INK)
+	end_title.add_theme_color_override("font_outline_color", BOX)
 	box.add_child(end_title)
 
-	end_quote = _label("", 26, CREAM)
+	end_quote = _label("", 26, TEXT)
 	end_quote.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	end_quote.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	end_quote.custom_minimum_size.x = 760
 	end_quote.add_theme_constant_override("outline_size", 8)
-	end_quote.add_theme_color_override("font_outline_color", INK)
+	end_quote.add_theme_color_override("font_outline_color", BOX)
 	box.add_child(end_quote)
 
 	end_button = Button.new()

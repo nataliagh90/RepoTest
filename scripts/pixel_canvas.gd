@@ -50,6 +50,35 @@ func ellipse(cx: float, cy: float, rx: float, ry: float, c: Color, top_ry := -1.
 				img.set_pixel(x, y, c)
 
 
+## Like ellipse(), but with NES-style 3-tone shading: a highlight towards the
+## top-left, the base colour in the middle and a shadow towards the
+## bottom-right. No outline needed.
+func shaded_ellipse(cx: float, cy: float, rx: float, ry: float, base: Color, dark: Color,
+		light: Color, top_ry := -1.0, min_y := -9999, max_y := 9999) -> void:
+	for y in range(maxi(0, min_y), mini(h, max_y + 1)):
+		for x in w:
+			var nx := (x + 0.5 - cx) / rx
+			var r := top_ry if top_ry > 0.0 and y + 0.5 < cy else ry
+			var ny := (y + 0.5 - cy) / r
+			if nx * nx + ny * ny > 1.0:
+				continue
+			var diag := (nx + ny) * 0.7071
+			var c := base
+			if diag > 0.5:
+				c = dark
+			elif diag < -0.55:
+				c = light
+			img.set_pixel(x, y, c)
+
+
+## A straight 1-pixel line.
+func line(x0: int, y0: int, x1: int, y1: int, c: Color) -> void:
+	var steps := maxi(absi(x1 - x0), absi(y1 - y0))
+	for i in steps + 1:
+		var t := 0.0 if steps == 0 else float(i) / steps
+		px(roundi(lerpf(x0, x1, t)), roundi(lerpf(y0, y1, t)), c)
+
+
 ## Recolours only pixels that are already filled (to paint inside a shape).
 func paint_inside(x: int, y: int, c: Color) -> void:
 	if is_filled(x, y):

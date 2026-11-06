@@ -12,13 +12,19 @@ mismatch you could have avoided, because you'd already seen one of the eggs
 involved or the right partner, costs one of your 3 allowed mistakes. The
 4th one loses the game, after the snake says something sassy.
 
-There are 4 levels: no tricks, then the snake **swaps** eggs you've opened,
+There are 4 levels with 6, 8, 10 and 12 pairs: no tricks, then the snake **swaps** eggs you've opened,
 then 2 eggs are **secretly blindfolded** (you never see their color; opening
 one the first time is free, gambling with it later costs a mistake), then both. Use **Back** / **Skip** at the top to jump between levels.
 
-All art is **placeholder pixel art** generated in code (`scripts/sprites.gd`),
-meant to be replaced later by hand-drawn sprites of the same size. Each art
-pixel is shown 5x5 on screen (`Sprites.PX`).
+All art is **placeholder pixel art** generated in code (`scripts/sprites.gd`)
+in an NES-like style: limited palette, no outlines, 3-tone shading. The
+background is the snake's lair, a biker garage. Sprites are meant to be
+replaced later by hand-drawn ones of the same size. Each art pixel is shown
+5x5 on screen (`Sprites.PX`; 4x4 on the bigger 4-row boards).
+
+When a pair matches, both birds pull out AK-47s and shoot the snake; that's
+what takes its HP down. The snake's lines stay on screen until you pick the
+next egg.
 
 The text uses [Pixelify Sans](https://github.com/eifetx/Pixelify-Sans)
 (SIL Open Font License, see `fonts/PixelifySans-OFL.txt`).

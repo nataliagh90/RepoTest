@@ -6,14 +6,13 @@ answered before it's built.
 
 ## To do
 
-1. **New aesthetic: older pixel-art videogame look, no line art (no
-   outlines), and add a background.**
-   - Decided: NES feel. Background: the snake's lair, looking like the den
-     of someone who loves motorcycles (generic biker garage, no real brand
-     logos).
+(Nothing waiting. Add the next decided tasks here.)
 
 ## Done
 
+- NES-style look: limited palette, no outlines, the snake's biker lair as
+  background (brick wall, string lights, winged-wheel emblem, chopper,
+  tires), black-and-white UI boxes.
 - Matched birds pull out AK-47s and shoot the snake; each bullet that lands
   takes its share of the HP (3 shots per bird).
 - Removed the level description that named the snake's tricks.
