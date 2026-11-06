@@ -14,7 +14,8 @@ const NEST := Color("b5793f")
 const NEST_DARK := Color("7d4f26")
 const BEAK := Color("ffb627")
 const BLINDFOLD := Color("3d2a4a")
-const BLIND_BIRD := Color("7a7686")
+const CLOUD := Color("ffffff")
+const CLOUD_SHADE := Color("cfe0ee")
 
 const BIRD_COLORS: Array[Color] = [
 	Color("ef5b5b"),  # red
@@ -84,45 +85,66 @@ static func egg(blindfolded: bool = false) -> ImageTexture:
 
 
 # --- Hatched bird in its shell: 26 x 26 ---
+# A blind egg hatches a "?" cloud instead of a bird, so its color stays secret.
 
 static func bird(bird_id: int, blind: bool = false) -> ImageTexture:
 	var key := "bird_blind" if blind else "bird_%d" % bird_id
 	return _cached(key, func():
-		var col: Color = BLIND_BIRD if blind else BIRD_COLORS[bird_id % BIRD_COLORS.size()]
-		var dark := col.darkened(0.28)
-		var light := col.lightened(0.45)
 		var c := PixelCanvas.new(26, 26)
-		# Tuft
-		for p in [Vector2i(10, 4), Vector2i(12, 3), Vector2i(13, 4), Vector2i(15, 4)]:
-			c.px(p.x, p.y, dark)
-		# Body, belly, wing
-		c.ellipse(13, 12.5, 7.5, 7.5, col)
-		c.ellipse(13, 15.5, 4.5, 3.0, light)
-		c.ellipse(8, 13.5, 2.5, 3.5, dark)
-		# Big silly eye
-		c.ellipse(16, 10, 2.6, 2.6, Color.WHITE)
-		c.rect(16, 9, 2, 2, OUTLINE)
-		# Beak
-		c.rect(20, 11, 3, 1, BEAK)
-		c.rect(20, 12, 4, 1, BEAK)
-		c.rect(20, 13, 2, 1, BEAK)
-		# Shell hat
-		c.ellipse(14, 6, 5.5, 3.5, EGG, -1.0, 0, 5)
-		# Bottom shell with a zigzag top edge
-		for x in range(4, 23):
-			var top := 17 + (1 if int(x / 2.0) % 2 == 1 else 0)
-			for y in range(top, 25):
-				var dx := (x + 0.5 - 13.0) / 9.0
-				var dy := (y + 0.5 - 17.0) / 7.5
-				if dx * dx + dy * dy <= 1.0:
-					c.px(x, y, OUTLINE if y == top else EGG)
 		if blind:
-			# A "?" badge: you can't tell which bird this is.
-			c.ellipse(3.5, 3.5, 3.4, 3.4, Color.WHITE)
-			for p in [Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(4, 2), Vector2i(3, 3), Vector2i(3, 5)]:
-				c.px(p.x, p.y, OUTLINE)
+			_paint_cloud(c)
+		else:
+			_paint_bird(c, BIRD_COLORS[bird_id % BIRD_COLORS.size()])
+		_paint_bottom_shell(c)
 		c.outline(OUTLINE)
 		return c.texture())
+
+
+static func _paint_bird(c: PixelCanvas, col: Color) -> void:
+	var dark := col.darkened(0.28)
+	var light := col.lightened(0.45)
+	# Tuft
+	for p in [Vector2i(10, 4), Vector2i(12, 3), Vector2i(13, 4), Vector2i(15, 4)]:
+		c.px(p.x, p.y, dark)
+	# Body, belly, wing
+	c.ellipse(13, 12.5, 7.5, 7.5, col)
+	c.ellipse(13, 15.5, 4.5, 3.0, light)
+	c.ellipse(8, 13.5, 2.5, 3.5, dark)
+	# Big silly eye
+	c.ellipse(16, 10, 2.6, 2.6, Color.WHITE)
+	c.rect(16, 9, 2, 2, OUTLINE)
+	# Beak
+	c.rect(20, 11, 3, 1, BEAK)
+	c.rect(20, 12, 4, 1, BEAK)
+	c.rect(20, 13, 2, 1, BEAK)
+	# Shell hat
+	c.ellipse(14, 6, 5.5, 3.5, EGG, -1.0, 0, 5)
+
+
+static func _paint_cloud(c: PixelCanvas) -> void:
+	# Puffy cloud made of overlapping circles, shaded along the bottom.
+	for puff in [Vector3(7, 13, 4.5), Vector3(11, 8.5, 5), Vector3(17, 9, 4.5), Vector3(20, 13, 4), Vector3(13.5, 14, 6)]:
+		c.ellipse(puff.x, puff.y, puff.z, puff.z, CLOUD)
+	for y in range(15, 20):
+		for x in c.w:
+			if c.is_filled(x, y) and not c.is_filled(x, y + 2):
+				c.px(x, y, CLOUD_SHADE)
+	# A big "?" in the middle
+	var q := [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 1), Vector2i(3, 2),
+			Vector2i(2, 3), Vector2i(1, 4), Vector2i(1, 5), Vector2i(1, 7)]
+	for p in q:
+		c.px(11 + p.x, 6 + p.y, OUTLINE)
+
+
+static func _paint_bottom_shell(c: PixelCanvas) -> void:
+	# Bottom half of the shell with a zigzag top edge.
+	for x in range(4, 23):
+		var top := 17 + (1 if int(x / 2.0) % 2 == 1 else 0)
+		for y in range(top, 25):
+			var dx := (x + 0.5 - 13.0) / 9.0
+			var dy := (y + 0.5 - 17.0) / 7.5
+			if dx * dx + dy * dy <= 1.0:
+				c.px(x, y, OUTLINE if y == top else EGG)
 
 
 # --- Motorized snake: 70 x 52, animated ---
