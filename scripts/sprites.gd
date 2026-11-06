@@ -26,6 +26,10 @@ const BIRD_COLORS: Array[Color] = [
 	Color("ff8c42"),  # orange
 	Color("f15bb5"),  # pink
 	Color("00bbbf"),  # teal
+	Color("b8f818"),  # lime
+	Color("2038ec"),  # dark blue
+	Color("a0522d"),  # brown
+	Color("fcfcfc"),  # white
 ]
 
 const SNAKE := Color("7bc950")

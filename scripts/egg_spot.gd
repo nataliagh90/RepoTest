@@ -6,12 +6,12 @@ extends Control
 
 signal pressed(index: int)
 
-const PX := Sprites.PX
 const SIZE_PX := Vector2i(30, 32)  # Spot size in art pixels.
 const NEST_AT := Vector2i(1, 22)
 const EGG_AT := Vector2i(6, 2)
 const BIRD_AT := Vector2i(2, 1)
 
+var px := Sprites.PX  # Screen pixels per art pixel (set before adding to the tree).
 var index := 0
 var bird_id := 0
 var hatched := false
@@ -24,7 +24,7 @@ var lift_y := 0
 
 
 func _ready() -> void:
-	custom_minimum_size = Vector2(SIZE_PX * PX)
+	custom_minimum_size = Vector2(SIZE_PX * px)
 	mouse_default_cursor_shape = CURSOR_POINTING_HAND
 	mouse_entered.connect(func():
 		hovered = true
@@ -94,4 +94,4 @@ func _draw() -> void:
 
 
 func _blit(tex: Texture2D, at: Vector2i) -> void:
-	draw_texture_rect(tex, Rect2(Vector2(at * PX), tex.get_size() * PX), false)
+	draw_texture_rect(tex, Rect2(Vector2(at * px), tex.get_size() * px), false)

@@ -2,21 +2,20 @@ extends Control
 ## The game screen: level bar on top, eggs on the left, the snake boss on
 ## the right.
 
-const PAIRS := 6
 const MISTAKES_ALLOWED := 3
-const COLUMNS := 4
 const MISMATCH_DELAY := 0.9
 const BACKGROUND := Color("8fd3c7")
 const INK := Color("2b1d2e")
 const CREAM := Color("fff4dc")
 
-## The levels, in order. "tricks" lists what the snake may do (see
-## MemoryBoard for timing). "hint" is shown in the level bar.
+## The levels, in order. "pairs" is how many bird pairs are on the board,
+## "columns" how wide the grid is, and "tricks" what the snake may do (see
+## MemoryBoard for timing).
 const LEVELS := [
-	{"tricks": [], "hint": "No tricks. Just you and the eggs."},
-	{"tricks": ["swap"], "hint": "The snake may swap eggs you've opened."},
-	{"tricks": ["blind"], "hint": "Two eggs are secretly blindfolded."},
-	{"tricks": ["swap", "blind"], "hint": "Swaps AND secret blindfolds. Good luck."},
+	{"pairs": 6, "columns": 4, "tricks": []},
+	{"pairs": 8, "columns": 4, "tricks": ["swap"]},
+	{"pairs": 10, "columns": 5, "tricks": ["blind"]},
+	{"pairs": 12, "columns": 6, "tricks": ["swap", "blind"]},
 ]
 
 ## PLACEHOLDER lines the snake says when you lose. Edit freely.
@@ -39,19 +38,15 @@ const SWAP_LINES := ["Vroom! Swapsies!", "Let's shuffle things up a bit..."]
 ## PLACEHOLDER lines when you discover a secretly blindfolded egg.
 const BLIND_LINES := ["Surprise! That one's blindfolded. Hehehe.", "Peekaboo... not!"]
 
-const SHORT_LINE_SECONDS := 2.2
-
 var level := 0
 var board: MemoryBoard
 var spots: Array[EggSpot] = []
 var busy := false
 var rng := RandomNumberGenerator.new()
-var speech_id := 0  # Lets an old speech timer know a newer line replaced it.
 var game_id := 0  # Bumped on every (re)start so unfinished animations of an old board stop.
 
 var grid: GridContainer
 var level_label: Label
-var hint_label: Label
 var prev_button: Button
 var skip_button: Button
 var hp_bar: ProgressBar
@@ -60,6 +55,7 @@ var pips: Array[TextureRect] = []
 var speech: Label
 var end_panel: Control
 var end_title: Label
+var end_quote: Label
 var end_button: Button
 var end_action: Callable
 
@@ -83,9 +79,6 @@ func _ready() -> void:
 	left.size_flags_horizontal = SIZE_EXPAND_FILL
 	row.add_child(left)
 	grid = GridContainer.new()
-	grid.columns = COLUMNS
-	grid.add_theme_constant_override("h_separation", 24)
-	grid.add_theme_constant_override("v_separation", 12)
 	left.add_child(grid)
 	var right := CenterContainer.new()
 	right.custom_minimum_size.x = 420
@@ -104,14 +97,21 @@ func start_level(n: int) -> void:
 	game_id += 1
 	end_panel.visible = false
 	speech.visible = false
-	speech_id += 1
 	busy = false
 	for spot in spots:
 		spot.queue_free()
 	spots.clear()
-	board = MemoryBoard.new(PAIRS, MISTAKES_ALLOWED, rng, LEVELS[level]["tricks"])
+	var cfg: Dictionary = LEVELS[level]
+	board = MemoryBoard.new(cfg["pairs"], MISTAKES_ALLOWED, rng, cfg["tricks"])
+	# Bigger boards (4 rows) use smaller art pixels so everything fits.
+	var rows := ceili(board.slots.size() / float(cfg["columns"]))
+	var art_px := Sprites.PX if rows <= 3 else Sprites.PX - 1
+	grid.columns = cfg["columns"]
+	grid.add_theme_constant_override("h_separation", 24 if rows <= 3 else 12)
+	grid.add_theme_constant_override("v_separation", 12 if rows <= 3 else 6)
 	for i in board.slots.size():
 		var spot := EggSpot.new()
+		spot.px = art_px
 		spot.index = i
 		spot.bird_id = board.slots[i]
 		spot.blind = board.blind[i]
@@ -119,7 +119,6 @@ func start_level(n: int) -> void:
 		grid.add_child(spot)
 		spots.append(spot)
 	level_label.text = "Level %d / %d" % [level + 1, LEVELS.size()]
-	hint_label.text = LEVELS[level]["hint"]
 	prev_button.disabled = level == 0
 	skip_button.disabled = level == LEVELS.size() - 1
 	_refresh()
@@ -131,13 +130,14 @@ func _on_spot_pressed(i: int) -> void:
 	if busy or not board.can_pick(i):
 		return
 	var my_game := game_id
+	_hush()  # Speech stays up until the player picks the next egg.
 	var res := board.pick(i)
 	busy = true
 	await spots[i].hatch()
 	if my_game != game_id:
 		return
 	if res.get("discovered_blind", false):
-		_say(_pick_line(BLIND_LINES), SHORT_LINE_SECONDS)
+		_say(_pick_line(BLIND_LINES))
 	match res["result"]:
 		"match":
 			spots[res["a"]].set_matched()
@@ -155,7 +155,7 @@ func _on_spot_pressed(i: int) -> void:
 				await _lose()
 				return
 			if res["mistake"]:
-				_say(_pick_line(SLIP_LINES), SHORT_LINE_SECONDS)
+				_say(_pick_line(SLIP_LINES))
 			await _wait(MISMATCH_DELAY)
 			if my_game != game_id:
 				return
@@ -173,7 +173,7 @@ func _after_turn() -> void:
 	var trick := board.maybe_trick(rng)
 	match trick.get("trick", ""):
 		"swap":
-			_say(_pick_line(SWAP_LINES), SHORT_LINE_SECONDS)
+			_say(_pick_line(SWAP_LINES))
 			await _animate_swap(trick["a"], trick["b"])
 
 
@@ -212,10 +212,12 @@ func _win() -> void:
 
 func _lose() -> void:
 	var my_game := game_id
-	_say(_pick_line(LOSE_LINES), 0.0)
-	await _wait(2.8)
+	var line := _pick_line(LOSE_LINES)
+	_say(line)
+	await _wait(1.5)
 	if my_game == game_id:
-		_show_end("You lose!", "Try Again", start_level.bind(level))
+		# The snake's line is repeated on the lose screen so there's time to read it.
+		_show_end("You lose!", "Try Again", start_level.bind(level), "The snake: \"%s\"" % line)
 
 
 # --- Helpers ---
@@ -228,17 +230,14 @@ func _pick_line(lines: Array) -> String:
 	return lines[rng.randi() % lines.size()]
 
 
-## Shows a speech bubble. With seconds > 0 it hides itself afterwards,
-## unless a newer line has replaced it in the meantime.
-func _say(text: String, seconds: float) -> void:
-	speech_id += 1
-	var my_id := speech_id
+## Shows a speech bubble. It stays until the player picks the next egg.
+func _say(text: String) -> void:
 	speech.text = text
 	speech.visible = true
-	if seconds > 0.0:
-		await _wait(seconds)
-		if speech_id == my_id:
-			speech.visible = false
+
+
+func _hush() -> void:
+	speech.visible = false
 
 
 func _refresh() -> void:
@@ -302,10 +301,8 @@ func _build_level_bar() -> Control:
 	prev_button = _small_button("< Back", func(): start_level(level - 1))
 	bar.add_child(prev_button)
 	level_label = _label("", 26)
+	level_label.size_flags_horizontal = SIZE_EXPAND_FILL
 	bar.add_child(level_label)
-	hint_label = _label("", 20, Color(INK, 0.75))
-	hint_label.size_flags_horizontal = SIZE_EXPAND_FILL
-	bar.add_child(hint_label)
 	skip_button = _small_button("Skip >", func(): start_level(level + 1))
 	bar.add_child(skip_button)
 	return margin
@@ -378,6 +375,14 @@ func _build_end_panel() -> Control:
 	end_title.add_theme_color_override("font_outline_color", INK)
 	box.add_child(end_title)
 
+	end_quote = _label("", 26, CREAM)
+	end_quote.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	end_quote.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	end_quote.custom_minimum_size.x = 760
+	end_quote.add_theme_constant_override("outline_size", 8)
+	end_quote.add_theme_color_override("font_outline_color", INK)
+	box.add_child(end_quote)
+
 	end_button = Button.new()
 	end_button.custom_minimum_size = Vector2(260, 64)
 	end_button.size_flags_horizontal = SIZE_SHRINK_CENTER
@@ -387,8 +392,10 @@ func _build_end_panel() -> Control:
 	return dim
 
 
-func _show_end(title: String, button_text: String, action: Callable) -> void:
+func _show_end(title: String, button_text: String, action: Callable, quote: String = "") -> void:
 	end_title.text = title
+	end_quote.text = quote
+	end_quote.visible = quote != ""
 	end_button.text = button_text
 	end_action = action
 	end_panel.visible = true
