@@ -102,16 +102,38 @@ func _test_tricks() -> void:
 	r = s.pick(y)
 	_check(r["mistake"], "mismatching swapped opened eggs is still a mistake")
 
-	# Blind eggs: still a mistake if you'd seen them.
+	# Secret blind eggs.
 	var bl := MemoryBoard.new(6, 3, rng, ["blind"])
-	var p := bl.slots.find(0)
-	var q := bl.slots.find(1)
-	bl.pick(p)
-	bl.pick(q)
-	bl.blind[q] = true
-	bl.pick(p)
-	r = bl.pick(q)
-	_check(r["mistake"], "mismatching a blind egg you'd seen is still a mistake")
+	_check(bl.blind.count(true) == MemoryBoard.BLIND_EGGS, "a blind level has %d secret blind eggs" % MemoryBoard.BLIND_EGGS)
+	var bad := _blind_and_other(bl)  # [blind egg, an unseen egg of another bird]
+	var r1 := bl.pick(bad[0])
+	_check(r1["discovered_blind"], "opening a blind egg for the first time discovers it")
+	r = bl.pick(bad[1])
+	_check(not r["mistake"], "discovering a blind egg is free")
+	_check(bl.is_known_blind(bad[0]), "after opening it, you know it's blind")
+	var other := -1
+	for k in bl.slots.size():
+		if not bl.seen[k] and bl.slots[k] != bl.slots[bad[0]] and not bl.blind[k]:
+			other = k
+	bl.pick(bad[0])
+	r = bl.pick(other)
+	_check(r["mistake"], "gambling with a known blind egg and missing is a mistake")
+
+	# A visible egg whose partner is blind: you couldn't know its color, so free.
+	var bl2 := MemoryBoard.new(6, 3, rng, ["blind"])
+	var pair := _blind_and_other(bl2)
+	var blind_egg: int = pair[0]
+	var visible_twin := bl2.partner_of(blind_egg)
+	if not bl2.blind[visible_twin]:
+		bl2.pick(blind_egg)
+		bl2.pick(pair[1])  # discover the blind egg (free)
+		var fresh := -1
+		for k in bl2.slots.size():
+			if not bl2.seen[k] and k != visible_twin and bl2.slots[k] != bl2.slots[visible_twin]:
+				fresh = k
+		bl2.pick(visible_twin)
+		r = bl2.pick(fresh)
+		_check(not r["mistake"], "missing the partner of a blind egg you never saw the color of is free")
 
 	# Tricks only target opened eggs, and respect timing limits.
 	var ok_targets := true
@@ -142,6 +164,15 @@ func _test_tricks() -> void:
 	_check(ok_targets, "tricks only ever hit eggs you've opened")
 	_check(earliest >= MemoryBoard.TRICK_FIRST_TURN, "no tricks before turn %d" % MemoryBoard.TRICK_FIRST_TURN)
 	_check(max_tricks <= MemoryBoard.TRICK_MAX and max_tricks > 0, "tricks happen, but at most %d per level" % MemoryBoard.TRICK_MAX)
+
+
+## Returns [a blind egg, an unseen non-blind egg of a different bird].
+func _blind_and_other(b: MemoryBoard) -> Array:
+	var x := b.blind.find(true)
+	for k in b.slots.size():
+		if k != x and not b.blind[k] and b.slots[k] != b.slots[x]:
+			return [x, k]
+	return [x, -1]
 
 
 func _check(cond: bool, msg: String) -> void:

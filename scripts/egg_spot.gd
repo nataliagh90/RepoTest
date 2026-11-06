@@ -28,7 +28,8 @@ var index := 0
 var bird_id := 0
 var hatched := false
 var hovered := false
-var blind := false  # Blinded by the boss: the egg wears a blindfold and the bird shows no color.
+var blind := false  # Secretly blindfolded: the bird never shows its color.
+var blind_known := false  # Opened at least once, so the blindfold now shows on the egg.
 
 const BLIND_BIRD := Color("6e6a78")
 const BLINDFOLD := Color("3d2a4a")
@@ -59,6 +60,8 @@ func hatch() -> void:
 		t.tween_property(self, "rotation", angle, 0.05)
 	t.tween_callback(func():
 		hatched = true
+		if blind:
+			blind_known = true
 		queue_redraw())
 	t.tween_property(self, "scale", Vector2(1.1, 0.92), 0.06)
 	t.tween_property(self, "scale", Vector2(0.95, 1.08), 0.08)
@@ -83,16 +86,6 @@ func set_matched() -> void:
 	queue_redraw()
 
 
-## The boss blindfolds this egg.
-func set_blind() -> void:
-	blind = true
-	var t := create_tween()
-	t.tween_property(self, "scale", Vector2(1.15, 1.15), 0.12)
-	t.tween_callback(queue_redraw)
-	t.tween_property(self, "scale", Vector2.ONE, 0.15)
-	await t.finished
-
-
 # --- Drawing ---
 
 func _draw() -> void:
@@ -112,7 +105,7 @@ func _draw() -> void:
 					HORIZONTAL_ALIGNMENT_CENTER, 40 * s, int(28 * s), OUTLINE)
 	else:
 		_draw_egg(base + Vector2(0, -50) * s, s)
-		if blind:
+		if blind and blind_known:
 			_draw_blindfold(base + Vector2(0, -50) * s, s)
 
 

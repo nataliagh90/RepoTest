@@ -15,8 +15,8 @@ const CREAM := Color("fff4dc")
 const LEVELS := [
 	{"tricks": [], "hint": "No tricks. Just you and the eggs."},
 	{"tricks": ["swap"], "hint": "The snake may swap eggs you've opened."},
-	{"tricks": ["blind"], "hint": "The snake may blindfold eggs you've opened."},
-	{"tricks": ["swap", "blind"], "hint": "Swaps AND blindfolds. Good luck."},
+	{"tricks": ["blind"], "hint": "Two eggs are secretly blindfolded."},
+	{"tricks": ["swap", "blind"], "hint": "Swaps AND secret blindfolds. Good luck."},
 ]
 
 ## PLACEHOLDER lines the snake says when you lose. Edit freely.
@@ -34,9 +34,10 @@ const SLIP_LINES := [
 	"Oops! Did your brain take the day off?",
 ]
 
-## PLACEHOLDER lines announcing a trick, so the player sees it happen.
+## PLACEHOLDER lines announcing a swap, so the player sees it happen.
 const SWAP_LINES := ["Vroom! Swapsies!", "Let's shuffle things up a bit..."]
-const BLIND_LINES := ["Blindfold time! Remember that one?", "Peekaboo... not!"]
+## PLACEHOLDER lines when you discover a secretly blindfolded egg.
+const BLIND_LINES := ["Surprise! That one's blindfolded. Hehehe.", "Peekaboo... not!"]
 
 const SHORT_LINE_SECONDS := 2.2
 
@@ -112,6 +113,7 @@ func start_level(n: int) -> void:
 		var spot := EggSpot.new()
 		spot.index = i
 		spot.bird_id = board.slots[i]
+		spot.blind = board.blind[i]
 		spot.pressed.connect(_on_spot_pressed)
 		grid.add_child(spot)
 		spots.append(spot)
@@ -133,6 +135,8 @@ func _on_spot_pressed(i: int) -> void:
 	await spots[i].hatch()
 	if my_game != game_id:
 		return
+	if res.get("discovered_blind", false):
+		_say(_pick_line(BLIND_LINES), SHORT_LINE_SECONDS)
 	match res["result"]:
 		"match":
 			spots[res["a"]].set_matched()
@@ -165,19 +169,11 @@ func _on_spot_pressed(i: int) -> void:
 
 ## Between turns the snake may pull a trick.
 func _after_turn() -> void:
-	var my_game := game_id
 	var trick := board.maybe_trick(rng)
 	match trick.get("trick", ""):
 		"swap":
 			_say(_pick_line(SWAP_LINES), SHORT_LINE_SECONDS)
 			await _animate_swap(trick["a"], trick["b"])
-		"blind":
-			_say(_pick_line(BLIND_LINES), SHORT_LINE_SECONDS)
-			await _wait(0.3)
-			if my_game != game_id:
-				return
-			spots[trick["egg"]].blind = true
-			await spots[trick["egg"]].set_blind()
 
 
 ## The two eggs visibly hop over to each other's nest.
@@ -202,6 +198,7 @@ func _animate_swap(a: int, b: int) -> void:
 	for k in [a, b]:
 		spots[k].bird_id = board.slots[k]
 		spots[k].blind = board.blind[k]
+		spots[k].blind_known = board.is_known_blind(k)
 		spots[k].queue_redraw()
 
 

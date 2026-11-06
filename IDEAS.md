@@ -29,9 +29,15 @@ through and you pick it. Items marked **(built)** are in the game.
 - **(built)** **Swap:** the boss swaps two eggs you've already opened (shown:
   the eggs hop over). They keep their "already opened" status, so a mismatch
   on them still costs a mistake. Levels 2 and 4.
-- **(built)** **Blindfold:** the boss blindfolds an egg you've already opened;
-  reopening it no longer shows its color, you must remember it. A mismatch
-  still costs a mistake. A matched pair reveals its color. Levels 3 and 4.
+- **(built)** **Secret blind eggs:** 2 eggs are secretly blindfolded from the
+  start. You only find out when you open one, and you never see its color
+  (a matched pair reveals it). Discovering one is free; after that, any
+  mismatch involving it is a gamble and costs a mistake. Strategy: leave
+  blind eggs for last and deduce them by elimination. Levels 3 and 4.
+  (Replaced an earlier version where the boss blinded eggs you'd already
+  opened.)
+- To watch while testing: with only 1-2 blind eggs, "leave it for last" may
+  make them too easy.
 - **Hidden mistakes:** the boss hides how many mistakes you have left.
 - Fewer allowed mistakes on later levels.
 

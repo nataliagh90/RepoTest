@@ -13,8 +13,8 @@ involved or the right partner, costs one of your 3 allowed mistakes. The
 4th one loses the game, after the snake says something sassy.
 
 There are 4 levels: no tricks, then the snake **swaps** eggs you've opened,
-then it **blindfolds** eggs you've opened (you can't see their color anymore),
-then both. Use **Back** / **Skip** at the top to jump between levels.
+then 2 eggs are **secretly blindfolded** (you never see their color; opening
+one the first time is free, gambling with it later costs a mistake), then both. Use **Back** / **Skip** at the top to jump between levels.
 
 All art is **placeholder** drawn in code, meant to be replaced later.
 
