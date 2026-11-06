@@ -42,7 +42,8 @@ scripts/sprites.gd        Placeholder pixel art, generated in code
 scripts/pixel_canvas.gd   Helper for painting low-res pixel images
 fonts/                    Pixel font + its license
 tests/test_runner.gd      Headless tests for the rules
-IDEAS.md                  Ideas list for future design decisions
+IDEAS.md                  Ideas still being discussed
+BACKLOG.md                Decided work, in order
 ```
 
 Levels are listed in `LEVELS` in `scripts/main.gd`; trick timing (first
