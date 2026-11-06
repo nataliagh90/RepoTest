@@ -56,7 +56,7 @@ var prev_button: Button
 var skip_button: Button
 var hp_bar: ProgressBar
 var hp_label: Label
-var pips: Array[Label] = []
+var pips: Array[TextureRect] = []
 var speech: Label
 var end_panel: Control
 var end_title: Label
@@ -65,6 +65,7 @@ var end_action: Callable
 
 
 func _ready() -> void:
+	theme = _build_theme()
 	var bg := ColorRect.new()
 	bg.color = BACKGROUND
 	bg.set_anchors_preset(PRESET_FULL_RECT)
@@ -245,11 +246,34 @@ func _refresh() -> void:
 	hp_bar.value = board.boss_hp
 	hp_label.text = "HP %d / %d" % [board.boss_hp, board.boss_max_hp]
 	for k in pips.size():
-		var used := k >= board.mistakes_left
-		pips[k].add_theme_color_override("font_color", Color(INK, 0.25) if used else Color("e2483d"))
+		pips[k].texture = Sprites.pip(k < board.mistakes_left)
 
 
 # --- UI building ---
+
+## Pixel font and square, chunky boxes for every button.
+func _build_theme() -> Theme:
+	var t := Theme.new()
+	var font: FontFile = load("res://fonts/PixelifySans-Regular.woff2")
+	font.antialiasing = TextServer.FONT_ANTIALIASING_NONE
+	font.hinting = TextServer.HINTING_NONE
+	t.default_font = font
+	t.default_font_size = 24
+	var states := {"normal": CREAM, "hover": Color.WHITE, "pressed": Color("e3cfa6"),
+			"disabled": Color(CREAM, 0.45), "focus": Color(0, 0, 0, 0)}
+	for state in states:
+		var sb := StyleBoxFlat.new()
+		sb.bg_color = states[state]
+		sb.border_color = INK if state != "disabled" else Color(INK, 0.35)
+		sb.set_border_width_all(4)
+		sb.draw_center = state != "focus"
+		sb.set_content_margin_all(8)
+		t.set_stylebox(state, "Button", sb)
+	for c in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+		t.set_color(c, "Button", INK)
+	t.set_color("font_disabled_color", "Button", Color(INK, 0.35))
+	return t
+
 
 func _label(text: String, font_size: int, color: Color = INK) -> Label:
 	var l := Label.new()
@@ -275,14 +299,14 @@ func _build_level_bar() -> Control:
 	var bar := HBoxContainer.new()
 	bar.add_theme_constant_override("separation", 16)
 	margin.add_child(bar)
-	prev_button = _small_button("◀ Back", func(): start_level(level - 1))
+	prev_button = _small_button("< Back", func(): start_level(level - 1))
 	bar.add_child(prev_button)
 	level_label = _label("", 26)
 	bar.add_child(level_label)
 	hint_label = _label("", 20, Color(INK, 0.75))
 	hint_label.size_flags_horizontal = SIZE_EXPAND_FILL
 	bar.add_child(hint_label)
-	skip_button = _small_button("Skip ▶", func(): start_level(level + 1))
+	skip_button = _small_button("Skip >", func(): start_level(level + 1))
 	bar.add_child(skip_button)
 	return margin
 
@@ -299,7 +323,6 @@ func _build_boss_panel() -> Control:
 	bubble.bg_color = Color.WHITE
 	bubble.border_color = INK
 	bubble.set_border_width_all(4)
-	bubble.set_corner_radius_all(18)
 	bubble.set_content_margin_all(14)
 	speech.add_theme_stylebox_override("normal", bubble)
 	box.add_child(speech)
@@ -311,12 +334,10 @@ func _build_boss_panel() -> Control:
 	hp_bar.show_percentage = false
 	var fill := StyleBoxFlat.new()
 	fill.bg_color = Color("e2483d")
-	fill.set_corner_radius_all(8)
 	var back := StyleBoxFlat.new()
 	back.bg_color = CREAM
 	back.border_color = INK
 	back.set_border_width_all(4)
-	back.set_corner_radius_all(8)
 	hp_bar.add_theme_stylebox_override("fill", fill)
 	hp_bar.add_theme_stylebox_override("background", back)
 	box.add_child(hp_bar)
@@ -330,7 +351,10 @@ func _build_boss_panel() -> Control:
 	mistakes.add_child(_label("Mistakes allowed:", 22))
 	pips.clear()
 	for k in MISTAKES_ALLOWED:
-		var p := _label("●", 30)
+		var p := TextureRect.new()
+		p.texture = Sprites.pip(true)
+		p.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		p.custom_minimum_size = Vector2(6, 6) * Sprites.PX
 		mistakes.add_child(p)
 		pips.append(p)
 	box.add_child(mistakes)

@@ -16,7 +16,12 @@ There are 4 levels: no tricks, then the snake **swaps** eggs you've opened,
 then 2 eggs are **secretly blindfolded** (you never see their color; opening
 one the first time is free, gambling with it later costs a mistake), then both. Use **Back** / **Skip** at the top to jump between levels.
 
-All art is **placeholder** drawn in code, meant to be replaced later.
+All art is **placeholder pixel art** generated in code (`scripts/sprites.gd`),
+meant to be replaced later by hand-drawn sprites of the same size. Each art
+pixel is shown 5x5 on screen (`Sprites.PX`).
+
+The text uses [Pixelify Sans](https://github.com/eifetx/Pixelify-Sans)
+(SIL Open Font License, see `fonts/PixelifySans-OFL.txt`).
 
 ## Running it
 
@@ -31,8 +36,11 @@ All art is **placeholder** drawn in code, meant to be replaced later.
 scenes/main.tscn          The game screen
 scripts/main.gd           Builds the board, handles clicks, shows the win message
 scripts/memory_board.gd   The memory rules, with no visuals
-scripts/egg_spot.gd       One nest + egg + bird (placeholder drawing, animations)
-scripts/snake_boss.gd     The motorized snake boss (placeholder drawing)
+scripts/egg_spot.gd       One nest + egg + bird (draws sprites, animations)
+scripts/snake_boss.gd     The motorized snake boss (animated sprite)
+scripts/sprites.gd        Placeholder pixel art, generated in code
+scripts/pixel_canvas.gd   Helper for painting low-res pixel images
+fonts/                    Pixel font + its license
 tests/test_runner.gd      Headless tests for the rules
 IDEAS.md                  Ideas list for future design decisions
 ```
