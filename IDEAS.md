@@ -26,7 +26,8 @@ through and you pick it. Items marked **(built)** are in the game.
   with the colors it is *not* (e.g. "not red"), so you don't have to keep
   track yourself. (Came out of sparring; the base game shows nothing.)
   To keep it from doing the remembering for you: show the marks only
-  briefly (e.g. 3 seconds), then hide them. (Undecided.)
+  briefly (e.g. 3 seconds), when the player chooses to use it, then hide
+  them. (Undecided.)
 
 ## Progression (being discussed)
 
@@ -44,6 +45,10 @@ through and you pick it. Items marked **(built)** are in the game.
   Mode, Hades' God Mode, Bastion's Shrine idols.
 - Ways to keep power-ups from flattening the game (undecided): a limited
   number of uses, or making them hard to get (level, points...).
+- Power-up types (undecided): one-time consumables like potions (as many
+  as you bought), or a permanent pack whose uses refresh.
+- Open topic: how the player activates a power-up and how it shows in the
+  HUD.
 - Rule of thumb from sparring: offer a power-up once the player has felt the
   problem it solves, not before.
 
