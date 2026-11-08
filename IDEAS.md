@@ -45,8 +45,13 @@ through and you pick it. Items marked **(built)** are in the game.
   Mode, Hades' God Mode, Bastion's Shrine idols.
 - Ways to keep power-ups from flattening the game (undecided): a limited
   number of uses, or making them hard to get (level, points...).
-- Power-up types (undecided): one-time consumables like potions (as many
-  as you bought), or a permanent pack whose uses refresh.
+- **Power-ups are packs whose uses refresh** (decided), not one-time
+  potions: it fits the player choosing their own difficulty, and avoids
+  hoarding. Still open: do the uses refresh every level or every run?
+- **The help is called "Assist"** in the shop (term players know from
+  Celeste's Assist Mode).
+- **Turning difficulty up** (idea): a dial the other way, like Bastion's
+  Shrine idols or Hades' Pact of Punishment. Not discussed yet.
 - Open topic: how the player activates a power-up and how it shows in the
   HUD.
 - Rule of thumb from sparring: offer a power-up once the player has felt the
