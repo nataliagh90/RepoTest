@@ -47,9 +47,10 @@ through and you pick it. Items marked **(built)** are in the game.
   number of uses, or making them hard to get (level, points...).
 - **Power-ups are packs whose uses refresh** (decided), not one-time
   potions: it fits the player choosing their own difficulty, and avoids
-  hoarding. **Uses refresh every run** (decided), so the player spreads
-  them over the 4 levels. To watch while testing: players saving charges
-  "for later" and never using them.
+  hoarding. **Uses refresh every level** (decided; considered every run).
+  To watch while testing: whether it makes the game too easy.
+- **Currency: "sassiness".** Still open: how it's earned and what Assists
+  cost.
 - **The shop starts small:** only the Assists we already have. More get
   added later, once the game creates the need for them.
 - **The help is called "Assist"** in the shop (term players know from
