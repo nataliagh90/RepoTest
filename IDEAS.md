@@ -59,11 +59,12 @@ through and you pick it. Items marked **(built)** are in the game.
   flat price. Whether extra uses of other Assists get pricier is open.
 - **First Assist is free**, the very first time. It's a one-off gift (it
   doesn't come back every run) that lasts the whole next run; after that,
-  the player buys it if they want.
+  the player buys it if they want. **The player picks which** of the
+  Assists on offer is free.
 - **The shop offers the Assist for the trick you lost to:** lose on the
   blind-eggs level and "not this color" marks show up; lose on the swap
   level and the cracked egg marker shows up; lose on the last level, both.
-  Lose on level 1 and nothing new is offered (you still keep your points).
+  Lose on level 1 and only the cracked egg marker is offered (see below).
   Once an Assist shows up, it stays in the shop for good.
 - **Cracked egg marker is on/off:** once activated it stays visible (no
   uses to count).
@@ -71,9 +72,11 @@ through and you pick it. Items marked **(built)** are in the game.
   different losses earn different amounts. Don't be too strict about
   rewarding memory, or it clashes with players choosing their own
   difficulty. **Mistakes subtract points.**
-- The cracked egg marker isn't tied to any snake trick (swaps only happen
-  between eggs you've already opened). Open: should it be in the shop from
-  the first loss on, even a loss on level 1?
+- **The cracked egg marker is in the shop from the first loss on**, even a
+  loss on level 1, so it's the first Assist every player meets. It isn't
+  tied to a snake trick (swaps only happen between eggs you've already
+  opened); it helps with "which eggs have I opened?", which is what makes a
+  mistake avoidable.
 - **The shop starts small:** only the Assists we already have. More get
   added later, once the game creates the need for them.
 - **The help is called "Assist"** in the shop (term players know from
