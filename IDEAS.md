@@ -54,9 +54,19 @@ through and you pick it. Items marked **(built)** are in the game.
   well**: the underlying goal is getting better at memory, not just winning,
   even if some players use all the help available. Still open: what exactly
   counts as playing well, and what Assists cost.
-- Pricing: players should be able to afford help early (maybe after the
-  first loss), since help is their choice of difficulty. Whether you can buy
-  more uses of an Assist may depend on the Assist.
+- Pricing: players should be able to afford help early, since help is
+  their choice of difficulty. Whether you can buy more uses of an Assist
+  may depend on the Assist.
+- **First Assist is free**, the very first time. It's a one-off gift (it
+  doesn't come back every run); after that, the player buys it if they want.
+- **The shop offers the Assist for the trick you lost to:** lose on the
+  blind-eggs level and "not this color" marks show up; lose on the swap
+  level and the cracked egg marker shows up; lose on the last level, both.
+- **Cracked egg marker is on/off:** once activated it stays visible (no
+  uses to count).
+- Points idea: winning gives a starting number, minus some per mistake.
+  Don't be too strict about rewarding memory, or it clashes with players
+  choosing their own difficulty.
 - **The shop starts small:** only the Assists we already have. More get
   added later, once the game creates the need for them.
 - **The help is called "Assist"** in the shop (term players know from
