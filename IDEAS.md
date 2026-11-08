@@ -25,6 +25,8 @@ through and you pick it. Items marked **(built)** are in the game.
 - **"Not this color" marks:** after a blind egg fails to match, it gets marked
   with the colors it is *not* (e.g. "not red"), so you don't have to keep
   track yourself. (Came out of sparring; the base game shows nothing.)
+  To keep it from doing the remembering for you: show the marks only
+  briefly (e.g. 3 seconds), then hide them. (Undecided.)
 
 ## Progression (being discussed)
 
@@ -32,11 +34,14 @@ through and you pick it. Items marked **(built)** are in the game.
   designer tool for testing only, not for players.
 - **Shop**, roguelike style: it could appear after each level, or (current
   favorite) when the player loses. Still open: what currency the player
-  earns, and whether power-ups last one run or forever.
+  earns. Power-ups you buy come with you into the next try (after a loss
+  sends you back to level 1).
 - **Power-ups as chosen difficulty:** buying help is the player's choice of
   difficulty, not a trap. Don't punish players who want help. The copy
   should make this clear, so players think "I can tune my difficulty", not
   "the game pushed me into this and now it's boring".
+  The message goes in the shop. References to look at: Celeste's Assist
+  Mode, Hades' God Mode, Bastion's Shrine idols.
 - Ways to keep power-ups from flattening the game (undecided): a limited
   number of uses, or making them hard to get (level, points...).
 - Rule of thumb from sparring: offer a power-up once the player has felt the
