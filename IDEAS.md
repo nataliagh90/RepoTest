@@ -58,15 +58,20 @@ through and you pick it. Items marked **(built)** are in the game.
   their choice of difficulty. Whether you can buy more uses of an Assist
   may depend on the Assist.
 - **First Assist is free**, the very first time. It's a one-off gift (it
-  doesn't come back every run); after that, the player buys it if they want.
+  doesn't come back every run) that lasts the whole next run; after that,
+  the player buys it if they want.
 - **The shop offers the Assist for the trick you lost to:** lose on the
   blind-eggs level and "not this color" marks show up; lose on the swap
   level and the cracked egg marker shows up; lose on the last level, both.
+  Lose on level 1 and nothing new is offered (you still keep your points).
+  Once an Assist shows up, it stays in the shop for good.
 - **Cracked egg marker is on/off:** once activated it stays visible (no
   uses to count).
-- Points idea: winning gives a starting number, minus some per mistake.
-  Don't be too strict about rewarding memory, or it clashes with players
-  choosing their own difficulty.
+- **Points come from pairs matched**, so losing also earns points, and
+  different losses earn different amounts. Don't be too strict about
+  rewarding memory, or it clashes with players choosing their own
+  difficulty. (Earlier idea: a starting number for winning, minus some per
+  mistake.)
 - **The shop starts small:** only the Assists we already have. More get
   added later, once the game creates the need for them.
 - **The help is called "Assist"** in the shop (term players know from
