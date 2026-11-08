@@ -20,9 +20,19 @@ through and you pick it. Items marked **(built)** are in the game.
   piece so you can tell you already opened it. It should still offer what is
   inside.
 - **Stronger hits:** something that increases the damage a match deals.
+  **Parked:** right now clearing the board always kills the snake
+  (HP = pairs x damage), so there's no problem for it to solve yet.
 - **"Not this color" marks:** after a blind egg fails to match, it gets marked
   with the colors it is *not* (e.g. "not red"), so you don't have to keep
   track yourself. (Came out of sparring; the base game shows nothing.)
+
+## Progression (being discussed)
+
+- **Shop**, roguelike style: it could appear after each level, or (current
+  favorite) when the player loses. Still open: what currency the player
+  earns, what a loss resets, and whether power-ups last one run or forever.
+- Rule of thumb from sparring: offer a power-up once the player has felt the
+  problem it solves, not before.
 
 ## Boss tricks (make it harder)
 
