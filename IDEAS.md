@@ -28,9 +28,17 @@ through and you pick it. Items marked **(built)** are in the game.
 
 ## Progression (being discussed)
 
+- **Losing sends you back to level 1** (roguelike run). Back/Skip are a
+  designer tool for testing only, not for players.
 - **Shop**, roguelike style: it could appear after each level, or (current
   favorite) when the player loses. Still open: what currency the player
-  earns, what a loss resets, and whether power-ups last one run or forever.
+  earns, and whether power-ups last one run or forever.
+- **Power-ups as chosen difficulty:** buying help is the player's choice of
+  difficulty, not a trap. Don't punish players who want help. The copy
+  should make this clear, so players think "I can tune my difficulty", not
+  "the game pushed me into this and now it's boring".
+- Ways to keep power-ups from flattening the game (undecided): a limited
+  number of uses, or making them hard to get (level, points...).
 - Rule of thumb from sparring: offer a power-up once the player has felt the
   problem it solves, not before.
 
