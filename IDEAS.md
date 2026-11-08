@@ -49,8 +49,14 @@ through and you pick it. Items marked **(built)** are in the game.
   potions: it fits the player choosing their own difficulty, and avoids
   hoarding. **Uses refresh every level** (decided; considered every run).
   To watch while testing: whether it makes the game too easy.
-- **Currency: "sassiness".** Still open: how it's earned and what Assists
-  cost.
+- **Currency: "points"** for now (placeholder until the art style and
+  theme are settled; "sassiness" was considered). **Earned for playing
+  well**: the underlying goal is getting better at memory, not just winning,
+  even if some players use all the help available. Still open: what exactly
+  counts as playing well, and what Assists cost.
+- Pricing: players should be able to afford help early (maybe after the
+  first loss), since help is their choice of difficulty. Whether you can buy
+  more uses of an Assist may depend on the Assist.
 - **The shop starts small:** only the Assists we already have. More get
   added later, once the game creates the need for them.
 - **The help is called "Assist"** in the shop (term players know from
