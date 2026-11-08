@@ -54,9 +54,9 @@ through and you pick it. Items marked **(built)** are in the game.
   well**: the underlying goal is getting better at memory, not just winning,
   even if some players use all the help available. Still open: what exactly
   counts as playing well, and what Assists cost.
-- Pricing: players should be able to afford help early, since help is
-  their choice of difficulty. Whether you can buy more uses of an Assist
-  may depend on the Assist.
+- **Pricing:** an Assist can be bought right away once it's unlocked (see
+  the design principles in the README). The cracked egg marker has one
+  flat price. Whether extra uses of other Assists get pricier is open.
 - **First Assist is free**, the very first time. It's a one-off gift (it
   doesn't come back every run) that lasts the whole next run; after that,
   the player buys it if they want.
@@ -70,8 +70,10 @@ through and you pick it. Items marked **(built)** are in the game.
 - **Points come from pairs matched**, so losing also earns points, and
   different losses earn different amounts. Don't be too strict about
   rewarding memory, or it clashes with players choosing their own
-  difficulty. (Earlier idea: a starting number for winning, minus some per
-  mistake.)
+  difficulty. **Mistakes subtract points.**
+- The cracked egg marker isn't tied to any snake trick (swaps only happen
+  between eggs you've already opened). Open: should it be in the shop from
+  the first loss on, even a loss on level 1?
 - **The shop starts small:** only the Assists we already have. More get
   added later, once the game creates the need for them.
 - **The help is called "Assist"** in the shop (term players know from

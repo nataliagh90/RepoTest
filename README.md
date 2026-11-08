@@ -29,6 +29,14 @@ next egg.
 The text uses [Pixelify Sans](https://github.com/eifetx/Pixelify-Sans)
 (SIL Open Font License, see `fonts/PixelifySans-OFL.txt`).
 
+## Design principles
+
+- **The goal is getting better at memory, not just winning.** But don't be
+  too strict about it: it must not clash with the next principle.
+- **Help is the player's choice of difficulty.** Never punish players who
+  want help. An Assist the player has unlocked can be bought right away.
+- **Offer help once the player has felt the problem it solves**, not before.
+
 ## Running it
 
 1. Install [Godot 4.3 or newer](https://godotengine.org/download) (standard
