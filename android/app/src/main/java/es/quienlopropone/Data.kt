@@ -4,8 +4,9 @@ import android.content.Context
 import org.json.JSONArray
 
 enum class Partido(val sigla: String, val nombre: String, val programa: String) {
-    ERC("ERC", "Esquerra Republicana", "«Pel país. Per la gent. Pel futur.»"),
-    PP("PP", "Partido Popular", "«La Reconstrucción Nacional»"),
+    ERC("ERC", "Esquerra Republicana", "«Pel país. Per la gent. Pel futur.» (elecciones generales 2026)"),
+    PP("PP", "Partido Popular", "«La Reconstrucción Nacional» (elecciones generales 2026)"),
+    VOX("VOX", "Castilla y León", "«Un programa con sentido común» (autonómicas de Castilla y León 2026)"),
 }
 
 data class Iniciativa(

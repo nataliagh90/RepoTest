@@ -43,11 +43,12 @@ class MainActivity : ComponentActivity() {
 fun colorDe(p: Partido): Color = when (p) {
     Partido.ERC -> Color(0xFFE8A317)
     Partido.PP -> Color(0xFF1D6FB8)
+    Partido.VOX -> Color(0xFF4E9A23)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Juego() {
+fun Juego(respuestaInicial: Partido? = null) {
     val context = LocalContext.current
     val todas = remember { Repositorio.cargar(context) }
     val temas = remember { listOf(TODAS) + todas.map { it.tema }.distinct().sorted() }
@@ -56,7 +57,7 @@ fun Juego() {
     var tema by rememberSaveable { mutableStateOf(TODAS) }
     var mazo by rememberSaveable { mutableStateOf(barajar(todas, TODAS)) }
     var posicion by rememberSaveable { mutableIntStateOf(0) }
-    var respuesta by rememberSaveable { mutableStateOf<String?>(null) }
+    var respuesta by rememberSaveable { mutableStateOf(respuestaInicial?.name) }
     var aciertos by rememberSaveable { mutableIntStateOf(0) }
     var jugadas by rememberSaveable { mutableIntStateOf(0) }
     var racha by rememberSaveable { mutableIntStateOf(0) }
@@ -145,7 +146,7 @@ fun Juego() {
 
         // Botones de respuesta
         Text("¿De qué partido es?", style = MaterialTheme.typography.titleMedium)
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Partido.entries.forEach { p ->
                 val elegido = respuesta == p.name
                 Button(
@@ -156,11 +157,12 @@ fun Juego() {
                         contentColor = Color.White,
                         disabledContainerColor = colorDe(p).copy(alpha = 0.25f),
                     ),
-                    modifier = Modifier.weight(1f).heightIn(min = 72.dp),
+                    contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp),
+                    modifier = Modifier.weight(1f).heightIn(min = 76.dp),
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(p.sigla, fontSize = 22.sp, fontWeight = FontWeight.Bold)
-                        Text(p.nombre, fontSize = 12.sp, textAlign = TextAlign.Center)
+                        Text(p.nombre, fontSize = 11.sp, lineHeight = 13.sp, textAlign = TextAlign.Center)
                     }
                 }
             }
@@ -177,13 +179,14 @@ fun Juego() {
             ) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
-                        if (acierto) "¡Correcto!" else "¡No! Es del ${actual.partido.sigla}",
+                        if (acierto) "¡Correcto!" else "¡No! Es ${if (actual.partido == Partido.PP) "del" else "de"} ${actual.partido.sigla}",
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
                         color = if (acierto) Color(0xFF2E7D32) else Color(0xFFC62828),
                     )
                     Text(
-                        "${actual.partido.nombre} (${actual.partido.sigla}) — programa ${actual.partido.programa}",
+                        if (actual.partido == Partido.VOX) "VOX — programa ${actual.partido.programa}"
+                        else "${actual.partido.nombre} (${actual.partido.sigla}) — programa ${actual.partido.programa}",
                         style = MaterialTheme.typography.bodyMedium,
                     )
                     Text(
@@ -216,8 +219,8 @@ fun Juego() {
         ) { Text("Siguiente propuesta", fontSize = 16.sp) }
 
         Text(
-            "Fuente: programas electorales de ERC y PP para las elecciones generales de 2026. " +
-                "Los títulos de ERC están traducidos del catalán.",
+            "Fuentes: programas de ERC y PP para las elecciones generales de 2026 y de VOX para las " +
+                "autonómicas de Castilla y León 2026 (parcial). Los títulos de ERC están traducidos del catalán.",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
