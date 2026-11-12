@@ -220,7 +220,7 @@ fun Juego(respuestaInicial: Partido? = null) {
 
         Text(
             "Fuentes: programas de ERC y PP para las elecciones generales de 2026 y de VOX para las " +
-                "autonómicas de Castilla y León 2026 (parcial). Los títulos de ERC están traducidos del catalán.",
+                "autonómicas de Castilla y León 2026. Los títulos de ERC están traducidos del catalán.",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )

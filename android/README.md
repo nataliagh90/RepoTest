@@ -1,9 +1,9 @@
 # ¿Quién lo propone?
 
-App Android (Kotlin + Jetpack Compose) para jugar a adivinar de qué partido es cada propuesta electoral. Incluye 745 iniciativas:
+App Android (Kotlin + Jetpack Compose) para jugar a adivinar de qué partido es cada propuesta electoral. Incluye 977 iniciativas:
 
 - **ERC** y **PP**: programas de las elecciones generales de 2026. Son 468 medidas: las 476 del inventario menos las 8 del PP marcadas como «por anunciar».
-- **VOX**: programa de las elecciones autonómicas de Castilla y León (marzo de 2026). Son 277 medidas, porque solo se dispone de las partes 1 y 3 del programa: faltan las medidas 237–468.
+- **VOX**: programa de las elecciones autonómicas de Castilla y León (marzo de 2026), completo, con sus 509 medidas.
 
 <img src="captura.png" width="300"> <img src="captura-respuesta.png" width="300">
 

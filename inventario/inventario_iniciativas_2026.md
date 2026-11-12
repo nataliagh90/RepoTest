@@ -6,13 +6,13 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 |---|---|---|---|
 | **ERC** – Esquerra Republicana | *Eleccions al Congrés 2026. Programa electoral* («Pel país. Per la gent. Pel futur.») | Generales | 227 |
 | **PP** – Partido Popular | *La Reconstrucción Nacional. El programa del cambio necesario para España* | Generales | 249 (8 «por anunciar») |
-| **VOX** | *Un programa con sentido común* | Autonómicas de Castilla y León (15-3-2026) | 277 de 509 (faltan las 237–468) |
+| **VOX** | *Un programa con sentido común* | Autonómicas de Castilla y León (15-3-2026) | 509 |
 
 **Notas**
 
 - ERC (generales 2026): 227 medidas numeradas. El PDF salta de la 167 a la 198 y omite la 251; se respeta la numeración original.
 - PP (generales 2026): 249 medidas numeradas, de las cuales 8 son huecos «Permanezca atento a la campaña para conocer esta nueva medida» (nº 83, 109, 132, 164, 167, 173, 200, 210).
-- VOX: es el programa de las elecciones autonómicas de Castilla y León (15 de marzo de 2026), no de las generales. El programa tiene 509 medidas, pero solo se han facilitado las partes 1 (págs. 1-80) y 3 (págs. 161-171): faltan las medidas 237-468, que corresponden a trabajo y energía, infraestructuras, familia y natalidad, vivienda, educación y parte de la sección 11. La medida 236 queda cortada.
+- VOX: es el programa de las elecciones autonómicas de Castilla y León (15 de marzo de 2026), no de las generales. 509 medidas numeradas, repartidas en 12 secciones (el PDF se publicó en tres partes).
 - En VOX las medidas son párrafos sin título: se usa como título la primera frase con el compromiso (los títulos de más de 280 caracteres se recortan con «…» y el resto pasa a la descripción).
 - La «Categoría» es una clasificación temática común para comparar los programas; la «Sección original» respeta la estructura de cada documento.
 - Los textos de ERC se mantienen en catalán, tal como figuran en el programa.
@@ -22,26 +22,26 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 
 | Categoría | ERC | PP | VOX | Total |
 |---|--:|--:|--:|--:|
-| 1. Instituciones, democracia y justicia | 3 | 37 | 5 | 45 |
-| 2. Administración pública y gasto público | 0 | 13 | 11 | 24 |
-| 3. Autogobierno, modelo territorial y financiación | 18 | 13 | 0 | 31 |
-| 4. Lengua, cultura, memoria e identidad | 16 | 15 | 41 | 72 |
+| 1. Instituciones, democracia y justicia | 3 | 37 | 7 | 47 |
+| 2. Administración pública y gasto público | 0 | 13 | 23 | 36 |
+| 3. Autogobierno, modelo territorial y financiación | 18 | 13 | 2 | 33 |
+| 4. Lengua, cultura, memoria e identidad | 16 | 15 | 44 | 75 |
 | 5. Política exterior, Unión Europea y defensa | 12 | 19 | 2 | 33 |
 | 6. Seguridad, interior y emergencias | 8 | 19 | 14 | 41 |
-| 7. Inmigración, fronteras y nacionalidad | 1 | 18 | 23 | 42 |
-| 8. Vivienda | 11 | 14 | 0 | 25 |
+| 7. Inmigración, fronteras y nacionalidad | 1 | 18 | 27 | 46 |
+| 8. Vivienda | 11 | 14 | 37 | 62 |
 | 9. Fiscalidad y finanzas públicas | 11 | 10 | 18 | 39 |
-| 10. Economía, industria, trabajo y autónomos | 24 | 15 | 13 | 52 |
-| 11. Pensiones, protección social, familias y cuidados | 11 | 17 | 7 | 35 |
-| 12. Igualdad, feminismo, LGTBI y antirracismo | 15 | 1 | 5 | 21 |
-| 13. Sanidad | 6 | 10 | 67 | 83 |
-| 14. Educación, universidades e investigación | 18 | 13 | 0 | 31 |
-| 15. Infraestructuras y transporte | 23 | 10 | 3 | 36 |
-| 16. Energía, medio ambiente y agua | 27 | 8 | 17 | 52 |
-| 17. Agricultura, pesca y mundo rural | 12 | 14 | 50 | 76 |
-| 18. Sociedad digital e inteligencia artificial | 7 | 3 | 1 | 11 |
+| 10. Economía, industria, trabajo y autónomos | 24 | 15 | 59 | 98 |
+| 11. Pensiones, protección social, familias y cuidados | 11 | 17 | 36 | 64 |
+| 12. Igualdad, feminismo, LGTBI y antirracismo | 15 | 1 | 14 | 30 |
+| 13. Sanidad | 6 | 10 | 70 | 86 |
+| 14. Educación, universidades e investigación | 18 | 13 | 43 | 74 |
+| 15. Infraestructuras y transporte | 23 | 10 | 28 | 61 |
+| 16. Energía, medio ambiente y agua | 27 | 8 | 28 | 63 |
+| 17. Agricultura, pesca y mundo rural | 12 | 14 | 51 | 77 |
+| 18. Sociedad digital e inteligencia artificial | 7 | 3 | 6 | 16 |
 | 19. Bienestar animal | 4 | 0 | 0 | 4 |
-| **Total** | **227** | **249** | **277** | **753** |
+| **Total** | **227** | **249** | **509** | **985** |
 
 ## 1. Instituciones, democracia y justicia
 
@@ -91,13 +91,15 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **90.** Las leyes se harán a la vista de todos <sub>(p. 36)</sub>
 - **91.** Los secretos oficiales tendrán límites y fecha de caducidad <sub>(p. 36)</sub>
 
-### VOX (5)
+### VOX (7)
 
 - **1.** Estableceremos un régimen de tolerancia cero con la corrupción y el clientelismo, con incompatibilidades y sanciones mucho más estricto para aquellos cargos públicos que utilicen su posición con fines partidistas o personales <sub>(p. 9)</sub>
 - **2.** Perseguiremos la corrupción en todas las administraciones y haremos que los corruptos paguen por todo el daño y el perjuicio que han causado a los castellanos y leoneses <sub>(p. 9)</sub>
 - **3.** Auditaremos de forma exhaustiva los recursos públicos y perseguiremos cualquier conducta corrupta <sub>(p. 9)</sub>
 - **4.** La Administración autonómica se personará como parte perjudicada en todos los procesos por corrupción, solicitará las penas máximas y, tras la condena, exigirá el reintegro total del dinero defraudado hasta el último euro <sub>(p. 10)</sub>
 - **5.** Desterraremos de las políticas públicas de Castilla y León todo el lastre ideológico consolidado por el bipartidismo a nivel nacional, regional y local: – Revisaremos los objetivos estratégicos y operativos de los presupuestos… <sub>(p. 10)</sub>
+- **462.** Superaremos y derogaremos todas las leyes que impongan adoctrinamiento y dividan a los castellanos y leoneses <sub>(p. 159)</sub>
+- **468.** Aplicaremos el principio de tolerancia cero con la corrupción y el clientelismo, estableciendo un régimen de incompatibilidades y sanciones más estricto para los cargos públicos que usen su posición con fines partidistas o personales… <sub>(p. 160)</sub>
 
 ## 2. Administración pública y gasto público
 
@@ -121,9 +123,21 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **12.** Ninguna subvención se prorrogará sin demostrar resultados <sub>(p. 15)</sub>
 - **65.** Dos prórrogas presupuestarias obligarán a convocar elecciones <sub>(p. 30)</sub>
 
-### VOX (11)
+### VOX (23)
 
 - **21.** Suprimiremos las duplicidades y todo el gasto político superfluo <sub>(p. 20)</sub>
+- **455.** Pondremos la Administración al servicio de las familias y empresas castellanas y leonesas mediante una Junta compacta, ágil y eficiente, eliminando toda la burocracia y obstáculos de un Gobierno autonómico sobredimensionado e improductivo <sub>(p. 158)</sub>
+- **456.** Recortaremos el bienestar de los políticos para impulsar el de los castellanos y leoneses, reduciendo el tamaño del Ejecutivo —en consejerías, direcciones generales, altos cargos y personal eventual—… <sub>(p. 158)</sub>
+- **457.** Impulsaremos una reducción del número de procuradores en las Cortes de Castilla y León y eliminaremos cargos de confianza, asesores y personal eventual innecesarios, como ya hicimos en la anterior legislatura al recortar las asignaciones a grupos políticos… <sub>(p. 158)</sub>
+- **458.** Realizaremos una reforma profunda de la Administración pública para hacerla más eficaz y eficiente, garantizando que todos los empleados accedan por principios de mérito y capacidad, y… <sub>(p. 158)</sub>
+- **459.** Suprimiremos o reformaremos todos los organismos, entes públicos y estructuras administrativas sin utilidad social o económica, que dupliquen funciones ya cubiertas por la Administración general, o cuya finalidad sea estafar a los españoles… <sub>(p. 158)</sub>
+- **460.** Terminaremos de forma definitiva con toda la administración paralela del PP —ampliada a lo largo de años de dominio—, que ha convertido la Junta en un dispensador de favores para sus redes partidistas <sub>(p. 159)</sub>
+- **461.** Eliminaremos las subvenciones públicas a partidos políticos, sindicatos y patronales —como UGT, CCOO y CEOE—, que durante décadas han vivido del esfuerzo de los castellanos y leoneses mientras actuaban como brazos políticos del bipartidismo <sub>(p. 159)</sub>
+- **463.** Revisaremos y cancelaremos convenios y contratos públicos con entidades privadas o fundaciones subvencionadas que funcionen como prolongaciones de partidos, eliminando ayudas a inmigrantes en situación irregular… <sub>(p. 159)</sub>
+- **464.** Vigilaremos las partidas de publicidad institucional y la financiación mediante convenios opacos de medios de comunicación o asociaciones afines, asegurando la neutralidad institucional y un pluralismo informativo real <sub>(p. 160)</sub>
+- **465.** Promoveremos auditorías integrales de todos los organismos y empresas públicas de la Junta o que reciban subvención — como CyLTV o el Instituto de Competitividad Empresarial—, y las fundaciones o entidades públicas empresariales… <sub>(p. 160)</sub>
+- **466.** Impondremos la evaluación obligatoria de impacto económico y social previa a la creación de cualquier nuevo organismo, con informe vinculante de la Intervención General, y reformaremos el sistema de subvenciones para establecer concurrencia competitiva… <sub>(p. 160)</sub>
+- **467.** Exigiremos auditorías que nos permitan conocer en qué se ha gastado el dinero de los castellanos y leoneses y qué entes y subvenciones carecen de utilidad pública demostrada, para proceder a su desmantelamiento <sub>(p. 160)</sub>
 - **469.** Derogaremos el punto 4 del artículo 7 de la ley 1/2002, que establece una puerta giratoria para los expresidentes de la Junta de Castilla y León y supone un gran gasto político sin interés para los castellanos y leoneses <sub>(p. 161)</sub>
 - **470.** Reorientaremos los recursos liberados hacia políticas esenciales en sanidad, educación y apoyo a la familia, la natalidad y el mundo rural… <sub>(p. 161)</sub>
 - **471.** Avanzaremos en esta regeneración institucional como requisito indispensable para recuperar la confianza en las instituciones, reducir el gasto político, desarticular la red clientelar construida por el PP como pata del bipartidismo en nuestra región y poner… <sub>(p. 161)</sub>
@@ -174,9 +188,10 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **105.** Habrá más recursos para los pueblos más pequeños <sub>(p. 42)</sub>
 - **106.** La insularidad, la ultraperiferia y las ciudades autónomas no significarán menos oportunidades <sub>(p. 42)</sub>
 
-### VOX (0)
+### VOX (2)
 
-*Sin medidas en esta categoría.*
+- **341.** Impulsaremos la autonomía local de las entidades locales, que son quienes mejor conocen las necesidades de los vecinos, colaborando de manera más estrecha con ellas para atender las necesidades reales de los municipios desde una perspectiva de conjunto <sub>(p. 118)</sub>
+- **342.** Trabajaremos para vertebrar todas las provincias de Castilla y León, con el fin de garantizar el acceso a unos servicios públicos de calidad a todos los municipios <sub>(p. 118)</sub>
 
 ## 4. Lengua, cultura, memoria e identidad
 
@@ -217,7 +232,7 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **138.** Proyectaremos al mundo lo mejor de España <sub>(p. 49)</sub>
 - **139.** Impulsaremos el deporte español y defenderemos la final del mundial de 2030 en España <sub>(p. 49)</sub>
 
-### VOX (41)
+### VOX (44)
 
 - **7.** En Castilla y León, como en toda España, defenderemos la concordia y la reconciliación heredada de nuestros padres y abuelos frente a las políticas que pretenden reescribir la historia e imponer una verdad oficial… <sub>(p. 10)</sub>
 - **8.** No permitiremos la instrumentalización del pasado para dividirnos; al contrario, garantizaremos la libertad para homenajear a todos aquellos que, desde diferentes perspectivas históricas, lucharon por la España que mejor creían para sus hijos y nietos <sub>(p. 11)</sub>
@@ -259,7 +274,10 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **233.** Impulsaremos medidas para fortalecer el belenismo en Castilla y León, apoyando a los belenistas con talleres y formación, ayudas para montaje y materiales, y un circuito de exposiciones itinerantes y concursos que amplíe su proyección cultural y turística <sub>(p. 80)</sub>
 - **234.** Promoveremos las fiestas tradicionales de nuestros pueblos y ciudades para preservarlas, en cuanto fuente de prosperidad material y espiritual de nuestra región y de España, algunas de ellas antiquísimas y de gran arraigo… <sub>(p. 80)</sub>
 - **235.** Celebraremos, con la debida relevancia, los siguientes acontecimientos vinculados a Castilla y León: en 2027, el I Centenario de la Confederación Hidrográfica del Duero (1927), con sede en Valladolid y clave en la gestión del agua del Duero; en 2026… <sub>(p. 80)</sub>
-- **236.** De nuestro compromiso con la promoción del Camino de Santiago y del Camino del Cid, potenciaremos la <sub>(p. 80)</sub>
+- **236.** De nuestro compromiso con la promoción del Camino de Santiago y del Camino del Cid, potenciaremos la difusión de otras rutas culturales y espirituales que atraviesan Castilla y León, como la Vía de la Plata y el Camino de San Salvador… <sub>(p. 80)</sub>
+- **237.** Promocionaremos iniciativas que realcen el valor de estas rutas, destacando su recorrido y el patrimonio histórico-artístico de los lugares que abarcan, de manera que puedan servir como recurso de desarrollo territorial <sub>(p. 81)</sub>
+- **238.** Adoptaremos todas las medidas necesarias para garantizar la recuperación y, en su caso, la devolución a Castilla y León de los fondos documentales y bienes culturales de titularidad legítima que hayan sido trasladados fuera de nuestra región… <sub>(p. 81)</sub>
+- **271.** Reforzaremos el papel del mundo del toro, la tauromaquia y los festejos taurinos en la promoción turística de Castilla y León <sub>(p. 92)</sub>
 
 ## 5. Política exterior, Unión Europea y defensa
 
@@ -384,7 +402,7 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **143.** Daremos seguridad jurídica a los auténticos descendientes de españoles <sub>(p. 50)</sub>
 - **238.** La frontera sur será una prioridad de España y de Europa <sub>(p. 74)</sub>
 
-### VOX (23)
+### VOX (27)
 
 - **22.** Aseguraremos el acceso prioritario de los españoles a las ayudas sociales y a los servicios públicos <sub>(p. 20)</sub>
 - **96.** Exigiremos exhaustivamente el reintegro del coste de la asistencia sanitaria no urgente prestada a personas extranjeras que no tengan derecho a asistencia sanitaria pública, estableciendo los mecanismos de facturación y recaudación necesarios <sub>(p. 34)</sub>
@@ -408,6 +426,10 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **116.** Promoveremos la prohibición en espacios y edificios públicos —abiertos y cerrados— de vestimentas o atuendos islámicos que atenten contra los derechos fundamentales y la dignidad de las mujeres, ya que son incompatibles con nuestra identidad, cultura, usos… <sub>(p. 43)</sub>
 - **128.** Exigiremos la máxima transparencia en el gasto público destinado a la inmigración ilegal <sub>(p. 47)</sub>
 - **129.** Impulsaremos la elaboración de un informe anual exhaustivo sobre el impacto real de la inmigración en el mercado inmobiliario de Castilla y León… <sub>(p. 47)</sub>
+- **360.** Estableceremos la prioridad nacional en el acceso a todas las ayudas sociales, especialmente a todas las que afecten a los jóvenes y que estén relacionadas con el acceso al empleo y a la vivienda <sub>(p. 122)</sub>
+- **402.** En las ayudas sociales y los programas de vivienda, impulsaremos la prioridad nacional en el acceso a programas de vivienda y concesión de ayudas sociales <sub>(p. 135)</sub>
+- **403.** En el alquiler, prohibiremos el arrendamiento a inmigrantes ilegales y perseguiremos el empadronamiento fraudulento de los inmigrantes ilegales y de los okupas <sub>(p. 135)</sub>
+- **454.** Estableceremos la prioridad nacional para los jóvenes en el acceso a ayudas vinculadas en ámbitos como el empleo o la vivienda, garantizando que los recursos públicos beneficien en primer lugar a los jóvenes españoles y a las familias que desean arraigar en Castilla y León <sub>(p. 153)</sub>
 - **507.** Eliminaremos toda financiación pública destinada a actividades que favorezcan la llegada o permanencia de inmigración masiva <sub>(p. 171)</sub>
 
 ## 8. Vivienda
@@ -443,9 +465,45 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **156.** «tres años+». el inquilino que cumple podrá quedarse y el propietario que lo haga posible pagará menos <sub>(p. 55)</sub>
 - **157.** El ocupa saldrá en 48 horas por orden judicial <sub>(p. 55)</sub>
 
-### VOX (0)
+### VOX (37)
 
-*Sin medidas en esta categoría.*
+- **319.** Presionaremos al Gobierno nacional para que impulse un Programa de Acceso a la Vivienda del que puedan beneficiarse las familias españolas que tengan o vayan a tener hijos, teniendo en cuenta el número de hijos de la unidad familiar <sub>(p. 113)</sub>
+- **371.** Ampliaremos el suelo disponible poniendo fin al secuestro de suelo por parte de las Administraciones Públicas para el beneficio de los partidos y de políticos corruptos, asegurando un correcto, ágil y armónico desarrollo urbanístico en toda España <sub>(p. 128)</sub>
+- **372.** Liberaremos todo el suelo que no esté o deba estar especialmente protegido por motivos de interés ambiental, paisajístico, productivo o para la Defensa Nacional <sub>(p. 128)</sub>
+- **373.** El plan priorizará vivienda asequible en alquiler y en compra para jóvenes y familias españolas, combinando promoción pública directa y colaboración con promotores privados <sub>(p. 128)</sub>
+- **374.** Llevaremos a cabo una aceleración de los procesos de transformación del suelo, así como políticas pro-incremento de alturas y densidad <sub>(p. 128)</sub>
+- **375.** Implantaremos un plazo máximo obligatorio de 3 meses para la concesión de licencias de obra, con criterios homogéneos en toda la región y refuerzo técnico a los ayuntamientos con mayor carga de trabajo <sub>(p. 128)</sub>
+- **376.** Financiaremos desde el Gobierno de Castilla y León equipos de apoyo y la digitalización completa de los expedientes, priorizando vivienda protegida y asequible <sub>(p. 129)</sub>
+- **377.** – Revisaremos y rebajaremos todos los tributos y cargas involucradas en el proceso edificatorio <sub>(p. 129)</sub>
+- **378.** Hasta la consecución de la reforma fiscal propuesta por VOX a nivel nacional, implementaremos y reforzaremos la deducción en el IRPF autonómico por adquisición o rehabilitación de la vivienda habitual que permita a los contribuyentes deducirse las cantidades invertidas <sub>(p. 129)</sub>
+- **379.** – Promocionaremos la recuperación del uso de cuentas ahorro vivienda, incentivando el ahorro previo necesario para acceder a la propiedad <sub>(p. 130)</sub>
+- **380.** – Facilitaremos la financiación para la compra de vivienda, con especial acento en los jóvenes españoles: avales públicos para compra de vivienda y créditos blandos para parejas jóvenes vinculados al número de hijos <sub>(p. 130)</sub>
+- **381.** Inundaremos Castilla y León de bloques de vivienda protegida para las familias españolas, mediante diversas fórmulas de colaboración público-privada: cesiones de suelo, subvenciones, descuentos, avales públicos y créditos blandos <sub>(p. 131)</sub>
+- **382.** Eliminaremos obstáculos para la iniciativa privada y el cooperativismo en la construcción de VPO <sub>(p. 131)</sub>
+- **383.** Reorientaremos las políticas de rehabilitación para que tengan como objetivo incrementar el número de viviendas habitables reales, y no limitarse a actuaciones estéticas o energéticas sin impacto social <sub>(p. 131)</sub>
+- **384.** Impulsaremos planes de inspección y rehabilitación del parque de vivienda social <sub>(p. 131)</sub>
+- **385.** Implementaremos líneas de ayuda específicas y finalistas para garantizar la accesibilidad universal, mediante la instalación de ascensores, plataformas y eliminación de barreras (portales, itinerarios accesibles, cuartos de contadores, etc.) <sub>(p. 131)</sub>
+- **386.** Promoveremos la eficiencia energética y la disminución de la factura energética de las familias, mediante líneas de ayudas a la instalación de envolventes térmicas (fachadas, cubiertas, medianeras), carpinterías y vidrios… <sub>(p. 131)</sub>
+- **387.** – Habilitaremos una plataforma auditada de peticiones para que, manteniendo la SAREB la titularidad de los activos, sean los Ayuntamientos los que soliciten a la SAREB, en función de la demanda y las necesidades habitacionales… <sub>(p. 131)</sub>
+- **388.** Promocionaremos la compra a plazos con condición resolutoria, y la bonificación del alquiler con opción a compra <sub>(p. 132)</sub>
+- **389.** En tanto no se produzca la derogación del Impuesto sobre Sucesiones y Donaciones a nivel estatal, extenderemos la bonificación del Impuesto sobre Sucesiones y Donaciones a todos los grados <sub>(p. 132)</sub>
+- **390.** Reduciremos el tipo general del 1,5% al 0,5% del Impuesto de Actos Jurídicos Documentados para fomentar la transmisión de bienes inmuebles y favorecer de esta manera la actividad inmobiliaria <sub>(p. 132)</sub>
+- **391.** Impulsaremos un aumento real y sostenido del parque de vivienda protegida en alquiler, con precios vinculados a la capacidad económica de los hogares españoles, impidiendo la especulación <sub>(p. 133)</sub>
+- **392.** Promocionaremos un modelo de alquileres que armonice los intereses de arrendadores —seguridad jurídica, garantía de cobro y recuperación de la posesión— y arrendatarios —asequibilidad, estabilidad— <sub>(p. 133)</sub>
+- **393.** Estableceremos incentivos fiscales al alquiler de larga duración y asequible <sub>(p. 133)</sub>
+- **394.** Simplificaremos la gestión de los sectores urbanizables, impulsaremos acuerdos con propietarios y priorizaremos la promoción de vivienda protegida y asequible, tanto en alquiler como en compra, adaptada a la realidad salarial del territorio <sub>(p. 133)</sub>
+- **395.** – Implantaremos un sistema de transparencia y rendición de cuentas obligatorio en materia de vivienda, con un cuadro de mando público actualizado trimestralmente <sub>(p. 133)</sub>
+- **396.** Defenderemos la tolerancia cero con la okupación: impulsaremos políticas activas de lucha contra la ocupación ilegal de viviendas, procediendo a la expulsión inmediata de los okupas en 24h, con especial atención a las unidades ocupadas del parque de vivienda social <sub>(p. 134)</sub>
+- **397.** Revisaremos y reforzaremos los protocolos de actuación policial y judicial para que los propietarios no se vean abandonados a procedimientos largos y costosos, y garantizaremos la defensa de la propiedad privada como derecho constitucional, sin… <sub>(p. 134)</sub>
+- **398.** Excluiremos a las personas que previamente hayan ocupado ilegalmente una vivienda de la posibilidad de recibir una vivienda social <sub>(p. 134)</sub>
+- **399.** Realizaremos un seguimiento pormenorizado de las okupaciones que se produzcan, y proporcionaremos asistencia y asesoramiento gratuito para los afectados, así como la compensación fiscal de aquellos que sean víctimas de okupación ilegal <sub>(p. 135)</sub>
+- **400.** Preservaremos los derechos de los vecinos residentes y pondremos fin a un modelo turístico poco respetuoso que está contribuyendo a la degradación de nuestros barrios y a la expulsión de los vecinos de sus hogares <sub>(p. 135)</sub>
+- **401.** En el acceso a vivienda social y protegida, situaremos el arraigo y el acumulado histórico de años de la familia en España como principales criterios de asignación de viviendas <sub>(p. 135)</sub>
+- **404.** En la compra, atajaremos la adquisición masiva de vivienda por capital extranjero, estableciendo una fiscalidad diferenciada para compradores no comunitarios <sub>(p. 135)</sub>
+- **406.** Estableceremos un régimen reforzado de cofinanciación (subvención + anticipo reembolsable) y mecanismos de alivio de derramas para comunidades con mayoría de propietarios de baja renta… <sub>(p. 136)</sub>
+- **407.** Aprobaremos ayudas a la renovación, conservación y seguridad estructural de los edificios antiguos, con especial atención a la retirada segura de elementos con amianto <sub>(p. 136)</sub>
+- **408.** Elaboraremos un Plan Integral de Rehabilitación de Viviendas Antiguas en Cascos Urbanos —en colaboración con Diputaciones y Ayuntamientos— que priorice barrios del centro histórico y edificios de 1950-1980 o anteriores <sub>(p. 136)</sub>
+- **409.** Promoveremos un urbanismo amable para las familias, arraigado y armonioso con el entorno, fomentando la rehabilitación de los estilos regionales y la protección de las fachadas tradicionales, incluyéndolos en los catálogos de bienes de interés cultural <sub>(p. 136)</sub>
 
 ## 9. Fiscalidad y finanzas públicas
 
@@ -544,10 +602,56 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **193.** Lo esencial no faltará: alimentos y medicamentos con suministro asegurado <sub>(p. 63)</sub>
 - **194.** El turismo español crecerá en valor, productividad y calidad <sub>(p. 64)</sub>
 
-### VOX (13)
+### VOX (59)
 
 - **211.** Desarrollaremos un plan de turismo sostenible específico para la cordillera Cantábrica en Castilla y León —Montaña Leonesa y Palentina, Alto Sil y áreas colindantes—… <sub>(p. 72)</sub>
 - **212.** Instaremos al Gobierno de España a realizar un estudio exhaustivo y a crear un plan nacional de Turismo de Pesca que permita el desarrollo adecuado de la pesca deportiva en todo el territorio, incluyendo medidas para reducir la burocracia administrativa… <sub>(p. 72)</sub>
+- **239.** Trabajaremos para lograr una mayor convergencia territorial en la industria, apostando por el aumento del peso de las provincias menos industrializadas y teniendo como objetivo la consecución de una economía regional diversificada <sub>(p. 85)</sub>
+- **240.** Impulsaremos y fortaleceremos los sectores considerados prioritarios a nivel estratégico para Castilla y León, como la automoción, la logística, la aeronáutica y las TIC, así como el agroalimentario, el farmacéutico y de la salud <sub>(p. 85)</sub>
+- **241.** Revisaremos el entorno regulatorio con el fin de favorecer la competitividad de las empresas y el desarrollo industrial de Castilla y León <sub>(p. 86)</sub>
+- **242.** Impulsaremos el incremento de la capacidad tecnológica de la industria manufacturera regional con el fin de mejorar la productividad y de que nuestras empresas se sitúen en el nivel tecnológico demandado por el mercado industrial mundial <sub>(p. 86)</sub>
+- **243.** Impulsaremos programas de atracción de inversión en el sector de la automoción, posicionando a Castilla y León como territorio líder para la instalación de nuevas plantas de fabricación, centros de I+D+i y empresas proveedoras… <sub>(p. 86)</sub>
+- **244.** Con el fin de favorecer la inversión y el crecimiento económico en Castilla y León, impulsaremos de manera ordenada la disponibilidad de suelo industrial que sea suficiente y reúna condiciones adecuadas en términos de calidad y precio <sub>(p. 86)</sub>
+- **245.** Firmes en este compromiso: – Trabajaremos para garantizar a los alumnos de FP Dual de Castilla y León la existencia de plazas suficientes en empresas donde puedan realizar sus prácticas formativas… <sub>(p. 87)</sub>
+- **246.** Queremos que el sector tecnológico regional crezca hasta poder complementar el sector de industria manufacturera <sub>(p. 87)</sub>
+- **247.** Protegeremos la comarca burgalesa de Miranda de Ebro frente al impacto negativo sobre la industria y el empleo causado por los privilegios fiscales y competitivos otorgados por el bipartidismo al País Vasco <sub>(p. 87)</sub>
+- **257.** Apoyaremos de manera decidida a este sector favoreciendo su desarrollo, consolidación y modernización, así como promocionando el trabajo de nuestros artesanos tanto en España como en el extranjero <sub>(p. 90)</sub>
+- **258.** En esta línea, seguiremos trabajando para fortalecer el ecosistema regional de economía social, promoviendo el desarrollo de todo tipo de entidades y teniendo en cuenta a todas las organizaciones representativas del sector <sub>(p. 90)</sub>
+- **259.** Seguiremos defendiendo medidas como la preservación del pequeño comercio tradicional, el fomento de la demanda del comercio de proximidad, el aumento de la oferta de los servicios en el medio rural, el apoyo a la modernización y digitalización… <sub>(p. 90)</sub>
+- **260.** Promoveremos el empleo estable, duradero y de calidad mediante la reducción de las cotizaciones a las empresas que contraten trabajadores de manera indefinida <sub>(p. 90)</sub>
+- **261.** Promoveremos que se asegure la garantía efectiva del derecho al trabajo mediante la prohibición de las acciones coactivas en las huelgas políticas <sub>(p. 91)</sub>
+- **262.** Revisaremos las políticas regionales de fomento del empleo con el fin de consolidar un modelo encaminado a la creación de empleo estable, duradero y de calidad <sub>(p. 91)</sub>
+- **263.** Reduciremos las cotizaciones a las empresas que contraten trabajadores españoles de manera indefinida <sub>(p. 91)</sub>
+- **264.** Siguiendo esta línea, seguiremos trabajando para favorecer la seguridad en el trabajo, impulsando la cultura preventiva y reforzando el control en los sectores más afectados por la siniestralidad laboral <sub>(p. 91)</sub>
+- **265.** Elaboraremos un diagnóstico actualizado del absentismo laboral en Castilla y León, con desglose por sectores y provincias, con el fin de evaluar su impacto económico y promover medidas correctoras en coordinación con los agentes sociales y económicos <sub>(p. 91)</sub>
+- **266.** Volveremos a impulsar un verdadero diálogo social, no sometido al chantaje de los sindicatos de extrema izquierda, adaptado a un marco de racionalización del gasto público que redunde en el bienestar de los ciudadanos <sub>(p. 91)</sub>
+- **267.** Trabajaremos para mejorar el posicionamiento turístico de Castilla y León y hacer que siga manteniendo el liderazgo en el turismo rural <sub>(p. 92)</sub>
+- **268.** Apostaremos por el fomento de la creación de empleo cualificado y estable en el sector turístico, incentivando el emprendimiento y eliminando las trabas burocráticas a las empresas <sub>(p. 92)</sub>
+- **269.** Impulsaremos la creación y crecimiento de empresas en la economía rural que tengan el turismo como fuerza motora <sub>(p. 92)</sub>
+- **270.** Favoreceremos y apoyaremos aquellas iniciativas empresariales de turismo local que fomenten y difundan la cultura, tradiciones e idiosincrasia local <sub>(p. 92)</sub>
+- **318.** Incentivaremos fiscalmente a las empresas que contraten a mujeres que hayan tenido hijos de manera reciente, así como a padres de familias numerosas, y que promuevan formas de conciliación de la vida personal, familiar y laboral <sub>(p. 113)</sub>
+- **327.** Combatiremos la brecha maternal facilitando la formación y reincorporación al trabajo de las madres que han interrumpido sus carreras por la maternidad y desean retomarla, así como con medidas contra las presiones y penalización económica que pueden sufrir… <sub>(p. 114)</sub>
+- **328.** Reconoceremos la aportación de la mujer en el ámbito laboral y empresarial, y eliminaremos toda legislación laboral «de género» que establezca diferencias laborales entre castellanos y leoneses y atenten contra la igualdad y la prohibición de discriminación laboral y empresarial <sub>(p. 114)</sub>
+- **329.** En lugar de las «cuotas de género», planes de igualdad u obligaciones de contratación —que denigran a la mujer y son lesivas para la libertad de empresa—, impulsaremos políticas que respeten la libre decisión de las mujeres de ser madres… <sub>(p. 115)</sub>
+- **330.** Estableceremos nuevas medidas para el desarrollo de itinerarios para la capacitación de mujeres afectadas por la brecha maternal que favorezcan su empleabilidad con actuaciones de información, asesoramiento y orientación <sub>(p. 115)</sub>
+- **331.** Implantaremos medidas que minimicen el impacto empresarial de tener trabajadoras con responsabilidades familiares, incentivando, en base a las particularidades de nuestro heterogéneo mercado laboral, el teletrabajo <sub>(p. 115)</sub>
+- **332.** Fomentaremos el arraigo de los castellanos y de los leoneses en su tierra favoreciendo el empleo de calidad <sub>(p. 115)</sub>
+- **333.** Sacar adelante un negocio dejará de ser un infierno: simplificaremos la burocracia garantizando siempre la seguridad jurídica mercantil y laboral y facilitaremos la gestión y agilización de trámites administrativos <sub>(p. 116)</sub>
+- **334.** Aprobaremos incentivos económicos y fiscales para la instalación de empresas, industrias y centros de trabajo en zonas rurales, incluyendo: – Reducción del 50% en las cuotas de la Seguridad Social por trabajador contratado residente en municipios rurales <sub>(p. 116)</sub>
+- **335.** Desarrollaremos un programa de cesión o arrendamiento a bajo coste de locales de titularidad municipal o autonómica en desuso para la instalación de nuevos negocios y empresas en el medio rural <sub>(p. 116)</sub>
+- **336.** Crearemos una línea específica de ayudas al empleo para madres y padres con hijos menores de 3 años, que fijen su residencia en municipios con menos de 5.000 habitantes y contemple: – Bonificaciones para empresas que contraten a progenitores con hijos menores de 3 años <sub>(p. 116)</sub>
+- **337.** Fomentaremos la natalidad con incentivos fiscales, especialmente en el mundo rural <sub>(p. 117)</sub>
+- **338.** Durante nuestra etapa en el Gobierno, impulsamos medidas para garantizar oportunidades a los jóvenes en el medio rural <sub>(p. 117)</sub>
+- **339.** Fomentaremos el relevo generacional en todos los sectores <sub>(p. 117)</sub>
+- **340.** Impulsaremos un plan de ayudas a la conservación de empresas familiares y centenarias mediante incentivos para mantener la actividad y el empleo, facilitando el relevo generacional <sub>(p. 117)</sub>
+- **345.** Protegeremos el pequeño comercio de proximidad, elemento de cohesión clave en nuestros pueblos y ciudades durante generaciones <sub>(p. 118)</sub>
+- **346.** Aumentaremos las bonificaciones y deducciones fiscales a las empresas que compren producto nacional, priorizando los proveedores nacionales y ayudando a pequeños comerciantes y productores españoles <sub>(p. 119)</sub>
+- **405.** Reindustrializaremos y revitalizaremos la vida en cabezas de comarca, pequeñas y medianas ciudades pequeñas y mundo rural: servicios, infraestructuras, comunicaciones, trabajo, ocio <sub>(p. 136)</sub>
+- **439.** Pondremos en marcha las políticas necesarias para que los jóvenes y las familias que se han marchado puedan volver a su tierra mediante ayudas para acceder a una vivienda, ventajas fiscales y facilidades para el teletrabajo <sub>(p. 149)</sub>
+- **440.** Impulsaremos el relevo generacional en todos los sectores <sub>(p. 149)</sub>
+- **451.** Facilitaremos el retorno de jóvenes y familias mediante un entorno formativo y profesional atractivo, articulando ayudas a la vivienda, incentivos fiscales y facilidades para el teletrabajo que complementen la oferta educativa y de Formación Profesional en el territorio <sub>(p. 153)</sub>
+- **452.** Impulsaremos el relevo generacional en todos los sectores productivos mediante la coordinación entre el sistema educativo, la Formación Profesional y las políticas fiscales… <sub>(p. 153)</sub>
+- **453.** Apoyaremos a los emprendedores jóvenes del ámbito rural mediante la simplificación administrativa, la reducción de cargas fiscales y la conexión directa con la oferta formativa y tecnológica, para… <sub>(p. 153)</sub>
 - **486.** En VOX, apoyaremos a los trabajadores autónomos mediante compensaciones para aquellos cuyos ingresos netos no lleguen al SMI <sub>(p. 167)</sub>
 - **487.** Tomaremos las medidas necesarias para acabar con la figura del falso autónomo y reducir la burocracia al máximo <sub>(p. 167)</sub>
 - **488.** Impulsaremos un plan de ayudas a la conservación de empresas familiares y centenarias mediante incentivos para mantener la actividad y el empleo, facilitando el relevo generacional <sub>(p. 167)</sub>
@@ -596,7 +700,7 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **166.** Actuaremos con urgencia contra la pobreza infantil <sub>(p. 57)</sub>
 - **167.** *(Medida por anunciar durante la campaña)* <sub>(p. 58)</sub>
 
-### VOX (7)
+### VOX (36)
 
 - **25.** Combatiremos la burocracia excesiva para agilizar el acceso de las familias a las ayudas sociales <sub>(p. 20)</sub>
 - **31.** Pondremos en marcha las políticas necesarias para que los jóvenes y las familias que se han marchado puedan volver a su tierra, facilitando el acceso a una vivienda mediante la aprobación de ventajas fiscales, fomentando la colaboración con entidades… <sub>(p. 21)</sub>
@@ -605,6 +709,35 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **64.** Prestaremos especial atención a la soledad no deseada — que padecen generalmente las personas mayores— implementando unidades de atención domiciliaria con formación específica en las áreas básicas de salud para paliar este tipo de situaciones <sub>(p. 28)</sub>
 - **66.** Apostaremos por un fortalecimiento del sistema de atención a la dependencia y reforzaremos el Servicio de Ayuda a Domicilio para que la atención llegue a las zonas más despobladas <sub>(p. 28)</sub>
 - **80.** Reforzaremos la coordinación sociosanitaria, orientando toda acción a la dignidad de la persona y la mejora de su calidad de vida, y modernizaremos las residencias de mayores y centros de día para garantizar una atención digna y cercana, impulsando inspecciones periódicas <sub>(p. 31)</sub>
+- **300.** Pondremos a las familias castellanas y leonesas en el centro de todas las políticas públicas <sub>(p. 109)</sub>
+- **301.** Estableceremos medidas sociales que revaloricen la importancia de la familia y el matrimonio, la natalidad, la maternidad y la paternidad <sub>(p. 109)</sub>
+- **302.** Apostaremos por emplear los recursos públicos en defensa de la vida, terminando con todas las políticas y medidas que promueve la izquierda junto al Partido Popular y que están hoy al servicio de la cultura de la muerte <sub>(p. 109)</sub>
+- **303.** Priorizaremos en todas las políticas la vida, y la familia como institución natural y básica de la sociedad española <sub>(p. 109)</sub>
+- **304.** Impulsaremos la colaboración con las asociaciones que tengan por objeto la defensa de la vida y de la familia, junto con aquellas que promueven la igualdad real entre hombres y mujeres <sub>(p. 109)</sub>
+- **306.** Rechazamos la mercantilización de la mujer con los vientres de alquiler, que suponen una cosificación y un ataque a su dignidad; además de una visión de los hijos como un derecho o bien de mercado <sub>(p. 110)</sub>
+- **307.** Fomentaremos la natalidad con incentivos fiscales y más ayudas progresivas a la maternidad, especialmente para las familias jóvenes o las que se instalen en nuestras provincias <sub>(p. 110)</sub>
+- **308.** Promoveremos la interconexión de datos entre las distintas Consejerías competentes para que los beneficios autonómicos se apliquen de forma automática al acreditar las familias el cumplimiento de los criterios de acceso a los mismos <sub>(p. 110)</sub>
+- **309.** Incrementaremos significativamente la dotación presupuestaria destinada a fomentar la natalidad y al resto de políticas familiares <sub>(p. 110)</sub>
+- **310.** Por ello: – Aumentaremos las rebajas fiscales para las familias en función del número de hijos y de la renta per cápita familiar, junto con tasas y precios públicos especiales con base en estos mismos criterios… <sub>(p. 110)</sub>
+- **311.** Mantendremos las ayudas y descuentos a las familias numerosas hasta la emancipación del miembro menor de la unidad familiar <sub>(p. 111)</sub>
+- **312.** Impulsaremos su reconocimiento como profesión de riesgo a nivel nacional <sub>(p. 111)</sub>
+- **313.** Reforzaremos el Bono Nacimiento para que sea una ayuda realmente relevante en el primer año de crianza, con convocatoria abierta y pago en un plazo máximo de 30 días desde la resolución, con tramitación simplificada y automática <sub>(p. 111)</sub>
+- **314.** Aumentaremos la deducción autonómica en el IRPF, eliminando el límite de renta, con importes más elevados por cada hijo: 1.500 € por el primero, 2.000 € por el segundo y 3.000 € por el tercero y siguientes (con incremento mínimo del 50% por discapacidad) <sub>(p. 112)</sub>
+- **315.** Las familias residentes en el medio rural que tengan un hijo podrán deducirse hasta un 20% más sobre el tramo anteriormente descrito <sub>(p. 112)</sub>
+- **316.** Rebajaremos la consideración de familia numerosa especial a 3 hijos, con todos los derechos que ello implica, alineándonos a otras regiones <sub>(p. 112)</sub>
+- **317.** Garantizaremos la prestación efectiva de servicios básicos esenciales en todos los municipios de Castilla y León mediante el mantenimiento de consultorios médicos locales y servicios de atención primaria itinerante con periodicidad mínima semanal… <sub>(p. 112)</sub>
+- **320.** Exigiremos la aplicación de la bonificación máxima del IBI a las familias numerosas, así como el establecimiento de bonificaciones significativas en tasas municipales esenciales: agua y alcantarillado con un mínimo de consumo elevado, basura o vados <sub>(p. 113)</sub>
+- **321.** Negociaremos acuerdos con entidades locales para adoptar bonificaciones en favor de familias con hijos que alivien sus cargas y faciliten su movilidad y estabilidad <sub>(p. 113)</sub>
+- **322.** Reconoceremos con el Título de Familia Numerosa a todos los ascendientes que fueron familia numerosa, pero que dejaron de serlo al emanciparse sus hijos <sub>(p. 113)</sub>
+- **323.** Fomentaremos el reconocimiento público de las Familias Numerosas para visibilizar la aportación demográfica y social que realizan <sub>(p. 114)</sub>
+- **324.** Reconoceremos de forma efectiva los derechos de conciliación de la vida personal, familiar y profesional de los trabajadores, de forma que fomenten la asunción equilibrada de las responsabilidades familiares… <sub>(p. 114)</sub>
+- **325.** Aumentaremos el presupuesto en conciliación familiar, mejorando los servicios de conciliación familiar y laboral, con ampliación de los servicios complementarios de aula en los centros educativos <sub>(p. 114)</sub>
+- **326.** Crearemos incentivos para las empresas que favorezcan la conciliación familiar y laboral <sub>(p. 114)</sub>
+- **347.** Combatiremos la soledad no deseada, especialmente la de nuestros mayores <sub>(p. 119)</sub>
+- **350.** Reforzaremos las ayudas a la contratación de cuidadores a domicilio, incrementando la cuantía máxima y simplificando el proceso para la formalización de solicitudes <sub>(p. 119)</sub>
+- **351.** Promoveremos la valoración social de los cuidados que se prestan en el hogar <sub>(p. 119)</sub>
+- **352.** Habilitaremos medidas de apoyo económico, social e institucional a familiares cuidadores de hijos enfermos, mayores o dependientes <sub>(p. 120)</sub>
+- **361.** Revertiremos la dinámica de unos servicios sociales precarios que no llegan a los españoles más necesitados, y que demasiadas veces, debido a postulados ideológicos, no ofrecen ayudas adecuadas a las familias ni tienen en cuenta el interés superior del menor <sub>(p. 122)</sub>
 
 ## 12. Igualdad, feminismo, LGTBI y antirracismo
 
@@ -630,13 +763,22 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 
 - **111.** Nadie tendrá menos oportunidades por ser quien es <sub>(p. 43)</sub>
 
-### VOX (5)
+### VOX (14)
 
 - **14.** – En su lugar, aprobaremos leyes y normas que de verdad protejan a las mujeres víctimas de violencia, en especial, a aquellas que sufran maltrato, y que no dejen a ninguna víctima desamparada <sub>(p. 12)</sub>
 - **15.** Combatiremos, desde la Junta de Castilla y León, los consensos del bipartidismo; en especial, todas las políticas relacionadas con la inmigración masiva que amenazan nuestra seguridad, identidad, libertad y prosperidad <sub>(p. 13)</sub>
 - **16.** Promoveremos la superación de todas las leyes divisivas aprobadas por la izquierda con el fin de proteger de verdad a las mujeres <sub>(p. 14)</sub>
 - **17.** – Trabajaremos también en la prevención de esta violencia, identificando sus causas y los perfiles criminales repetidos de los agresores para combatirlos con más eficacia <sub>(p. 14)</sub>
 - **117.** Exigiremos un protocolo nacional que tenga como fin la erradicación del matrimonio forzado y la mutilación genital femenina, propio de culturas extranjeras incompatibles con la nuestra… <sub>(p. 43)</sub>
+- **362.** Para afrontar los casos en los que, desgraciadamente, no lo sea, impulsaremos una Ley de Violencia Doméstica libre de fanatismo ideológico y sectarismo que establezca los mecanismos oportunos para prevenir la violencia de cualquier tipo… <sub>(p. 122)</sub>
+- **363.** Las políticas llamadas «de género» han resultado ser un fracaso en la erradicación de la violencia contra la mujer: conducen en la práctica a la desprotección de la mujer en los ámbitos asistenciales o deportivos, llegando a premiar a los agresores según se «autoperciban» <sub>(p. 122)</sub>
+- **364.** Promoveremos políticas de seguridad para todas las víctimas de violencia, sin discriminaciones ideológicas ni sectarismo de género <sub>(p. 123)</sub>
+- **365.** Promoveremos la tipificación del delito de enaltecimiento del maltrato y la modificación del Sistema Estadístico de Criminalidad para que un hurto no pueda pesar como una agresión sexual <sub>(p. 123)</sub>
+- **366.** Garantizaremos toda la asistencia у apoyo posible a las mujeres víctimas de violencia, con ayuda financiera para los Centros de Crisis 24 Horas de Atención a Víctimas de Violencia Sexual <sub>(p. 123)</sub>
+- **367.** Acabaremos con toda la burocracia ideológica <sub>(p. 123)</sub>
+- **368.** Promoveremos la superación de todas las leyes LGTBi y de género, por pretender el borrado de las mujeres y no buscar la igualdad de derechos entre todos los castellanos y leoneses, sino el adoctrinamiento, la división y el enfrentamiento para justificar el despilfarro político <sub>(p. 123)</sub>
+- **369.** No dejaremos de denunciar la hipocresía de los que se erigen en defensores de las mujeres, pero, con sus leyes feministas, benefician y sacan de las cárceles a violadores у delincuentes sexuales, o los que se declaran defensores de los homosexuales y… <sub>(p. 124)</sub>
+- **370.** Defenderemos el deporte femenino frente a la imposición de hombres que se «autoperciben» mujeres en competiciones femeninas, salvaguardando el esfuerzo y el mérito de nuestras deportistas en las competiciones… <sub>(p. 124)</sub>
 
 ## 13. Sanidad
 
@@ -662,7 +804,7 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **226.** Garantizaremos los cuidados paliativos y una vida digna hasta el final <sub>(p. 70)</sub>
 - **227.** Ceuta y Melilla tendrán un plan sanitario propio <sub>(p. 71)</sub>
 
-### VOX (67)
+### VOX (70)
 
 - **18.** Defenderemos un modelo sanitario nacional, coordinado desde el Estado, que garantice el acceso de todos los españoles en condiciones de igualdad a los servicios sanitarios, con independencia de su lugar de residencia <sub>(p. 19)</sub>
 - **19.** Queremos una sanidad coordinada que ponga fin a las diferencias injustas, las duplicidades administrativas y las fronteras autonómicas, y que permita un control del gasto más eficaz y eficiente <sub>(p. 19)</sub>
@@ -731,6 +873,9 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **93.** Aprobaremos un plan integral para hacer frente a la obesidad en Castilla y León tal y como aconsejan los profesionales del sector, nutricionistas y endocrinos, así como las asociaciones de pacientes <sub>(p. 33)</sub>
 - **94.** Garantizaremos la detección y diagnóstico precoz de la enfermedad del Alzheimer y otras demencias asociadas a la vejez, reforzando las unidades de memoria y la formación específica de los profesionales sanitarios de atención primaria <sub>(p. 34)</sub>
 - **95.** Seguiremos avanzando en la aprobación de incentivos en las zonas rurales para que los profesionales sanitarios quieran ocupar puestos de difícil cobertura <sub>(p. 34)</sub>
+- **305.** Garantizaremos la objeción de conciencia de los profesionales sanitarios y farmacéuticos y potenciaremos los cuidados paliativos <sub>(p. 110)</sub>
+- **348.** Priorizaremos el cuidado de la salud mental y fomentaremos los factores protectores de lacras tan dolorosas como el suicidio o la depresión <sub>(p. 119)</sub>
+- **349.** Diseñaremos nuevas campañas de sensibilización sobre salud mental desde la perspectiva de la cultura de la vida, que contribuyan a la concienciación sobre la necesidad de tejer lazos comunitarios y cohesionar nuestros municipios y provincias para hacer frente al aislamiento, el abandono y el suicidio <sub>(p. 119)</sub>
 
 ## 14. Educación, universidades e investigación
 
@@ -771,9 +916,51 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **217.** Las universidades tendrán autonomía y responsabilidad <sub>(p. 68)</sub>
 - **218.** Estudiar dependerá del talento y el esfuerzo, no de la renta <sub>(p. 68)</sub>
 
-### VOX (0)
+### VOX (43)
 
-*Sin medidas en esta categoría.*
+- **356.** Garantizaremos la accesibilidad a la educación gratuita de 0 a 3 años en toda Castilla y León <sub>(p. 120)</sub>
+- **357.** Queremos una educación excelente que garantice la igualdad de oportunidades y libre de adoctrinamiento <sub>(p. 121)</sub>
+- **358.** Ampliaremos el sistema de apoyo a las familias para la educación de sus hijos con medidas fiscales en función del número de hijos para el comedor y transporte escolar, materiales, uniforme o actividades extraescolares <sub>(p. 121)</sub>
+- **359.** Fomentaremos una colaboración estrecha con nuestras universidades —verdaderos centros de conocimiento de reconocido prestigio en todo el mundo desde hace siglos— como medio de captación y retención del talento en nuestra tierra <sub>(p. 121)</sub>
+- **410.** Garantizaremos la neutralidad en las aulas y el respeto a las convicciones de las familias <sub>(p. 142)</sub>
+- **411.** Ningún activista —y ninguna entidad ajena a los colegios— entrará en las aulas sin el consentimiento expreso de los padres <sub>(p. 142)</sub>
+- **412.** Evitaremos cualquier intento de islamización en las aulas <sub>(p. 142)</sub>
+- **413.** Trabajaremos para devolver el sentido común y desideologizar los currículos de las enseñanzas no universitarias, eliminando de los materiales educativos y de las programaciones escolares todas las agendas políticas, como, por ejemplo, la Agenda 2030… <sub>(p. 142)</sub>
+- **414.** Garantizaremos que la enseñanza se base en el conocimiento, la disciplina y los valores comunes de nuestra civilización <sub>(p. 142)</sub>
+- **415.** – Reforzaremos las Humanidades y la enseñanza de la historia común de España, para que los jóvenes conozcan el papel decisivo de nuestra tierra en la construcción de nuestra Nación <sub>(p. 143)</sub>
+- **416.** Recuperaremos la cultura del esfuerzo mediante evaluaciones justas que valoren el trabajo, la constancia y la superación personal de cada alumno, garantizando que el mérito y la igualdad de oportunidades vuelvan a ser el camino hacia el éxito educativo <sub>(p. 143)</sub>
+- **417.** Crearemos premios al mérito académico y a la excelencia docente para reconocer públicamente el esfuerzo de alumnos y profesores <sub>(p. 143)</sub>
+- **418.** Reforzaremos las bibliotecas escolares y universitarias con más presupuesto para fomentar la lectura, la cultura y el saber <sub>(p. 143)</sub>
+- **419.** Garantizaremos la igualdad de oportunidades y restableceremos una educación basada en el esfuerzo, la exigencia y el mérito, poniendo fin al aprobado generalizado impuesto por el bipartidismo mediante una aplicación laxa de la normativa educativa <sub>(p. 143)</sub>
+- **420.** Impulsaremos medidas para reconocer públicamente el mérito, el esfuerzo y el rendimiento académico, tanto de los alumnos como de los profesores, reforzando una cultura educativa exigente que valore el trabajo, la constancia y los resultados <sub>(p. 144)</sub>
+- **421.** Promoveremos desde Castilla y León la superación del Estado autonómico y sus 17 sistemas educativos con el objetivo de lograr un único sistema educativo que garantice la igualdad de oportunidades y el desarrollo personal de los alumnos y que fortalezca la cohesión nacional <sub>(p. 144)</sub>
+- **422.** Defenderemos una inspección educativa al servicio del conocimiento, la exigencia y centrada en la mejora de resultados, no de agendas políticas enmascaradas en objetivos pedagógicos <sub>(p. 144)</sub>
+- **423.** Defenderemos una prueba de acceso a la universidad común en toda España, con criterios homogéneos y exigentes, que garantice la igualdad real de oportunidades entre los jóvenes de todas las regiones <sub>(p. 144)</sub>
+- **424.** Desarrollaremos un Plan regional contra el acoso escolar, coordinado con familias, servicios sociales y sanitarios, que establezca protocolos ágiles y homogéneos en todos los centros y priorice siempre la protección inmediata de la víctima… <sub>(p. 144)</sub>
+- **425.** Exigiremos que todos los centros educativos dispongan de protocolos claros y actualizados frente al ciberacoso y a los ataques realizados mediante herramientas de inteligencia artificial, como la manipulación de imágenes… <sub>(p. 145)</sub>
+- **426.** Garantizaremos formación específica y continua para los docentes en prevención, detección y gestión del acoso escolar, asegurando que puedan intervenir con rapidez y con respaldo institucional firme <sub>(p. 145)</sub>
+- **427.** Aseguraremos por Ley la convivencia y protección del profesorado, con medidas eficaces de prevención, respuesta rápida ante agresiones y acoso, y mediante el respaldo institucional inequívoco a docentes y equipos directivos <sub>(p. 145)</sub>
+- **428.** Reduciremos de forma drástica la carga burocrática que asfixia al profesorado, suprimiendo informes redundantes, duplicidades administrativas y exigencias formales que poco aportan a la mejora real del aprendizaje <sub>(p. 146)</sub>
+- **429.** Estableceremos la plena compatibilidad entre el reconocimiento de sexenios por formación permanente y el desarrollo de la carrera profesional docente, evitando penalizaciones o incompatibilidades injustificadas <sub>(p. 146)</sub>
+- **430.** Impulsaremos un Plan plurianual de renovación y estabilización del profesorado rural, con previsión pública de jubilaciones a cinco y diez años vista, convocatoria ordenada de plazas y calendario transparente de reposición <sub>(p. 146)</sub>
+- **431.** Respaldaremos al profesorado garantizando estabilidad y creando incentivos reales para atraer y mantener docentes en el medio rural <sub>(p. 146)</sub>
+- **432.** Blindaremos la escuela rural como infraestructura estratégica, evitando cierres automáticos y evaluando caso por caso, con criterios transparentes de demanda mínima viable y soluciones de continuidad <sub>(p. 147)</sub>
+- **433.** Impulsaremos incentivos fiscales y ayudas específicas para familias con hijos que mantengan su residencia efectiva en municipios en riesgo de despoblación <sub>(p. 147)</sub>
+- **434.** Garantizaremos una red suficiente de enseñanzas postobligatorias en todas las provincias, evitando que la despoblación o la reducción de matrícula suponga la desaparición automática de itinerarios formativos <sub>(p. 147)</sub>
+- **435.** Apoyaremos decididamente la educación rural: – Garantizaremos que los alumnos del medio rural dispongan de los mismos recursos de apoyo educativo que los de las capitales, mediante equipos itinerantes con presencia periódica obligatoria y planificación anual… <sub>(p. 147)</sub>
+- **436.** Reforzaremos la FP Dual con pymes, autónomos y cooperativas, reduciendo carga administrativa y garantizando calidad del aprendizaje en la empresa, para que sea una vía de empleo juvenil y no una práctica formal <sub>(p. 149)</sub>
+- **437.** Publicaremos datos de inserción laboral por centro y familia profesional y ajustaremos la oferta en función de resultados contrastados, evitando titulaciones sin salida que alimentan frustración y la salida de la región <sub>(p. 149)</sub>
+- **438.** Facilitaremos la incorporación de profesionales en activo como docentes asociados o colaboradores en FP, priorizando experiencia profesional acreditada y actualización técnica continua <sub>(p. 149)</sub>
+- **441.** Garantizaremos la gratuidad de la educación infantil de 0 a 3 años en toda Castilla y León, junto con una deducción fiscal por los gastos de esta etapa, para facilitar la conciliación y apoyar la natalidad, especialmente en el medio rural <sub>(p. 150)</sub>
+- **442.** Reformaremos el sistema regional de becas para que priorice el mérito, la necesidad real y el número de hijos, flexibilizando los umbrales de renta y patrimonio cuando existan varios miembros dependientes y estableciendo criterios transparentes… <sub>(p. 150)</sub>
+- **443.** Implantaremos un modelo de comedor escolar gratuito para familias con menores recursos y bonificaciones automáticas para familias numerosas en función del número de hijos, asegurando… <sub>(p. 150)</sub>
+- **444.** Defenderemos y consolidaremos los centros de Educación Especial como opción real elegida por las familias, asegurando plazas suficientes, recursos humanos especializados y coordinación eficaz con orientación y servicios educativos… <sub>(p. 150)</sub>
+- **445.** Garantizaremos la libertad de elección educativa en Castilla y León y la continuidad de la educación diferenciada dentro del sistema concertado <sub>(p. 150)</sub>
+- **446.** Publicaremos anualmente indicadores educativos por provincia y etapa que permitan evaluar la evolución del sistema y reforzaremos la toma de decisiones basadas en datos objetivos <sub>(p. 151)</sub>
+- **447.** Garantizaremos la suficiente evaluación y rendición de cuentas del Sistema Educativo <sub>(p. 151)</sub>
+- **448.** Estableceremos un modelo autonómico homogéneo de inspección educativa con criterios claros, públicos y objetivos en todas las provincias, orientando su actuación a la mejora de resultados académicos y la convivencia escolar… <sub>(p. 151)</sub>
+- **449.** Aseguraremos que la digitalización funciona como herramienta de gestión, no como sustituto del método ni del contenido <sub>(p. 152)</sub>
+- **450.** Garantizaremos el buen estado de las infraestructuras educativas: – Pondremos en marcha un Plan trianual de mantenimiento preventivo de los centros educativos para garantizar instalaciones seguras, accesibles y bien climatizadas… <sub>(p. 152)</sub>
 
 ## 15. Infraestructuras y transporte
 
@@ -816,10 +1003,35 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **124.** Puertos más modernos y competitivos <sub>(p. 46)</sub>
 - **125.** Mayor capacidad y mejores accesos para los aeropuertos <sub>(p. 46)</sub>
 
-### VOX (3)
+### VOX (28)
 
 - **23.** Promoveremos una adecuada vertebración del territorio a través de la extensión del actual sistema de transporte a demanda a todos los municipios menores de 500 habitantes… <sub>(p. 20)</sub>
 - **24.** Aseguraremos la aplicación de los fondos autonómicos y europeos suficientes para garantizar la conectividad rural y completar la cobertura de fibra óptica y 5G que afecta aún a demasiados municipios de nuestra región <sub>(p. 20)</sub>
+- **273.** Frente al modelo del bipartidismo, conforme el cual se han repartido inversiones buscando satisfacer las exigencias de los separatistas, defenderemos una planificación nacional de las infraestructuras basada en la cohesión territorial… <sub>(p. 97)</sub>
+- **274.** Exigiremos al Gobierno de España la ejecución de las autovías todavía pendientes en Castilla y León, entre las que destacan la A-11 (Autovía del Duero), la A-12 (Autovía del Camino de Santiago), la A-15 (Autovía de Navarra), la A-60 (Autovía Valladolid-León)… <sub>(p. 97)</sub>
+- **275.** Presionaremos al Ministerio de Transportes y Movilidad Sostenible para que reconsidere su decisión de no conectar Ávila con la A-6 (Autovía del Noroeste) <sub>(p. 97)</sub>
+- **276.** Con el fin de apostar por la competitividad, así como para proteger a los transportistas, trabajadores y familias, seguiremos exigiendo el fin de los peajes de la AP-9, la AP-51, la AP-61, la AP-71, la AP-6 y la AP-66 <sub>(p. 97)</sub>
+- **277.** Reclamaremos al Gobierno de España el impulso de las labores de modernización y adaptación a vía de alta capacidad del corredor León-Braganza, priorizando la adecuación y mejora de la variante internacional entre Puebla de Sanabria y Rihonor de Castilla <sub>(p. 98)</sub>
+- **278.** De exigir al Gobierno de España las inversiones necesarias en lo referido a la Red de Carreteras del Estado, elaboraremos un Plan de Carreteras autonómico que marque las prioridades de inversión y gestión de toda la red regional, de manera… <sub>(p. 98)</sub>
+- **279.** Incrementaremos de forma sustancial y urgente el presupuesto destinado a la prevención de accidentes por fauna salvaje, priorizando los tramos de mayor siniestralidad <sub>(p. 98)</sub>
+- **280.** Exigiremos la vuelta de los trenes FEVE al centro de la ciudad de León <sub>(p. 99)</sub>
+- **281.** Presionaremos al Gobierno de Sánchez para que ponga fin a la incertidumbre existente en relación con el Corredor Atlántico y presente sin más demoras el Plan Director del Corredor Atlántico en Castilla y León <sub>(p. 99)</sub>
+- **282.** Exigiremos las inversiones necesarias para lograr aumentar la competitividad de los aeropuertos de Burgos, León, Salamanca y Valladolid ante los nuevos retos que afronta la aviación comercial en el tráfico de pasajeros y mercancías <sub>(p. 99)</sub>
+- **283.** Impulsaremos la puesta en marcha de la terminal de carga aérea del Aeropuerto de León <sub>(p. 99)</sub>
+- **284.** Trabajaremos para garantizar unos servicios de transporte interurbano por autobús útiles y fiables, especialmente en el medio rural, donde el transporte público es esencial para la vida diaria <sub>(p. 99)</sub>
+- **285.** Aumentaremos las frecuencias en el transporte a la demanda, con el fin de asegurarnos de que ningún municipio quede aislado <sub>(p. 100)</sub>
+- **286.** Impulsaremos de manera decidida la modernización de la red de estaciones de autobuses de Castilla y León <sub>(p. 100)</sub>
+- **288.** Reivindicaremos un modelo del transporte que no olvide las pequeñas comarcas y municipios del interior <sub>(p. 100)</sub>
+- **289.** Continuaremos demandando al Gobierno de España que garantice el mantenimiento de las paradas existentes en las líneas ferroviarias que atraviesan Castilla y León, especialmente aquellas de alta velocidad <sub>(p. 101)</sub>
+- **290.** Reclamaremos el refuerzo del mantenimiento preventivo de la red ferroviaria con el fin de garantizar la seguridad y calidad del servicio <sub>(p. 101)</sub>
+- **291.** Exigiremos al Ministerio de Transportes y Movilidad Sostenible que coordine los servicios de media distancia existentes entre Burgos, Palencia, Valladolid y Medina del Campo con los horarios de los trenes de alta velocidad… <sub>(p. 101)</sub>
+- **292.** Seguiremos reclamando la reapertura de la línea ferroviaria de la Ruta de la Plata <sub>(p. 101)</sub>
+- **293.** Presionaremos para que el Gobierno de Sánchez apruebe la apertura del Tren Directo Madrid-Aranda de Duero-Burgos <sub>(p. 101)</sub>
+- **294.** Promoveremos el soterramiento del ferrocarril en Palencia, Valladolid y San Andrés del Rabanedo <sub>(p. 101)</sub>
+- **295.** Seguiremos comprometidos con el sector del transporte de mercancías por carretera <sub>(p. 102)</sub>
+- **296.** Seguiremos oponiéndonos a las ZBE, exigiendo su derogación y haciendo que, en los ayuntamientos en donde se hayan aprobado, queden sin efecto y no se multe a los vecinos <sub>(p. 102)</sub>
+- **297.** Apostaremos por un modelo de movilidad que no esté sometido al fanatismo climático <sub>(p. 102)</sub>
+- **343.** Impulsaremos la creación de redes de transporte público a demanda para facilitar el traslado de los vecinos a los centros de atención de las ciudades o cabezas de comarca <sub>(p. 118)</sub>
 - **509.** En los proyectos de ley de presupuestos, incorporaremos obligatoriamente una memoria plurianual de infraestructuras <sub>(p. 171)</sub>
 
 ## 16. Energía, medio ambiente y agua
@@ -865,7 +1077,7 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **232.** Afrontaremos el cambio climático con rigor científico <sub>(p. 72)</sub>
 - **233.** Aprovecharemos la economía circular que ya funciona <sub>(p. 73)</sub>
 
-### VOX (17)
+### VOX (28)
 
 - **6.** Desde la Junta de Castilla y León, combatiremos el fanatismo climático que tanto el PP como el PSOE han impulsado desde Bruselas y tanto daño ha causado a nuestra tierra <sub>(p. 10)</sub>
 - **148.** Impulsaremos un Plan Nacional del Agua que contemple la gestión racional de los recursos hídricos en todo el territorio nacional y que, sobre la base de los principios de solidaridad y bien común… <sub>(p. 55)</sub>
@@ -884,6 +1096,17 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **196.** Exigiremos el fortalecimiento del SEPRONA (Servicio de Protección de la Naturaleza de la Guardia Civil) en Castilla y León para garantizar la protección del medio rural frente a los recortes del Ministerio del Interior <sub>(p. 69)</sub>
 - **197.** Pediremos al Gobierno de España que suspenda de inmediato cualquier plan de reestructuración que implique la supresión o reducción de patrullas y unidades operativas del SEPRONA en Castilla y León <sub>(p. 69)</sub>
 - **198.** Reclamaremos al Gobierno de España que refuerce las plantillas del SEPRONA en Castilla y León, dando prioridad a la cobertura de las zonas rurales de alto riesgo —como la Montaña Leonesa y Palentina, Sanabria y La Carballeda, El Bierzo y los Pinares de Soria— <sub>(p. 69)</sub>
+- **248.** Continuaremos apostando por un modelo energético soberano que nos permita acceder sin restricciones ideológicas a fuentes de energía baratas, sostenibles, eficientes, limpias y con precios asequibles <sub>(p. 87)</sub>
+- **249.** Trabajaremos para garantizar el acceso a energía competitiva y suficiente para el tejido industrial regional, prestando especial interés al refuerzo de las redes eléctricas y el fomento del autoconsumo <sub>(p. 88)</sub>
+- **250.** Seguiremos apostando por el renacimiento de la industria nuclear nacional <sub>(p. 88)</sub>
+- **251.** Exigiremos al Gobierno de Sánchez la ampliación de la vida útil de las centrales nucleares actualmente en funcionamiento en España, e impulsaremos la elaboración de un estudio para para evaluar posible la instalación de un reactor modular pequeño (SMR)… <sub>(p. 88)</sub>
+- **252.** Impulsaremos la derogación de la Ley nacional de Cambio Climático y Transición Energética y rechazaremos cualquier intento de promulgar una Ley de Cambio Climático y Transición Energética de Castilla y León <sub>(p. 88)</sub>
+- **253.** Promoveremos un aprovechamiento energético de los recursos naturales compatible con la seguridad de los españoles y con la protección de nuestro patrimonio natural y del sector primario… <sub>(p. 88)</sub>
+- **254.** Impulsaremos la elaboración de un mapa de afección medioambiental y de usos del suelo que limite la instalación de macroproyectos de energías renovables en zonas que afecten a cultivos, explotaciones ganaderas, parajes paisajísticos y núcleos rurales <sub>(p. 89)</sub>
+- **255.** Apostaremos por la diversificación de las fuentes de energía, incluyendo la biomasa forestal y agrícola, así como la producción de biogás <sub>(p. 89)</sub>
+- **256.** Sin perjuicio a nuestra apuesta por el biogás, exigiremos que los proyectos de instalación de plantas de dicha fuente de energía se desarrollen con la máxima garantía y transparencia, asegurando que son seguros, sostenibles y que no serán negativos para los vecinos <sub>(p. 89)</sub>
+- **298.** Protegeremos a las familias, agricultores y ganaderos castellanos y leoneses impulsando cuantas actuaciones sean necesarias para garantizar el suministro y acceso a agua de calidad <sub>(p. 102)</sub>
+- **299.** Continuaremos defendiendo la necesidad de que España cuente con un Plan Nacional del Agua que contemple la gestión racional de los recursos hídricos en todo el territorio nacional y que, sobre la base de los principios de solidaridad y bien común… <sub>(p. 102)</sub>
 
 ## 17. Agricultura, pesca y mundo rural
 
@@ -919,7 +1142,7 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **207.** Defenderemos la caza y su papel en el medio rural <sub>(p. 66)</sub>
 - **208.** Defenderemos la pesca y la cadena mar-industria <sub>(p. 66)</sub>
 
-### VOX (50)
+### VOX (51)
 
 - **130.** Rechazaremos enérgicamente —en todas las instituciones, sin distinción— la propuesta de reforma de la PAC 20282034 que plantea imponer la Comisión de populares y socialistas que gobierna en Bruselas y… <sub>(p. 51)</sub>
 - **131.** Pondremos fin a todas las trabas burocráticas que impiden a nuestros agricultores solicitar con normalidad las ayudas de la PAC y sus anticipos a nivel regional —tal y como hicimos desde el Gobierno en 2023—… <sub>(p. 51)</sub>
@@ -971,6 +1194,7 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **208.** Impulsaremos la aprobación de un Plan Nacional del Lobo que garantice el necesario equilibrio entre el hombre y el lobo para lo cual… <sub>(p. 71)</sub>
 - **209.** Reforzaremos los mecanismos de prevención y protección para los ganaderos mediante la distribución e implantación de medios de protección (p. ej., cercados electrificados y cerramientos móviles), el apoyo a refugios/apriscos nocturnos… <sub>(p. 72)</sub>
 - **210.** Aumentaremos y agilizaremos las compensaciones económicas por ataques de fauna salvaje, garantizando una valoración justa de los daños y el pago en el menor plazo posible… <sub>(p. 72)</sub>
+- **272.** Apoyaremos de manera decidida el enoturismo como activo de interés en la configuración de una oferta turística diferencial <sub>(p. 93)</sub>
 
 ## 18. Sociedad digital e inteligencia artificial
 
@@ -990,9 +1214,14 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - **169.** La inteligencia artificial ampliará las oportunidades de trabajar, y cada trabajador tendrá un cheque para formarse en ella <sub>(p. 58)</sub>
 - **190.** España será un centro de aplicaciones de inteligencia artificial para la economía real <sub>(p. 63)</sub>
 
-### VOX (1)
+### VOX (6)
 
 - **165.** Impulsaremos medidas encaminadas a garantizar la conectividad y el acceso a un Internet de calidad en nuestro mundo rural, así como a la formación necesaria para que nuestros agricultores y ganaderos puedan hacer frente al reto digital y a las nuevas tecnologías <sub>(p. 58)</sub>
+- **287.** Trabajaremos para revertir la brecha digital existente en Castilla y León haciendo uso de todos los recursos disponibles a nuestro alcance para llevar un servicio de Internet de calidad a las zonas en riesgo de despoblamiento y con peor conectividad <sub>(p. 100)</sub>
+- **344.** Promoveremos la conectividad digital en todos los municipios para revertir la brecha digital y facilitar que los castellanos y leoneses puedan trabajar, emprender o estudiar desde sus pueblos y ciudades <sub>(p. 118)</sub>
+- **353.** Garantizaremos que la dignidad humana y el bien común sean prioridades absolutas en la regulación de su uso, tanto por las entidades públicas como por los individuos <sub>(p. 120)</sub>
+- **354.** Elaboraremos, en coordinación con otras administraciones, un protocolo de prevención de las adicciones de comportamiento, entre las que se incluirá la adicción a las pantallas, para su difusión en los ámbitos escolar y sanitario <sub>(p. 120)</sub>
+- **355.** Ofreceremos un sistema de apoyo y seguimiento continuo a los menores con problemas de adicción a las pantallas y a sus familias, garantizando una intervención temprana y efectiva <sub>(p. 120)</sub>
 
 ## 19. Bienestar animal
 
@@ -1084,6 +1313,11 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - 2. Mejorar la sanidad y los servicios públicos de Castilla y León: por unos servicios públicos dignos, cercanos y de calidad — medidas 18–96 (79)
 - 3. Prioridad nacional en el acceso a todas las ayudas sociales y lucha decidida contra las políticas de inmigración masiva del bipartidismo que satura nuestros servicios públicos y dispara la inseguridad — medidas 97–129 (33)
 - 4. Defensa decidida del sector primario y de los productos de nuestra tierra — medidas 130–165 (36)
-- 5. Defensa total de nuestro modo de vida, de nuestro patrimonio natural, la caza y de las ricas tradiciones de Castilla y León — medidas 166–236 (71)
-- 11. Fin del despilfarro político: la Junta de Castilla y León al servicio de castellanos y leoneses — medidas 469–509 (41)
-- *Secciones 6 a 10 y parte de la 5 y la 11: no facilitadas (medidas 237–468).*
+- 5. Defensa total de nuestro modo de vida, de nuestro patrimonio natural, la caza y de las ricas tradiciones de Castilla y León — medidas 166–238 (73)
+- 6. Protección de los trabajadores, reindustrialización de nuestra región y soberanía energética frente a la expansión descontrolada de macroparques de renovables — medidas 239–272 (34)
+- 7. Castilla y león merece más: por unas infraestructuras dignas y el fin de décadas de pactos del bipartidismo con el separatismo que nos han robado el futuro y la prosperidad. — medidas 273–299 (27)
+- 8. Las familias en el centro de todas las políticas públicas. fomento de la natalidad y lucha contra la despoblación y la emergencia demográfica. — medidas 300–370 (71)
+- 9. Viviendas dignas y asequibles para jóvenes, familias y trabajadores en toda Castilla y León — medidas 371–409 (39)
+- 10. Defensa del derecho a permanecer de nuestros jóvenes: garantizar la igualdad de oportunidades y el acceso a una educación de calidad y libre de adoctrinamiento — medidas 410–454 (45)
+- 11. Fin del despilfarro político: la Junta de Castilla y León al servicio de castellanos y leoneses — medidas 455–471 (17)
+- 12. Bajada radical de impuestos y reducción de la burocracia para que Castilla y León sea un motor de desarrollo social y económico — medidas 472–509 (38)
