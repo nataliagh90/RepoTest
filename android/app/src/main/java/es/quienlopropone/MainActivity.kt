@@ -152,7 +152,8 @@ private fun TarjetaModo(titulo: String, texto: String, boton: String, onClick: (
 private fun Fuentes() {
     Text(
         "Fuentes: programas de ERC y PP para las elecciones generales de 2026 y de VOX para las " +
-            "autonómicas de Castilla y León 2026. Los títulos de ERC están traducidos del catalán.",
+            "autonómicas de Castilla y León 2026. Los títulos de ERC están traducidos del catalán. " +
+            "Faltan los programas de otros partidos porque todavía no se han publicado; se añadirán cuando estén disponibles.",
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )

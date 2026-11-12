@@ -5,6 +5,8 @@ App Android (Kotlin + Jetpack Compose) para jugar a adivinar de qué partido es 
 - **ERC** y **PP**: programas de las elecciones generales de 2026. Son 468 medidas: las 476 del inventario menos las 8 del PP marcadas como «por anunciar».
 - **VOX**: programa de las elecciones autonómicas de Castilla y León (marzo de 2026), completo, con sus 509 medidas.
 
+Faltan los programas de otros partidos porque todavía no se han publicado. Se añadirán cuando estén disponibles.
+
 ![Capturas: inicio, configuración de verdadero/falso, modo adivina, modo verdadero/falso y resultados](capturas-modos.png)
 
 ## Modos de juego
