@@ -18,10 +18,10 @@ class Partida(
     val resultados = mutableStateListOf<Boolean>()
     val aciertos get() = resultados.count { it }
 
-    /** La respuesta correcta en el modo verdadero/falso. */
-    fun esDelPartido(i: Iniciativa) = i.partido == partido
+    /** La respuesta correcta en el modo verdadero/falso (también si el partido propone lo mismo). */
+    fun esDelPartido(i: Iniciativa) = partido in i.partidosValidos
 
-    fun corregir(i: Iniciativa, eleccion: Partido) = eleccion == i.partido
+    fun corregir(i: Iniciativa, eleccion: Partido) = eleccion in i.partidosValidos
     fun corregir(i: Iniciativa, verdadero: Boolean) = verdadero == esDelPartido(i)
 
     /** Clave para guardar el récord de esta configuración de partida. */

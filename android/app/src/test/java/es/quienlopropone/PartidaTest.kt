@@ -43,4 +43,21 @@ class PartidaTest {
         assertTrue(partida.corregir(vox, false))
         assertTrue(!partida.corregir(vox, true))
     }
+
+    @Test fun compartidaCuentaParaAmbos() {
+        // Propuesta del PP que VOX también hace (igual) y que ERC hace de forma parecida.
+        val i = Iniciativa(
+            999, Partido.PP, 163, 1, "Tema", "Sección", "0-3 gratuita", "", "",
+            listOf(Coincidencia(Partido.VOX, 356, true, "0-3"), Coincidencia(Partido.ERC, 20, false, "0-3")),
+        )
+        val adivina = Partida(Modo.ADIVINA, listOf(i))
+        assertTrue(adivina.corregir(i, Partido.PP))
+        assertTrue(adivina.corregir(i, Partido.VOX))
+        assertTrue(!adivina.corregir(i, Partido.ERC))
+        val vfVox = Partida(Modo.VERDADERO_FALSO, listOf(i), Partido.VOX)
+        assertTrue(vfVox.corregir(i, true))
+        assertTrue(!vfVox.corregir(i, false))
+        val vfErc = Partida(Modo.VERDADERO_FALSO, listOf(i), Partido.ERC)
+        assertTrue(vfErc.corregir(i, false))
+    }
 }
