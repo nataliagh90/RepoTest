@@ -31,6 +31,8 @@ data class Iniciativa(
     val original: String,
     val descripcion: String,
     val coincidencias: List<Coincidencia> = emptyList(),
+    /** Resumen neutral de la medida («lo esencial»), igual de estilo para todos los partidos. */
+    val esencial: String = "",
 ) {
     /** Partidos a los que se puede atribuir correctamente: el suyo y los que proponen lo mismo. */
     val partidosValidos: Set<Partido> = setOf(partido) + coincidencias.filter { it.igual }.map { it.partido }
@@ -70,6 +72,7 @@ object Repositorio {
                         Coincidencia(Partido.valueOf(p), n.toInt(), x.getString("nivel") == "igual", x.getString("resumen"))
                     }
                 } ?: emptyList(),
+                esencial = o.optString("esencial", ""),
             )
         }
     }

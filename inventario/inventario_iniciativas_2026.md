@@ -16,6 +16,7 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 - En VOX las medidas son párrafos sin título: se usa como título la primera frase con el compromiso (los títulos de más de 280 caracteres se recortan con «…» y el resto pasa a la descripción).
 - Repetidas: el programa de VOX repite 11 medidas casi literalmente en dos secciones (p. ej. 389 y 477). Se marcan en la columna «Coincidencias» y no se usan en la app.
 - Propuestas compartidas: se han revisado una a una las parejas candidatas entre partidos. «Compartida» = proponen en lo esencial lo mismo (misma idea y misma dirección), aunque cambien los detalles o el ámbito territorial; «parecida» = mismo tema u objetivo, pero con medidas claramente distintas o con alguna parte opuesta. En la app, una propuesta compartida cuenta como acierto para todos los partidos que la proponen.
+- Lo esencial: resumen neutral de cada medida (qué se propone hacer, sin retórica, empezando siempre por un infinitivo para que el estilo no delate al partido). Es una redacción propia; el texto literal está en las columnas siguientes.
 - Faltan los programas de otros partidos y candidatos porque todavía no se han publicado; se incorporarán cuando estén disponibles.
 - La «Categoría» es una clasificación temática común para comparar los programas; la «Sección original» respeta la estructura de cada documento.
 - Los textos de ERC se mantienen en catalán, tal como figuran en el programa.
@@ -48,7 +49,7 @@ Inventario de todas las medidas numeradas de los programas electorales, agrupada
 
 ## Propuestas compartidas entre partidos
 
-Se han encontrado **174 parejas de propuestas compartidas** (en lo esencial proponen lo mismo) y **41 parecidas** entre programas de partidos distintos. Estas son las compartidas:
+Se han encontrado **168 parejas de propuestas compartidas** (en lo esencial proponen lo mismo) y **47 parecidas** entre programas de partidos distintos. Estas son las compartidas:
 
 | Qué comparten | Propuestas |
 |---|---|
@@ -189,12 +190,6 @@ Se han encontrado **174 parejas de propuestas compartidas** (en lo esencial prop
 | Pacto/Plan Nacional del Agua | **PP 126**: Promoveremos un pacto nacional del agua · **VOX 148**: Impulsaremos un Plan Nacional del Agua que contemple la gestión racional de los recursos h |
 | Pasar de curso con asignaturas aprobadas | **PP 215**: Recuperaremos la exigencia para pasar de etapa, y quien tenga dificultades tendrá apoyo · **VOX 419**: Garantizaremos la igualdad de oportunidades y restableceremos una educación basada en el e |
 | Plan para reducir listas de espera | **PP 219**: Reduciremos las listas de espera y aseguraremos la financiación sanitaria · **VOX 79**: Aprobaremos un Plan Integral de Reducción de las Listas de Espera que tenga como ejes cent |
-| Prioridad en ayudas por vínculo con España | **PP 98**: El vínculo con España dará prioridad · **VOX 99**: Estableceremos la prioridad nacional en el acceso a los servicios públicos y a todas las a |
-| Prioridad en ayudas por vínculo con España | **PP 98**: El vínculo con España dará prioridad · **VOX 22**: Aseguraremos el acceso prioritario de los españoles a las ayudas sociales y a los servicio |
-| Prioridad en ayudas por vínculo con España | **PP 98**: El vínculo con España dará prioridad · **VOX 360**: Estableceremos la prioridad nacional en el acceso a todas las ayudas sociales, especialmen |
-| Prioridad en ayudas por vínculo con España | **PP 98**: El vínculo con España dará prioridad · **VOX 402**: En las ayudas sociales y los programas de vivienda, impulsaremos la prioridad nacional en  |
-| Prioridad en ayudas por vínculo con España | **PP 98**: El vínculo con España dará prioridad · **VOX 454**: Estableceremos la prioridad nacional para los jóvenes en el acceso a ayudas vinculadas en  |
-| Prioridad por arraigo en España | **PP 98**: El vínculo con España dará prioridad · **VOX 401**: En el acceso a vivienda social y protegida, situaremos el arraigo y el acumulado histórico |
 | Priorizar la salud mental | **PP 223**: También habrá más profesionales y más atención a la salud mental · **VOX 348**: Priorizaremos el cuidado de la salud mental y fomentaremos los factores protectores de lac |
 | Prisión permanente para violadores reincidentes | **PP 30**: Ampliaremos la prisión permanente revisable a quien haga desaparecer a su víctima y a los  · **VOX 109**: Exigiremos la reforma del Código Penal para proteger de verdad a las mujeres españolas ele |
 | Profesión de riesgo para policías y guardias | **PP 32**: Profesión de riesgo para policías y guardias civiles y más protección para los funcionario · **VOX 312**: Impulsaremos su reconocimiento como profesión de riesgo a nivel nacional |
@@ -579,7 +574,7 @@ Se han encontrado **174 parejas de propuestas compartidas** (en lo esencial prop
 - **44.** Quien delinque será expulsado de España <sub>(p. 23)</sub>
 - **45.** Las órdenes de retorno se ejecutarán, no como hasta ahora <sub>(p. 23)</sub>
 - **46.** Promoveremos el regreso de los menores con sus familias como objetivo prioritario <sub>(p. 23)</sub>
-- **98.** El vínculo con España dará prioridad <sub>(p. 40)</sub> — 🤝 también: VOX 401, VOX 99, VOX 22, VOX 360, VOX 402, VOX 454
+- **98.** El vínculo con España dará prioridad <sub>(p. 40)</sub>
 - **140.** La nacionalidad no se regala <sub>(p. 49)</sub>
 - **141.** Exigiremos más para ser español <sub>(p. 50)</sub>
 - **142.** La nacionalidad implica lealtad a España <sub>(p. 50)</sub>
@@ -588,11 +583,11 @@ Se han encontrado **174 parejas de propuestas compartidas** (en lo esencial prop
 
 ### VOX (27)
 
-- **22.** Aseguraremos el acceso prioritario de los españoles a las ayudas sociales y a los servicios públicos <sub>(p. 20)</sub> — 🤝 también: PP 98
+- **22.** Aseguraremos el acceso prioritario de los españoles a las ayudas sociales y a los servicios públicos <sub>(p. 20)</sub>
 - **96.** Exigiremos exhaustivamente el reintegro del coste de la asistencia sanitaria no urgente prestada a personas extranjeras que no tengan derecho a asistencia sanitaria pública, estableciendo los mecanismos de facturación y recaudación necesarios <sub>(p. 34)</sub>
 - **97.** Dejaremos claro al Gobierno de la Nación y a la Comisión de populares y socialistas que gobierna en Bruselas que a España sólo se entra en base a las necesidades y demandas de nuestro mercado laboral, de forma legal, ordenada… <sub>(p. 39)</sub> — 🤝 también: PP 41, PP 40
 - **98.** Impulsaremos, desde los organismos regionales pertinentes, la fiscalización de todos los gastos directos e indirectos destinados a la gestión de la inmigración ilegal en nuestra región <sub>(p. 40)</sub>
-- **99.** Estableceremos la prioridad nacional en el acceso a los servicios públicos y a todas las ayudas sociales, como acto de justicia para los castellanos y leoneses que llevan generaciones trabajando y levantando nuestra Nación, y para nuestros jóvenes, que son nuestro futuro <sub>(p. 40)</sub> — 🤝 también: PP 98
+- **99.** Estableceremos la prioridad nacional en el acceso a los servicios públicos y a todas las ayudas sociales, como acto de justicia para los castellanos y leoneses que llevan generaciones trabajando y levantando nuestra Nación, y para nuestros jóvenes, que son nuestro futuro <sub>(p. 40)</sub>
 - **100.** Impulsaremos las modificaciones legales necesarias a fin de que cualquier ayuda social esté vinculada a la residencia legal, y no al mero empadronamiento <sub>(p. 40)</sub>
 - **101.** Lucharemos decididamente para combatir el fraude en el Padrón, que actualmente permite a los inmigrantes ilegales ser beneficiarios de ayudas públicas <sub>(p. 40)</sub>
 - **102.** Impulsaremos cuantas medidas sean necesarias para acabar con el fraude y el negocio ilícito de empadronamientos falsos <sub>(p. 40)</sub>
@@ -610,10 +605,10 @@ Se han encontrado **174 parejas de propuestas compartidas** (en lo esencial prop
 - **116.** Promoveremos la prohibición en espacios y edificios públicos —abiertos y cerrados— de vestimentas o atuendos islámicos que atenten contra los derechos fundamentales y la dignidad de las mujeres, ya que son incompatibles con nuestra identidad, cultura, usos… <sub>(p. 43)</sub>
 - **128.** Exigiremos la máxima transparencia en el gasto público destinado a la inmigración ilegal <sub>(p. 47)</sub>
 - **129.** Impulsaremos la elaboración de un informe anual exhaustivo sobre el impacto real de la inmigración en el mercado inmobiliario de Castilla y León… <sub>(p. 47)</sub>
-- **360.** Estableceremos la prioridad nacional en el acceso a todas las ayudas sociales, especialmente a todas las que afecten a los jóvenes y que estén relacionadas con el acceso al empleo y a la vivienda <sub>(p. 122)</sub> — 🤝 también: PP 98
-- **402.** En las ayudas sociales y los programas de vivienda, impulsaremos la prioridad nacional en el acceso a programas de vivienda y concesión de ayudas sociales <sub>(p. 135)</sub> — 🤝 también: PP 98
+- **360.** Estableceremos la prioridad nacional en el acceso a todas las ayudas sociales, especialmente a todas las que afecten a los jóvenes y que estén relacionadas con el acceso al empleo y a la vivienda <sub>(p. 122)</sub>
+- **402.** En las ayudas sociales y los programas de vivienda, impulsaremos la prioridad nacional en el acceso a programas de vivienda y concesión de ayudas sociales <sub>(p. 135)</sub>
 - **403.** En el alquiler, prohibiremos el arrendamiento a inmigrantes ilegales y perseguiremos el empadronamiento fraudulento de los inmigrantes ilegales y de los okupas <sub>(p. 135)</sub>
-- **454.** Estableceremos la prioridad nacional para los jóvenes en el acceso a ayudas vinculadas en ámbitos como el empleo o la vivienda, garantizando que los recursos públicos beneficien en primer lugar a los jóvenes españoles y a las familias que desean arraigar en Castilla y León <sub>(p. 153)</sub> — 🤝 también: PP 98
+- **454.** Estableceremos la prioridad nacional para los jóvenes en el acceso a ayudas vinculadas en ámbitos como el empleo o la vivienda, garantizando que los recursos públicos beneficien en primer lugar a los jóvenes españoles y a las familias que desean arraigar en Castilla y León <sub>(p. 153)</sub>
 - **507.** Eliminaremos toda financiación pública destinada a actividades que favorezcan la llegada o permanencia de inmigración masiva <sub>(p. 171)</sub>
 
 ## 8. Vivienda
@@ -682,7 +677,7 @@ Se han encontrado **174 parejas de propuestas compartidas** (en lo esencial prop
 - **398.** Excluiremos a las personas que previamente hayan ocupado ilegalmente una vivienda de la posibilidad de recibir una vivienda social <sub>(p. 134)</sub>
 - **399.** Realizaremos un seguimiento pormenorizado de las okupaciones que se produzcan, y proporcionaremos asistencia y asesoramiento gratuito para los afectados, así como la compensación fiscal de aquellos que sean víctimas de okupación ilegal <sub>(p. 135)</sub>
 - **400.** Preservaremos los derechos de los vecinos residentes y pondremos fin a un modelo turístico poco respetuoso que está contribuyendo a la degradación de nuestros barrios y a la expulsión de los vecinos de sus hogares <sub>(p. 135)</sub>
-- **401.** En el acceso a vivienda social y protegida, situaremos el arraigo y el acumulado histórico de años de la familia en España como principales criterios de asignación de viviendas <sub>(p. 135)</sub> — 🤝 también: PP 98
+- **401.** En el acceso a vivienda social y protegida, situaremos el arraigo y el acumulado histórico de años de la familia en España como principales criterios de asignación de viviendas <sub>(p. 135)</sub>
 - **404.** En la compra, atajaremos la adquisición masiva de vivienda por capital extranjero, estableciendo una fiscalidad diferenciada para compradores no comunitarios <sub>(p. 135)</sub>
 - **406.** Estableceremos un régimen reforzado de cofinanciación (subvención + anticipo reembolsable) y mecanismos de alivio de derramas para comunidades con mayoría de propietarios de baja renta… <sub>(p. 136)</sub>
 - **407.** Aprobaremos ayudas a la renovación, conservación y seguridad estructural de los edificios antiguos, con especial atención a la retirada segura de elementos con amianto <sub>(p. 136)</sub>

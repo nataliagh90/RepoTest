@@ -51,6 +51,13 @@ private val ROJO = Color(0xFFC62828)
 /** «del PP», «de ERC», «de VOX». */
 fun Partido.conDe() = if (this == Partido.PP) "del PP" else "de $sigla"
 
+/** true: se muestra «lo esencial» de cada propuesta; false: el título literal del programa. */
+val LocalVerEsencial = compositionLocalOf { true }
+
+/** Texto con el que se presenta una propuesta, según la preferencia del jugador. */
+@Composable
+fun Iniciativa.texto(): String = if (LocalVerEsencial.current && esencial.isNotBlank()) esencial else titulo
+
 sealed interface Pantalla {
     data object Inicio : Pantalla
     data object ConfigVF : Pantalla
@@ -63,10 +70,12 @@ fun App(inicial: Pantalla = Pantalla.Inicio) {
     val context = LocalContext.current
     val todas = remember { Repositorio.cargar(context) }
     var pantalla by remember { mutableStateOf(inicial) }
+    val prefs = remember { context.getSharedPreferences("ajustes", Context.MODE_PRIVATE) }
+    var verEsencial by remember { mutableStateOf(runCatching { prefs.getBoolean("verEsencial", true) }.getOrDefault(true)) }
 
     BackHandler(enabled = pantalla != Pantalla.Inicio) { pantalla = Pantalla.Inicio }
 
-    Column(
+    CompositionLocalProvider(LocalVerEsencial provides verEsencial) { Column(
         Modifier
             .fillMaxSize()
             .systemBarsPadding()
@@ -77,6 +86,8 @@ fun App(inicial: Pantalla = Pantalla.Inicio) {
         when (val p = pantalla) {
             Pantalla.Inicio -> Inicio(
                 compartidas = todas.count { it.compartida },
+                verEsencial = verEsencial,
+                onVerEsencial = { v -> verEsencial = v; runCatching { prefs.edit().putBoolean("verEsencial", v).apply() } },
                 onAdivina = { pantalla = Pantalla.Jugando(Partida.adivina(todas)) },
                 onVerdaderoFalso = { pantalla = Pantalla.ConfigVF },
             )
@@ -96,17 +107,35 @@ fun App(inicial: Pantalla = Pantalla.Inicio) {
                 onMenu = { pantalla = Pantalla.Inicio },
             )
         }
-    }
+    } }
 }
 
 // ---------------------------------------------------------------- Inicio
 
 @Composable
-private fun Inicio(compartidas: Int, onAdivina: () -> Unit, onVerdaderoFalso: () -> Unit) {
+private fun Inicio(
+    compartidas: Int, verEsencial: Boolean, onVerEsencial: (Boolean) -> Unit,
+    onAdivina: () -> Unit, onVerdaderoFalso: () -> Unit,
+) {
     Text("¿Quién lo propone?", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
     Text(
         "Pon a prueba lo que sabes de los programas electorales de ERC, PP y VOX.",
         style = MaterialTheme.typography.bodyLarge,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+    Text("Cómo ver las propuestas", style = MaterialTheme.typography.titleSmall)
+    SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
+        SegmentedButton(selected = verEsencial, onClick = { onVerEsencial(true) }, shape = SegmentedButtonDefaults.itemShape(0, 2)) {
+            Text("Lo esencial")
+        }
+        SegmentedButton(selected = !verEsencial, onClick = { onVerEsencial(false) }, shape = SegmentedButtonDefaults.itemShape(1, 2)) {
+            Text("Texto literal")
+        }
+    }
+    Text(
+        if (verEsencial) "Cada propuesta se resume de forma neutral, sin la retórica del partido. El texto original se puede consultar al responder."
+        else "Se muestra el título tal como aparece en el programa (los de ERC, traducidos del catalán).",
+        style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
     Spacer(Modifier.height(4.dp))
@@ -242,7 +271,7 @@ private fun Jugando(partida: Partida, todas: List<Iniciativa>, onSalir: () -> Un
     ElevatedCard(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text(actual.tema.uppercase(), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
-            Text(actual.titulo, fontSize = 21.sp, lineHeight = 28.sp, fontWeight = FontWeight.Medium)
+            Text(actual.texto(), fontSize = 21.sp, lineHeight = 28.sp, fontWeight = FontWeight.Medium)
         }
     }
 
@@ -354,6 +383,13 @@ internal fun Revelacion(
                 Text(if (verDetalle) "Ocultar el texto completo" else "Ver el texto completo")
             }
             if (verDetalle) {
+                if (LocalVerEsencial.current && actual.esencial.isNotBlank()) {
+                    Text(
+                        if (actual.original.isNotBlank()) "Título en el programa (traducido):" else "Título en el programa:",
+                        style = MaterialTheme.typography.labelLarge,
+                    )
+                    Text(actual.titulo, fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.bodyMedium)
+                }
                 if (actual.original.isNotBlank()) {
                     Text("Texto original (en catalán):", style = MaterialTheme.typography.labelLarge)
                     Text(actual.original, fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.bodyMedium)
@@ -400,7 +436,7 @@ private fun CoincidenciaFila(c: Coincidencia, todas: List<Iniciativa>) {
             "${c.partido.sigla} · medida nº ${c.numero}",
             style = MaterialTheme.typography.labelMedium, color = colorDe(c.partido), fontWeight = FontWeight.Bold,
         )
-        Text("«${otra?.titulo ?: c.resumen}»", style = MaterialTheme.typography.bodyMedium)
+        Text("«${otra?.texto() ?: c.resumen}»", style = MaterialTheme.typography.bodyMedium)
     }
 }
 
@@ -474,7 +510,7 @@ private fun Resultado(partida: Partida, onOtra: () -> Unit, onMenu: () -> Unit) 
         Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Text(if (ok) "✓" else "✗", color = if (ok) VERDE else ROJO, fontWeight = FontWeight.Bold, fontSize = 18.sp)
             Column(Modifier.weight(1f)) {
-                Text(ini.titulo, style = MaterialTheme.typography.bodyMedium, maxLines = 3, overflow = TextOverflow.Ellipsis)
+                Text(ini.texto(), style = MaterialTheme.typography.bodyMedium, maxLines = 3, overflow = TextOverflow.Ellipsis)
                 Text(
                     "${ini.partido.sigla} · medida nº ${ini.numero}" +
                         (if (ini.compartida) "  🤝 también " + (ini.partidosValidos - ini.partido).joinToString(", ") { it.sigla } else ""),
