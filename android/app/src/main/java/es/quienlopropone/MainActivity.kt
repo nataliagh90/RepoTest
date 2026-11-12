@@ -317,7 +317,7 @@ private fun BotonRespuesta(
 }
 
 @Composable
-private fun Revelacion(actual: Iniciativa, todas: List<Iniciativa>, acierto: Boolean, verDetalle: Boolean, onToggle: () -> Unit) {
+internal fun Revelacion(actual: Iniciativa, todas: List<Iniciativa>, acierto: Boolean, verDetalle: Boolean, onToggle: () -> Unit) {
     Card(
         Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = (if (acierto) VERDE else ROJO).copy(alpha = 0.15f)),

@@ -1,9 +1,9 @@
 # ¿Quién lo propone?
 
-App Android (Kotlin + Jetpack Compose) para jugar a adivinar de qué partido es cada propuesta electoral. Incluye 977 iniciativas:
+App Android (Kotlin + Jetpack Compose) para jugar a adivinar de qué partido es cada propuesta electoral. Incluye 966 iniciativas:
 
 - **ERC** y **PP**: programas de las elecciones generales de 2026. Son 468 medidas: las 476 del inventario menos las 8 del PP marcadas como «por anunciar».
-- **VOX**: programa de las elecciones autonómicas de Castilla y León (marzo de 2026), completo, con sus 509 medidas.
+- **VOX**: programa de las elecciones autonómicas de Castilla y León (marzo de 2026). Son 498 medidas: las 509 del programa menos 11 que el propio programa repite casi literalmente en otra sección.
 
 Faltan los programas de otros partidos porque todavía no se han publicado. Se añadirán cuando estén disponibles.
 
@@ -20,6 +20,10 @@ En los dos modos:
 - Tras cada respuesta, la app dice de quién es la propuesta, con su número, página y sección del programa. «Ver el texto completo» muestra la descripción íntegra; en ERC, también el título original en catalán.
 - Al final se muestra la puntuación, un repaso de todas las preguntas y el récord de esa configuración, que se guarda en el móvil.
 - En una misma partida no se repite ninguna propuesta.
+
+**Propuestas compartidas.** 116 propuestas coinciden con la de otro partido: son 63 parejas revisadas una a una, por ejemplo la educación infantil de 0 a 3 años gratuita (ERC, PP y VOX) o el apoyo a Ucrania (ERC y PP). En el juego, cualquiera de los partidos que la proponen cuenta como acierto, y al responder la app muestra la propuesta equivalente del otro partido. También se muestran las propuestas «parecidas»: mismo objetivo con otros medios. El listado completo está en el inventario.
+
+<img src="captura-compartidas.png" width="600">
 
 Los títulos de ERC se muestran traducidos al castellano para que el idioma no delate al partido.
 
