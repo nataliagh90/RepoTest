@@ -127,7 +127,7 @@ private fun Inicio(compartidas: Int, onAdivina: () -> Unit, onVerdaderoFalso: ()
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
     ) {
         Text(
-            "🤝 $compartidas propuestas aparecen, con otras palabras, en el programa de más de un partido. " +
+            "🤝 $compartidas propuestas coinciden en lo esencial con la de otro partido. " +
                 "En el juego, cualquiera de ellos cuenta como respuesta correcta.",
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(16.dp),
@@ -281,7 +281,10 @@ private fun Jugando(partida: Partida, todas: List<Iniciativa>, onSalir: () -> Un
     }
 
     AnimatedVisibility(visible = respuesta != null) {
-        Revelacion(actual, todas, acierto = partida.resultados.lastOrNull() == true, verDetalle) { verDetalle = !verDetalle }
+        Revelacion(
+            actual, todas, acierto = partida.resultados.lastOrNull() == true, verDetalle,
+            elegido = if (partida.modo == Modo.ADIVINA) respuesta as? Partido else partida.partido,
+        ) { verDetalle = !verDetalle }
     }
 
     val ultima = indice == total - 1
@@ -317,14 +320,22 @@ private fun BotonRespuesta(
 }
 
 @Composable
-internal fun Revelacion(actual: Iniciativa, todas: List<Iniciativa>, acierto: Boolean, verDetalle: Boolean, onToggle: () -> Unit) {
+internal fun Revelacion(
+    actual: Iniciativa, todas: List<Iniciativa>, acierto: Boolean, verDetalle: Boolean,
+    /** Partido por el que se ha preguntado (V/F) o el elegido (adivina). */
+    elegido: Partido? = null,
+    onToggle: () -> Unit,
+) {
+    val tambien = elegido != null && elegido != actual.partido && elegido in actual.partidosValidos
     Card(
         Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = (if (acierto) VERDE else ROJO).copy(alpha = 0.15f)),
     ) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(
-                (if (acierto) "¡Correcto! " else "¡No! ") + "Es ${actual.partido.conDe()}",
+                (if (acierto) "¡Correcto! " else "¡No! ") +
+                    if (tambien) "${if (elegido == Partido.PP) "El PP" else elegido!!.sigla} también lo propone"
+                    else "Es ${actual.partido.conDe()}",
                 style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold,
                 color = if (acierto) VERDE else ROJO,
             )
@@ -368,7 +379,7 @@ private fun Coincidencias(actual: Iniciativa, todas: List<Iniciativa>) {
                 val quienes = iguales.map { it.partido }.distinct()
                 Text(
                     "🤝 Propuesta compartida: " + quienes.joinToString(" y ") { if (it == Partido.PP) "el PP" else it.sigla } +
-                        (if (quienes.size == 1) " propone" else " proponen") + " lo mismo",
+                        " también lo " + (if (quienes.size == 1) "propone" else "proponen"),
                     style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold,
                 )
                 iguales.forEach { CoincidenciaFila(it, todas) }

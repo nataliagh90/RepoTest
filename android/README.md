@@ -21,7 +21,7 @@ En los dos modos:
 - Al final se muestra la puntuación, un repaso de todas las preguntas y el récord de esa configuración, que se guarda en el móvil.
 - En una misma partida no se repite ninguna propuesta.
 
-**Propuestas compartidas.** 116 propuestas coinciden con la de otro partido: son 63 parejas revisadas una a una, por ejemplo la educación infantil de 0 a 3 años gratuita (ERC, PP y VOX) o el apoyo a Ucrania (ERC y PP). En el juego, cualquiera de los partidos que la proponen cuenta como acierto, y al responder la app muestra la propuesta equivalente del otro partido. También se muestran las propuestas «parecidas»: mismo objetivo con otros medios. El listado completo está en el inventario.
+**Propuestas compartidas.** 255 propuestas coinciden en lo esencial con la de otro partido. Son 174 parejas revisadas una a una, por ejemplo la educación infantil de 0 a 3 años gratuita (ERC, PP y VOX), más recursos para la salud mental (ERC, PP y VOX) o el apoyo a Ucrania (ERC y PP). En el juego, cualquiera de los partidos que la proponen cuenta como acierto, y al responder la app muestra la propuesta equivalente del otro partido. Las propuestas solo «parecidas», sobre el mismo tema pero con medidas distintas, se muestran como información. El listado completo está en el inventario.
 
 <img src="captura-compartidas.png" width="600">
 
