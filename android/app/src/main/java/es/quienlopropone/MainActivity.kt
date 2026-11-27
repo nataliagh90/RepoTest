@@ -7,6 +7,16 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -340,7 +350,7 @@ private fun Jugando(partida: Partida, todas: List<Iniciativa>, onSalir: () -> Un
                         BotonRespuesta(
                             texto = p.sigla, subtitulo = t.subtituloBoton(p),
                             color = colorDe(p),
-                            activo = respuesta == null || respuesta == p || p in actual.partidosValidos,
+                            estado = estadoBoton(respuesta != null, respuesta == p, p in actual.partidosValidos),
                             modifier = Modifier.weight(1f),
                         ) {
                             if (respuesta == null) { respuesta = p; partida.resultados += partida.corregir(actual, p) }
@@ -357,7 +367,7 @@ private fun Jugando(partida: Partida, todas: List<Iniciativa>, onSalir: () -> Un
                     BotonRespuesta(
                         texto = texto, subtitulo = null,
                         color = if (valor) VERDE else ROJO,
-                        activo = respuesta == null || respuesta == valor || valor == partida.esDelPartido(actual),
+                        estado = estadoBoton(respuesta != null, respuesta == valor, valor == partida.esDelPartido(actual)),
                         modifier = Modifier.weight(1f),
                     ) {
                         if (respuesta == null) { respuesta = valor; partida.resultados += partida.corregir(actual, valor) }
@@ -384,24 +394,82 @@ private fun Jugando(partida: Partida, todas: List<Iniciativa>, onSalir: () -> Un
     ) { Text(if (ultima) t.verResultado else t.siguiente, fontSize = 16.sp) }
 }
 
+/** Cómo se muestra un botón de respuesta. */
+enum class EstadoBoton { NORMAL, ELEGIDO_OK, ELEGIDO_MAL, CORRECTO_NO_ELEGIDO, INACTIVO }
+
+/** Estado de un botón tras (o antes de) responder. */
+fun estadoBoton(respondida: Boolean, elegido: Boolean, correcto: Boolean) = when {
+    !respondida -> EstadoBoton.NORMAL
+    elegido && correcto -> EstadoBoton.ELEGIDO_OK
+    elegido -> EstadoBoton.ELEGIDO_MAL
+    correcto -> EstadoBoton.CORRECTO_NO_ELEGIDO
+    else -> EstadoBoton.INACTIVO
+}
+
 @Composable
-private fun BotonRespuesta(
-    texto: String, subtitulo: String?, color: Color, activo: Boolean,
+internal fun BotonRespuesta(
+    texto: String, subtitulo: String?, color: Color, estado: EstadoBoton,
     modifier: Modifier = Modifier, onClick: () -> Unit,
 ) {
-    Button(
-        onClick = onClick,
-        enabled = activo,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = color, contentColor = Color.White,
-            disabledContainerColor = color.copy(alpha = 0.25f),
-        ),
-        contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp),
-        modifier = modifier.heightIn(min = 76.dp),
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(texto, fontSize = 22.sp, fontWeight = FontWeight.Bold)
-            if (subtitulo != null) Text(subtitulo, fontSize = 11.sp, lineHeight = 13.sp, textAlign = TextAlign.Center)
+    val forma = RoundedCornerShape(40.dp)
+    val aro = MaterialTheme.colorScheme.onSurface
+    // El borde de la respuesta correcta no elegida «late» para llamar la atención.
+    val latido = rememberInfiniteTransition(label = "latido")
+    val alfaLatido by latido.animateFloat(
+        initialValue = 0.25f, targetValue = 1f,
+        animationSpec = infiniteRepeatable(tween(700), RepeatMode.Reverse), label = "alfa",
+    )
+    val borde = when (estado) {
+        EstadoBoton.ELEGIDO_OK -> Modifier.border(3.dp, aro, forma)
+        EstadoBoton.CORRECTO_NO_ELEGIDO -> Modifier.border(3.dp, aro.copy(alpha = alfaLatido), forma)
+        else -> Modifier.border(3.dp, Color.Transparent, forma)
+    }
+    val alfaFondo = when (estado) {
+        EstadoBoton.NORMAL, EstadoBoton.ELEGIDO_OK, EstadoBoton.CORRECTO_NO_ELEGIDO -> 1f
+        EstadoBoton.ELEGIDO_MAL -> 0.45f
+        EstadoBoton.INACTIVO -> 0.18f
+    }
+    val alfaTexto = if (estado == EstadoBoton.INACTIVO) 0.45f else 1f
+    Box(modifier) {
+        Box(borde.padding(4.dp)) {
+            Button(
+                onClick = onClick,
+                enabled = estado == EstadoBoton.NORMAL,
+                shape = forma,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = color, contentColor = Color.White,
+                    disabledContainerColor = color.copy(alpha = alfaFondo),
+                    disabledContentColor = Color.White.copy(alpha = alfaTexto),
+                ),
+                contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 72.dp),
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        texto, fontSize = 22.sp, fontWeight = FontWeight.Bold,
+                        textDecoration = if (estado == EstadoBoton.ELEGIDO_MAL) TextDecoration.LineThrough else null,
+                    )
+                    if (subtitulo != null) Text(subtitulo, fontSize = 11.sp, lineHeight = 13.sp, textAlign = TextAlign.Center)
+                }
+            }
+        }
+        // Insignia: ✓ si la opción es correcta (elegida o no), ✕ si es la elección equivocada.
+        val insignia = when (estado) {
+            EstadoBoton.ELEGIDO_OK, EstadoBoton.CORRECTO_NO_ELEGIDO -> "✓" to VERDE
+            EstadoBoton.ELEGIDO_MAL -> "✕" to ROJO
+            else -> null
+        }
+        if (insignia != null) {
+            Box(
+                Modifier
+                    .align(Alignment.TopEnd)
+                    .size(28.dp)
+                    .background(Color.White, CircleShape)
+                    .border(2.dp, insignia.second, CircleShape),
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(insignia.first, color = insignia.second, fontWeight = FontWeight.Black, fontSize = 16.sp)
+            }
         }
     }
 }

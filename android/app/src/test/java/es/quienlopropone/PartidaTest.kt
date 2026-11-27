@@ -76,4 +76,12 @@ class PartidaTest {
         assertEquals("¡Correcto! Es del PSOE", t.cabecera(true, Partido.PSOE, j))
         assertEquals("¡No! Es del PSOE", t.cabecera(false, Partido.PP, j))
     }
+
+    @Test fun estadosDeBoton() {
+        assertEquals(EstadoBoton.NORMAL, estadoBoton(false, false, true))
+        assertEquals(EstadoBoton.ELEGIDO_OK, estadoBoton(true, true, true))
+        assertEquals(EstadoBoton.ELEGIDO_MAL, estadoBoton(true, true, false))
+        assertEquals(EstadoBoton.CORRECTO_NO_ELEGIDO, estadoBoton(true, false, true))
+        assertEquals(EstadoBoton.INACTIVO, estadoBoton(true, false, false))
+    }
 }

@@ -23,6 +23,8 @@ Faltan los programas de otros partidos porque todavía no se han publicado. Se a
 
 En los dos modos:
 
+- Al responder, cada botón muestra su estado: tu elección correcta lleva ✓ y un aro fijo; si fallas, tu elección queda atenuada, tachada y con ✕; las opciones correctas que no elegiste llevan ✓ y un aro que late. Así se distingue un fallo de una propuesta compartida.
+
 - Tras cada respuesta, la app dice de quién es la propuesta, con su número, página y sección del programa. «Ver el texto completo» muestra la descripción íntegra; en ERC, también el título original en catalán.
 - Al final se muestra la puntuación, un repaso de todas las preguntas y el récord de esa configuración, que se guarda en el móvil.
 - En una misma partida no se repite ninguna propuesta.
