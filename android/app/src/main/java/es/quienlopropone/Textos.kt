@@ -441,20 +441,20 @@ object TextosEU : Textos() {
     override val paso1 = "1. Aukeratu alderdi bat"
     override val paso2 = "2. Zenbat galdera?"
     override val eligeUnPartido = "Aukeratu alderdi bat"
-    override fun empezar(n: Int, p: Partido) = "Hasi: $n galdera ${p.sigla}-ri buruz"
+    override fun empezar(n: Int, p: Partido) = "Hasi: $n galdera, ${p.nombreCorto()}"
     override val salir = "← Irten"
     override fun aciertos(n: Int) = "Asmatutakoak: $n"
     override fun pregunta(i: Int, total: Int) = "$i. galdera / $total"
     override val deQuePartido = "Zein alderdirena da?"
-    override fun esPropuestaDe(p: Partido) = "${p.nombreCorto()}-(r)en proposamena da?"
+    override fun esPropuestaDe(p: Partido) = "${gen(p)} proposamena da?"
     override val verdadero = "Egia"
     override val falso = "Gezurra"
     override val siguiente = "Hurrengoa"
     override val verResultado = "Ikusi emaitza"
     override val correcto = "Zuzena! "
     override val no = "Ez! "
-    override fun esDe(p: Partido) = "${p.nombreCorto()}-(r)ena da"
-    override fun tambienLoPropone(p: Partido) = "${p.nombreCorto()}-(e)k ere proposatzen du"
+    override fun esDe(p: Partido) = "${gen(p)}a da"
+    override fun tambienLoPropone(p: Partido) = "${erg(p)} ere proposatzen du"
     override fun programa(p: Partido) = when (p) {
         Partido.PSOE -> "«La fuerza de seguir avanzando» programa (2026ko hauteskunde orokorrak)"
         Partido.PP -> "«La Reconstrucción Nacional» programa (2026ko hauteskunde orokorrak)"
@@ -472,7 +472,8 @@ object TextosEU : Textos() {
     override val textoOriginalCatalan = "Jatorrizko testua (katalanez):"
     override val sinDetalle = "Programak ez du xehetasun gehiagorik ematen."
     override fun compartidaCon(ps: List<Partido>) =
-        "🤝 Proposamen partekatua: " + unir(ps.map { it.nombreCorto() }, "eta") + "-(e)k ere proposatzen dute"
+        "🤝 Proposamen partekatua: " + (if (ps.size == 1) erg(ps[0]) + " ere proposatzen du"
+            else unir(ps.dropLast(1).map { it.nombreCorto() } + erg(ps.last()), "eta") + " ere proposatzen dute")
     override val parecidas = "Antzeko proposamenak beste programetan"
     override fun medidaCorta(p: Partido, n: Int) = "${p.sigla} · $n. neurria"
     override fun tituloResultado(modo: Modo, p: Partido?) =
@@ -493,6 +494,11 @@ object TextosEU : Textos() {
     override val repaso = "Errepasoa"
     override fun tambien(siglas: String) = "🤝 baita ere $siglas"
     override val subtituloVox = "Gaztela eta Leon"
+
+    /** Ergatiboa: PSOEk, PPk, VOXek, Frente Ampliok, ERCk, Juntsek. */
+    private fun erg(p: Partido) = when (p) { Partido.VOX -> "VOXek"; Partido.JUNTS -> "Juntsek"; else -> p.nombreCorto() + "k" }
+    /** Genitiboa: PSOEren, PPren, VOXen, Frente Amplioren, ERCren, Juntsen. */
+    private fun gen(p: Partido) = when (p) { Partido.VOX -> "VOXen"; Partido.JUNTS -> "Juntsen"; else -> p.nombreCorto() + "ren" }
     override val autonomicasCyL = "Gaztela eta Leongo autonomia-hauteskundeak"
     override val temas = mapOf(
         "Instituciones, democracia y justicia" to "Erakundeak, demokrazia eta justizia",

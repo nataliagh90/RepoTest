@@ -74,16 +74,16 @@ sealed interface Pantalla {
 }
 
 @Composable
-fun App(inicial: Pantalla = Pantalla.Inicio) {
+fun App(inicial: Pantalla = Pantalla.Inicio, idiomaInicial: Idioma? = null) {
     val context = LocalContext.current
     val todas = remember { Repositorio.cargar(context) }
     var pantalla by remember { mutableStateOf(inicial) }
     val prefs = remember { context.getSharedPreferences("ajustes", Context.MODE_PRIVATE) }
     var verEsencial by remember { mutableStateOf(runCatching { prefs.getBoolean("verEsencial", true) }.getOrDefault(true)) }
     val idiomaGuardado = remember { runCatching { prefs.getString("idioma", null) }.getOrNull() }
-    var idioma by remember { mutableStateOf(Idioma.entries.firstOrNull { it.codigo == idiomaGuardado } ?: Idioma.ES) }
+    var idioma by remember { mutableStateOf(idiomaInicial ?: Idioma.entries.firstOrNull { it.codigo == idiomaGuardado } ?: Idioma.ES) }
     // La primera vez se pide el idioma antes de nada.
-    LaunchedEffect(Unit) { if (idiomaGuardado == null && pantalla == Pantalla.Inicio) pantalla = Pantalla.Idioma }
+    LaunchedEffect(Unit) { if (idiomaInicial == null && idiomaGuardado == null && pantalla == Pantalla.Inicio) pantalla = Pantalla.Idioma }
     val traduccion = remember(idioma) { Repositorio.traduccion(context, idioma) }
 
     BackHandler(enabled = pantalla != Pantalla.Inicio) { pantalla = Pantalla.Inicio }
