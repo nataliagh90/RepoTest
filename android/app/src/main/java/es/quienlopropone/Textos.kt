@@ -71,7 +71,32 @@ abstract class Textos {
     abstract val correcto: String
     abstract val no: String
     abstract fun esDe(p: Partido): String
-    abstract fun tambienLoPropone(p: Partido): String
+    /** Sujeto con artículo si el idioma lo pide: «el PP», «Junts». */
+    abstract fun sujeto(p: Partido): String
+    /** «, junto con el PP y VOX» */
+    abstract fun juntoCon(otros: List<Partido>): String
+    /** «El PP sí lo propone» */
+    abstract fun siLoPropone(p: Partido): String
+
+    /**
+     * Titular tras responder. [elegido] es el partido pulsado (adivina) o por el que se pregunta (V/F).
+     * Si la propuesta la hacen varios partidos, se nombran todos empezando por el elegido.
+     */
+    fun cabecera(acierto: Boolean, elegido: Partido?, actual: Iniciativa): String {
+        val inicio = if (acierto) correcto else no
+        val validos = listOf(actual.partido) + (actual.partidosValidos - actual.partido)
+        return if (elegido != null && elegido in validos) {
+            val otros = validos - elegido
+            when {
+                acierto && otros.isEmpty() -> inicio + esDe(elegido)
+                acierto -> inicio + sujeto(elegido).replaceFirstChar { it.uppercase() } + juntoCon(otros)
+                else -> inicio + siLoPropone(elegido) + (if (otros.isEmpty()) "" else juntoCon(otros))
+            }
+        } else {
+            val otros = validos - actual.partido
+            inicio + esDe(actual.partido) + (if (otros.isEmpty()) "" else juntoCon(otros))
+        }
+    }
     abstract fun programa(p: Partido): String
     abstract fun medida(n: Int, pagina: Int, seccion: String): String
     abstract val verTexto: String
@@ -147,7 +172,9 @@ object TextosES : Textos() {
     override val correcto = "¡Correcto! "
     override val no = "¡No! "
     override fun esDe(p: Partido) = "Es ${de(p)}"
-    override fun tambienLoPropone(p: Partido) = "${art(p).replaceFirstChar { it.uppercase() }} también lo propone"
+    override fun sujeto(p: Partido) = art(p)
+    override fun juntoCon(otros: List<Partido>) = ", junto con " + unir(otros.map { art(it) }, "y")
+    override fun siLoPropone(p: Partido) = "${art(p).replaceFirstChar { it.uppercase() }} sí lo propone"
     override fun programa(p: Partido) = when (p) {
         Partido.PSOE -> "programa «La fuerza de seguir avanzando» (elecciones generales 2026)"
         Partido.PP -> "programa «La Reconstrucción Nacional» (elecciones generales 2026)"
@@ -236,7 +263,9 @@ object TextosCA : Textos() {
     override val correcto = "Correcte! "
     override val no = "No! "
     override fun esDe(p: Partido) = "És ${de(p)}"
-    override fun tambienLoPropone(p: Partido) = "${art(p).replaceFirstChar { it.uppercase() }} també ho proposa"
+    override fun sujeto(p: Partido) = art(p)
+    override fun juntoCon(otros: List<Partido>) = ", juntament amb " + unir(otros.map { art(it) }, "i")
+    override fun siLoPropone(p: Partido) = "${art(p).replaceFirstChar { it.uppercase() }} sí que ho proposa"
     override fun programa(p: Partido) = when (p) {
         Partido.PSOE -> "programa «La fuerza de seguir avanzando» (eleccions generals 2026)"
         Partido.PP -> "programa «La Reconstrucción Nacional» (eleccions generals 2026)"
@@ -345,7 +374,9 @@ object TextosGL : Textos() {
     override val correcto = "Correcto! "
     override val no = "Non! "
     override fun esDe(p: Partido) = "É ${de(p)}"
-    override fun tambienLoPropone(p: Partido) = "${art(p).replaceFirstChar { it.uppercase() }} tamén o propón"
+    override fun sujeto(p: Partido) = art(p)
+    override fun juntoCon(otros: List<Partido>) = ", xunto con " + unir(otros.map { art(it) }, "e")
+    override fun siLoPropone(p: Partido) = "${art(p).replaceFirstChar { it.uppercase() }} si o propón"
     override fun programa(p: Partido) = when (p) {
         Partido.PSOE -> "programa «La fuerza de seguir avanzando» (eleccións xerais 2026)"
         Partido.PP -> "programa «La Reconstrucción Nacional» (eleccións xerais 2026)"
@@ -454,7 +485,11 @@ object TextosEU : Textos() {
     override val correcto = "Zuzena! "
     override val no = "Ez! "
     override fun esDe(p: Partido) = "${gen(p)}a da"
-    override fun tambienLoPropone(p: Partido) = "${erg(p)} ere proposatzen du"
+    override fun sujeto(p: Partido) = p.nombreCorto()
+    /** «, PPrekin eta VOXekin batera» (soziatiboa). */
+    override fun juntoCon(otros: List<Partido>) = ", " + unir(otros.map { soz(it) }, "eta") + " batera"
+    override fun siLoPropone(p: Partido) = "${erg(p)} proposatzen du"
+    private fun soz(p: Partido) = when (p) { Partido.VOX -> "VOXekin"; Partido.JUNTS -> "Juntsekin"; else -> p.nombreCorto() + "rekin" }
     override fun programa(p: Partido) = when (p) {
         Partido.PSOE -> "«La fuerza de seguir avanzando» programa (2026ko hauteskunde orokorrak)"
         Partido.PP -> "«La Reconstrucción Nacional» programa (2026ko hauteskunde orokorrak)"
@@ -563,7 +598,9 @@ object TextosOC : Textos() {
     override val correcto = "Corrècte! "
     override val no = "Non! "
     override fun esDe(p: Partido) = "Ei ${de(p)}"
-    override fun tambienLoPropone(p: Partido) = "${art(p).replaceFirstChar { it.uppercase() }} tanben ac prepause"
+    override fun sujeto(p: Partido) = art(p)
+    override fun juntoCon(otros: List<Partido>) = ", amassa damb " + unir(otros.map { art(it) }, "e")
+    override fun siLoPropone(p: Partido) = "${art(p).replaceFirstChar { it.uppercase() }} plan ac prepause"
     override fun programa(p: Partido) = when (p) {
         Partido.PSOE -> "programa «La fuerza de seguir avanzando» (eleccions generaus 2026)"
         Partido.PP -> "programa «La Reconstrucción Nacional» (eleccions generaus 2026)"
@@ -672,7 +709,9 @@ object TextosEN : Textos() {
     override val correcto = "Correct! "
     override val no = "No! "
     override fun esDe(p: Partido) = "It's from ${p.nombreCorto()}"
-    override fun tambienLoPropone(p: Partido) = "${p.nombreCorto()} proposes it too"
+    override fun sujeto(p: Partido) = p.nombreCorto()
+    override fun juntoCon(otros: List<Partido>) = ", along with " + unir(otros.map { it.nombreCorto() }, "and")
+    override fun siLoPropone(p: Partido) = "${p.nombreCorto()} does propose it"
     override fun programa(p: Partido) = when (p) {
         Partido.PSOE -> "manifesto «La fuerza de seguir avanzando» (2026 general election)"
         Partido.PP -> "manifesto «La Reconstrucción Nacional» (2026 general election)"

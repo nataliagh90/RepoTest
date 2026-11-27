@@ -58,4 +58,22 @@ class PartidaTest {
         val vfErc = Partida(Modo.VERDADERO_FALSO, listOf(i), Partido.ERC)
         assertTrue(vfErc.corregir(i, false))
     }
+
+    @Test fun cabeceraCompartida() {
+        // Caso real: JUNTS 30 (cuenta vivienda), compartida con PP 155 y VOX 379.
+        val i = Iniciativa(
+            1, Partido.JUNTS, 30, 0, "Vivienda", "Habitatge", "Cuenta vivienda", "", "",
+            listOf(Coincidencia(Partido.PP, 155, true, ""), Coincidencia(Partido.VOX, 379, true, "")),
+        )
+        val t = TextosES
+        assertEquals("¡Correcto! El PP, junto con Junts y VOX", t.cabecera(true, Partido.PP, i))
+        assertEquals("¡Correcto! Junts, junto con el PP y VOX", t.cabecera(true, Partido.JUNTS, i))
+        assertEquals("¡No! Es de Junts, junto con el PP y VOX", t.cabecera(false, Partido.ERC, i))
+        assertEquals("¡No! El PP sí lo propone, junto con Junts y VOX", t.cabecera(false, Partido.PP, i))
+        assertEquals("Correct! PP, along with Junts and VOX", TextosEN.cabecera(true, Partido.PP, i))
+        // Propuesta no compartida.
+        val j = Iniciativa(2, Partido.PSOE, 1, 1, "Vivienda", "", "x", "", "")
+        assertEquals("¡Correcto! Es del PSOE", t.cabecera(true, Partido.PSOE, j))
+        assertEquals("¡No! Es del PSOE", t.cabecera(false, Partido.PP, j))
+    }
 }

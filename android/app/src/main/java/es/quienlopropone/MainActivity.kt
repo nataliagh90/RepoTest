@@ -414,15 +414,13 @@ internal fun Revelacion(
     onToggle: () -> Unit,
 ) {
     val t = LocalTextos.current
-    val tambien = elegido != null && elegido != actual.partido && elegido in actual.partidosValidos
     Card(
         Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = (if (acierto) VERDE else ROJO).copy(alpha = 0.15f)),
     ) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(
-                (if (acierto) t.correcto else t.no) +
-                    if (tambien) t.tambienLoPropone(elegido!!) else t.esDe(actual.partido),
+                t.cabecera(acierto, elegido, actual),
                 style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold,
                 color = if (acierto) VERDE else ROJO,
             )
