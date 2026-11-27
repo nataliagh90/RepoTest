@@ -95,7 +95,7 @@ fun App(inicial: Pantalla = Pantalla.Inicio, idiomaInicial: Idioma? = null) {
     var verEsencial by remember { mutableStateOf(runCatching { prefs.getBoolean("verEsencial", true) }.getOrDefault(true)) }
     val idiomaGuardado = remember { runCatching { prefs.getString("idioma", null) }.getOrNull() }
     var idioma by remember { mutableStateOf(idiomaInicial ?: Idioma.entries.firstOrNull { it.codigo == idiomaGuardado } ?: Idioma.ES) }
-    val bienvenidaVista = remember { runCatching { prefs.getBoolean("bienvenidaVista", false) }.getOrDefault(false) }
+    var bienvenidaVista by remember { mutableStateOf(runCatching { prefs.getBoolean("bienvenidaVista", false) }.getOrDefault(false)) }
     // La primera vez: idioma y después la bienvenida. Quien ya eligió idioma ve la bienvenida una vez.
     LaunchedEffect(Unit) {
         if (idiomaInicial == null && pantalla == Pantalla.Inicio) {
@@ -105,6 +105,7 @@ fun App(inicial: Pantalla = Pantalla.Inicio, idiomaInicial: Idioma? = null) {
     }
     fun terminarBienvenida() {
         runCatching { prefs.edit().putBoolean("bienvenidaVista", true).apply() }
+        bienvenidaVista = true
         pantalla = Pantalla.Inicio
     }
     val traduccion = remember(idioma) { Repositorio.traduccion(context, idioma) }
@@ -126,9 +127,10 @@ fun App(inicial: Pantalla = Pantalla.Inicio, idiomaInicial: Idioma? = null) {
         when (val p = pantalla) {
             Pantalla.Idioma -> ElegirIdioma(
                 actual = idioma,
-                onElegir = { i -> idioma = i; runCatching { prefs.edit().putString("idioma", i.codigo).apply() } },
-                onContinuar = {
-                    runCatching { prefs.edit().putString("idioma", idioma.codigo).apply() }
+                // Elegir un idioma lo aplica y entra directamente, sin confirmar.
+                onElegir = { i ->
+                    idioma = i
+                    runCatching { prefs.edit().putString("idioma", i.codigo).apply() }
                     pantalla = if (bienvenidaVista) Pantalla.Inicio else Pantalla.Bienvenida
                 },
             )
@@ -225,10 +227,13 @@ private fun Inicio(
 }
 
 @Composable
-private fun ElegirIdioma(actual: Idioma, onElegir: (Idioma) -> Unit, onContinuar: () -> Unit) {
-    val t = LocalTextos.current
+private fun ElegirIdioma(actual: Idioma, onElegir: (Idioma) -> Unit) {
     Text("🌐", fontSize = 40.sp)
-    Text(t.elegirIdioma, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+    // Título en todos los idiomas: todavía no sabemos cuál lee el usuario.
+    Text(
+        "Idioma · Llengua · Lingua · Hizkuntza · Lengua · Language",
+        style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold,
+    )
     Idioma.entries.forEach { i ->
         val sel = i == actual
         OutlinedCard(
@@ -238,19 +243,18 @@ private fun ElegirIdioma(actual: Idioma, onElegir: (Idioma) -> Unit, onContinuar
                 containerColor = if (sel) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
             ),
         ) {
-            Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(selected = sel, onClick = { onElegir(i) })
-                Text(i.nombre, style = MaterialTheme.typography.titleMedium)
+            Row(Modifier.padding(horizontal = 20.dp, vertical = 18.dp), verticalAlignment = Alignment.CenterVertically) {
+                Text(i.nombre, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
+                Text("›", style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.primary)
             }
         }
     }
-    Card(
-        Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
-    ) {
-        Text(t.avisoIA, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(16.dp))
-    }
-    Button(onClick = onContinuar, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text(t.continuar, fontSize = 16.sp) }
+    Text(
+        "⚠️ Traducciones hechas con IA · Traduccions fetes amb IA · Traducións feitas con IA · " +
+            "AArekin egindako itzulpenak · Traduccions hètes damb IA · Translated with AI",
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
 }
 
 @Composable

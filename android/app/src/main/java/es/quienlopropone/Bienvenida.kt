@@ -68,6 +68,13 @@ fun Bienvenida(paginaInicial: Int = 0, onTerminar: () -> Unit) {
                     paginas[i].second, style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
+                // Aviso de traducción automática en la primera pantalla (no aplica al español).
+                if (i == 0 && t.idioma != Idioma.ES) {
+                    Spacer(Modifier.height(20.dp))
+                    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)) {
+                        Text(t.avisoIA, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(12.dp))
+                    }
+                }
             }
         }
         // Indicador de página

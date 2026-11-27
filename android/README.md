@@ -39,7 +39,7 @@ En los dos modos:
 
 <img src="captura-compartidas.png" width="600">
 
-**Idiomas.** Al abrir la app por primera vez se elige el idioma: español, català, galego, euskara, aranés (occitano) o inglés. Se puede cambiar después con el botón 🌐 de la pantalla de inicio. La interfaz y «lo esencial» de cada propuesta están traducidos con inteligencia artificial, y la app lo advierte. El texto literal de los programas se muestra siempre en su idioma original.
+**Idiomas.** Al abrir la app por primera vez se elige el idioma (español, català, galego, euskara, aranés u inglés); al tocarlo se entra directamente, sin confirmar. Se puede cambiar después con el botón 🌐 de la pantalla de inicio. La interfaz y «lo esencial» de cada propuesta están traducidos con inteligencia artificial, y la app lo advierte. El texto literal de los programas se muestra siempre en su idioma original.
 
 <img src="captura-idiomas.png" width="800">
 
