@@ -48,6 +48,8 @@ data class Iniciativa(
     /** Partidos a los que se puede atribuir correctamente: el suyo y los que proponen lo mismo. */
     val partidosValidos: Set<Partido> = setOf(partido) + coincidencias.filter { it.igual }.map { it.partido }
     val compartida get() = partidosValidos.size > 1
+    /** Clave estable «PARTIDO N», la misma que usan los ficheros de traducción. */
+    val clave get() = "${partido.name} $numero"
 }
 
 object Repositorio {
@@ -55,6 +57,20 @@ object Repositorio {
 
     fun cargar(context: Context): List<Iniciativa> = cache ?: synchronized(this) {
         cache ?: leer(context).also { cache = it }
+    }
+
+    private val traducciones = mutableMapOf<Idioma, Map<String, String>>()
+
+    /** «Lo esencial» traducido (assets/esencial_<código>.json). En español, o si falta el fichero, vacío. */
+    fun traduccion(context: Context, idioma: Idioma): Map<String, String> = synchronized(this) {
+        traducciones.getOrPut(idioma) {
+            if (idioma == Idioma.ES) emptyMap() else runCatching {
+                val o = org.json.JSONObject(
+                    context.assets.open("esencial_${idioma.codigo}.json").bufferedReader(Charsets.UTF_8).use { it.readText() },
+                )
+                o.keys().asSequence().associateWith { o.getString(it) }
+            }.getOrDefault(emptyMap())
+        }
     }
 
     /** Busca una propuesta por partido y número (para mostrar el texto de las coincidencias). */

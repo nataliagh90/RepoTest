@@ -59,9 +59,14 @@ val LocalVerEsencial = compositionLocalOf { true }
 
 /** Texto con el que se presenta una propuesta, según la preferencia del jugador. */
 @Composable
-fun Iniciativa.texto(): String = if (LocalVerEsencial.current && esencial.isNotBlank()) esencial else titulo
+fun Iniciativa.texto(): String =
+    if (LocalVerEsencial.current && esencial.isNotBlank()) LocalTraduccion.current[clave] ?: esencial else titulo
+
+/** «Lo esencial» traducido al idioma elegido (clave «PARTIDO N»); vacío en español. */
+val LocalTraduccion = compositionLocalOf<Map<String, String>> { emptyMap() }
 
 sealed interface Pantalla {
+    data object Idioma : Pantalla
     data object Inicio : Pantalla
     data object ConfigVF : Pantalla
     class Jugando(val partida: Partida) : Pantalla
@@ -75,10 +80,19 @@ fun App(inicial: Pantalla = Pantalla.Inicio) {
     var pantalla by remember { mutableStateOf(inicial) }
     val prefs = remember { context.getSharedPreferences("ajustes", Context.MODE_PRIVATE) }
     var verEsencial by remember { mutableStateOf(runCatching { prefs.getBoolean("verEsencial", true) }.getOrDefault(true)) }
+    val idiomaGuardado = remember { runCatching { prefs.getString("idioma", null) }.getOrNull() }
+    var idioma by remember { mutableStateOf(Idioma.entries.firstOrNull { it.codigo == idiomaGuardado } ?: Idioma.ES) }
+    // La primera vez se pide el idioma antes de nada.
+    LaunchedEffect(Unit) { if (idiomaGuardado == null && pantalla == Pantalla.Inicio) pantalla = Pantalla.Idioma }
+    val traduccion = remember(idioma) { Repositorio.traduccion(context, idioma) }
 
     BackHandler(enabled = pantalla != Pantalla.Inicio) { pantalla = Pantalla.Inicio }
 
-    CompositionLocalProvider(LocalVerEsencial provides verEsencial) { Column(
+    CompositionLocalProvider(
+        LocalVerEsencial provides verEsencial,
+        LocalTextos provides textosDe(idioma),
+        LocalTraduccion provides traduccion,
+    ) { Column(
         Modifier
             .fillMaxSize()
             .systemBarsPadding()
@@ -87,7 +101,14 @@ fun App(inicial: Pantalla = Pantalla.Inicio) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         when (val p = pantalla) {
+            Pantalla.Idioma -> ElegirIdioma(
+                actual = idioma,
+                onElegir = { i -> idioma = i; runCatching { prefs.edit().putString("idioma", i.codigo).apply() } },
+                onContinuar = { runCatching { prefs.edit().putString("idioma", idioma.codigo).apply() }; pantalla = Pantalla.Inicio },
+            )
             Pantalla.Inicio -> Inicio(
+                idioma = idioma,
+                onIdioma = { pantalla = Pantalla.Idioma },
                 compartidas = todas.count { it.compartida },
                 verEsencial = verEsencial,
                 onVerEsencial = { v -> verEsencial = v; runCatching { prefs.edit().putBoolean("verEsencial", v).apply() } },
@@ -117,41 +138,45 @@ fun App(inicial: Pantalla = Pantalla.Inicio) {
 
 @Composable
 private fun Inicio(
+    idioma: Idioma, onIdioma: () -> Unit,
     compartidas: Int, verEsencial: Boolean, onVerEsencial: (Boolean) -> Unit,
     onAdivina: () -> Unit, onVerdaderoFalso: () -> Unit,
 ) {
-    Text("¿Quién lo propone?", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+    val t = LocalTextos.current
+    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Text(t.titulo, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+        TextButton(onClick = onIdioma) { Text("🌐 ${idioma.codigo.uppercase()}") }
+    }
     Text(
-        "Pon a prueba lo que sabes de los programas electorales: " + Partido.entries.joinToString(", ") { it.nombre } + ".",
+        t.subtitulo(Partido.entries.joinToString(", ") { it.nombre }),
         style = MaterialTheme.typography.bodyLarge,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
-    Text("Cómo ver las propuestas", style = MaterialTheme.typography.titleSmall)
+    Text(t.comoVer, style = MaterialTheme.typography.titleSmall)
     SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
         SegmentedButton(selected = verEsencial, onClick = { onVerEsencial(true) }, shape = SegmentedButtonDefaults.itemShape(0, 2)) {
-            Text("Lo esencial")
+            Text(t.loEsencial)
         }
         SegmentedButton(selected = !verEsencial, onClick = { onVerEsencial(false) }, shape = SegmentedButtonDefaults.itemShape(1, 2)) {
-            Text("Texto literal")
+            Text(t.textoLiteral)
         }
     }
     Text(
-        if (verEsencial) "Cada propuesta se resume de forma neutral, sin la retórica del partido. El texto original se puede consultar al responder."
-        else "Se muestra el título tal como aparece en el programa (los de ERC, traducidos del catalán).",
+        if (verEsencial) t.explicaEsencial else t.explicaLiteral,
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
     Spacer(Modifier.height(4.dp))
     TarjetaModo(
-        titulo = "Adivina el partido",
-        texto = "10 propuestas de los tres partidos, repartidas a partes iguales. Para cada una, elige quién la propone.",
-        boton = "Jugar",
+        titulo = t.modoAdivina,
+        texto = t.modoAdivinaDesc,
+        boton = t.jugar,
         onClick = onAdivina,
     )
     TarjetaModo(
-        titulo = "¿Verdadero o falso?",
-        texto = "Elige un partido y responde si cada propuesta es suya o no. Tú decides cuántas: 10, 20 o 50.",
-        boton = "Elegir partido",
+        titulo = t.modoVF,
+        texto = t.modoVFDesc,
+        boton = t.elegirPartido,
         onClick = onVerdaderoFalso,
     )
     Card(
@@ -159,14 +184,42 @@ private fun Inicio(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
     ) {
         Text(
-            "🤝 $compartidas propuestas coinciden en lo esencial con la de otro partido. " +
-                "En el juego, cualquiera de ellos cuenta como respuesta correcta.",
+            t.compartidasInicio(compartidas),
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(16.dp),
         )
     }
     Spacer(Modifier.height(8.dp))
     Fuentes()
+}
+
+@Composable
+private fun ElegirIdioma(actual: Idioma, onElegir: (Idioma) -> Unit, onContinuar: () -> Unit) {
+    val t = LocalTextos.current
+    Text("🌐", fontSize = 40.sp)
+    Text(t.elegirIdioma, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+    Idioma.entries.forEach { i ->
+        val sel = i == actual
+        OutlinedCard(
+            onClick = { onElegir(i) },
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.outlinedCardColors(
+                containerColor = if (sel) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
+            ),
+        ) {
+            Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                RadioButton(selected = sel, onClick = { onElegir(i) })
+                Text(i.nombre, style = MaterialTheme.typography.titleMedium)
+            }
+        }
+    }
+    Card(
+        Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
+    ) {
+        Text(t.avisoIA, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(16.dp))
+    }
+    Button(onClick = onContinuar, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text(t.continuar, fontSize = 16.sp) }
 }
 
 @Composable
@@ -183,10 +236,7 @@ private fun TarjetaModo(titulo: String, texto: String, boton: String, onClick: (
 @Composable
 private fun Fuentes() {
     Text(
-        "Fuentes: programas del PSOE, PP, Frente Amplio y ERC para las elecciones generales de 2026; " +
-            "propuestas publicadas en la web de Junts (junts.cat/propostes), y programa de VOX para las " +
-            "autonómicas de Castilla y León 2026. Los textos de ERC y Junts están traducidos del catalán. " +
-            "Faltan los programas de otros partidos porque todavía no se han publicado; se añadirán cuando estén disponibles.",
+        LocalTextos.current.fuentes,
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
@@ -196,18 +246,19 @@ private fun Fuentes() {
 
 @Composable
 private fun ConfigVF(onVolver: () -> Unit, onEmpezar: (Partido, Int) -> Unit) {
+    val t = LocalTextos.current
     var partido by remember { mutableStateOf<Partido?>(null) }
     var n by remember { mutableIntStateOf(10) }
 
-    TextButton(onClick = onVolver, contentPadding = PaddingValues(0.dp)) { Text("← Volver") }
-    Text("¿Verdadero o falso?", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+    TextButton(onClick = onVolver, contentPadding = PaddingValues(0.dp)) { Text(t.volver) }
+    Text(t.modoVF, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
     Text(
-        "La mitad de las propuestas serán del partido que elijas y la otra mitad, de los otros dos.",
+        t.vfMitad,
         style = MaterialTheme.typography.bodyMedium,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
 
-    Text("1. Elige un partido", style = MaterialTheme.typography.titleMedium)
+    Text(t.paso1, style = MaterialTheme.typography.titleMedium)
     Partido.entries.forEach { p ->
         val sel = partido == p
         OutlinedCard(
@@ -224,14 +275,14 @@ private fun ConfigVF(onVolver: () -> Unit, onEmpezar: (Partido, Int) -> Unit) {
                     color = if (sel) Color.White else colorDe(p), modifier = Modifier.width(72.dp),
                 )
                 Text(
-                    if (p == Partido.VOX) "Autonómicas de Castilla y León" else p.nombre,
+                    if (p == Partido.VOX) t.autonomicasCyL else p.nombre,
                     color = if (sel) Color.White else MaterialTheme.colorScheme.onSurface,
                 )
             }
         }
     }
 
-    Text("2. ¿Cuántas preguntas?", style = MaterialTheme.typography.titleMedium)
+    Text(t.paso2, style = MaterialTheme.typography.titleMedium)
     SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
         listOf(10, 20, 50).forEachIndexed { i, valor ->
             SegmentedButton(
@@ -246,7 +297,7 @@ private fun ConfigVF(onVolver: () -> Unit, onEmpezar: (Partido, Int) -> Unit) {
         onClick = { partido?.let { onEmpezar(it, n) } },
         enabled = partido != null,
         modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
-    ) { Text(if (partido == null) "Elige un partido" else "Empezar: $n preguntas sobre ${partido!!.sigla}", fontSize = 16.sp) }
+    ) { Text(if (partido == null) t.eligeUnPartido else t.empezar(n, partido!!), fontSize = 16.sp) }
 }
 
 // ---------------------------------------------------------------- Partida
@@ -258,15 +309,16 @@ private fun Jugando(partida: Partida, todas: List<Iniciativa>, onSalir: () -> Un
     var respuesta by remember(partida) { mutableStateOf<Any?>(null) }
     var verDetalle by remember(partida) { mutableStateOf(false) }
 
+    val t = LocalTextos.current
     val total = partida.preguntas.size
     val actual = partida.preguntas[indice]
 
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-        TextButton(onClick = onSalir, contentPadding = PaddingValues(0.dp)) { Text("← Salir") }
+        TextButton(onClick = onSalir, contentPadding = PaddingValues(0.dp)) { Text(t.salir) }
         Spacer(Modifier.weight(1f))
-        Text("Aciertos: ${partida.aciertos}", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+        Text(t.aciertos(partida.aciertos), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
     }
-    Text("Pregunta ${indice + 1} de $total", style = MaterialTheme.typography.labelLarge)
+    Text(t.pregunta(indice + 1, total), style = MaterialTheme.typography.labelLarge)
     LinearProgressIndicator(
         progress = { (indice + if (respuesta != null) 1 else 0) / total.toFloat() },
         modifier = Modifier.fillMaxWidth(),
@@ -274,19 +326,19 @@ private fun Jugando(partida: Partida, todas: List<Iniciativa>, onSalir: () -> Un
 
     ElevatedCard(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text(actual.tema.uppercase(), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+            Text(t.tema(actual.tema).uppercase(), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
             Text(actual.texto(), fontSize = 21.sp, lineHeight = 28.sp, fontWeight = FontWeight.Medium)
         }
     }
 
     when (partida.modo) {
         Modo.ADIVINA -> {
-            Text("¿De qué partido es?", style = MaterialTheme.typography.titleMedium)
+            Text(t.deQuePartido, style = MaterialTheme.typography.titleMedium)
             Partido.entries.chunked(3).forEach { fila ->
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     fila.forEach { p ->
                         BotonRespuesta(
-                            texto = p.sigla, subtitulo = p.subtitulo,
+                            texto = p.sigla, subtitulo = t.subtituloBoton(p),
                             color = colorDe(p),
                             activo = respuesta == null || respuesta == p || p in actual.partidosValidos,
                             modifier = Modifier.weight(1f),
@@ -299,9 +351,9 @@ private fun Jugando(partida: Partida, todas: List<Iniciativa>, onSalir: () -> Un
         }
         Modo.VERDADERO_FALSO -> {
             val objetivo = partida.partido!!
-            Text("¿Es una propuesta ${objetivo.conDe()}?", style = MaterialTheme.typography.titleMedium)
+            Text(t.esPropuestaDe(objetivo), style = MaterialTheme.typography.titleMedium)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                listOf(true to "Verdadero", false to "Falso").forEach { (valor, texto) ->
+                listOf(true to t.verdadero, false to t.falso).forEach { (valor, texto) ->
                     BotonRespuesta(
                         texto = texto, subtitulo = null,
                         color = if (valor) VERDE else ROJO,
@@ -329,7 +381,7 @@ private fun Jugando(partida: Partida, todas: List<Iniciativa>, onSalir: () -> Un
         },
         enabled = respuesta != null,
         modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
-    ) { Text(if (ultima) "Ver resultado" else "Siguiente", fontSize = 16.sp) }
+    ) { Text(if (ultima) t.verResultado else t.siguiente, fontSize = 16.sp) }
 }
 
 @Composable
@@ -361,6 +413,7 @@ internal fun Revelacion(
     elegido: Partido? = null,
     onToggle: () -> Unit,
 ) {
+    val t = LocalTextos.current
     val tambien = elegido != null && elegido != actual.partido && elegido in actual.partidosValidos
     Card(
         Modifier.fillMaxWidth(),
@@ -368,40 +421,39 @@ internal fun Revelacion(
     ) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(
-                (if (acierto) "¡Correcto! " else "¡No! ") +
-                    if (tambien) "${elegido!!.conArticulo.replaceFirstChar { it.uppercase() }} también lo propone"
-                    else "Es ${actual.partido.conDe()}",
+                (if (acierto) t.correcto else t.no) +
+                    if (tambien) t.tambienLoPropone(elegido!!) else t.esDe(actual.partido),
                 style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold,
                 color = if (acierto) VERDE else ROJO,
             )
             Text(
-                if (actual.partido.nombre == actual.partido.sigla) "${actual.partido.sigla} — ${actual.partido.programa}"
-                else "${actual.partido.nombre} (${actual.partido.sigla}) — ${actual.partido.programa}",
+                if (actual.partido.nombre == actual.partido.sigla) "${actual.partido.sigla} — ${t.programa(actual.partido)}"
+                else "${actual.partido.nombre} (${actual.partido.sigla}) — ${t.programa(actual.partido)}",
                 style = MaterialTheme.typography.bodyMedium,
             )
             Text(
-                "Medida nº ${actual.numero} · página ${actual.pagina} · ${actual.seccion}",
+                t.medida(actual.numero, actual.pagina, actual.seccion),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             if (actual.coincidencias.isNotEmpty()) Coincidencias(actual, todas)
             TextButton(onClick = onToggle, contentPadding = PaddingValues(0.dp)) {
-                Text(if (verDetalle) "Ocultar el texto completo" else "Ver el texto completo")
+                Text(if (verDetalle) t.ocultarTexto else t.verTexto)
             }
             if (verDetalle) {
                 if (LocalVerEsencial.current && actual.esencial.isNotBlank()) {
                     Text(
-                        if (actual.original.isNotBlank()) "Título en el programa (traducido):" else "Título en el programa:",
+                        if (actual.original.isNotBlank()) t.tituloEnProgramaTraducido else t.tituloEnPrograma,
                         style = MaterialTheme.typography.labelLarge,
                     )
                     Text(actual.titulo, fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.bodyMedium)
                 }
                 if (actual.original.isNotBlank()) {
-                    Text("Texto original (en catalán):", style = MaterialTheme.typography.labelLarge)
+                    Text(t.textoOriginalCatalan, style = MaterialTheme.typography.labelLarge)
                     Text(actual.original, fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.bodyMedium)
                 }
                 if (actual.descripcion.isNotBlank()) Text(actual.descripcion, style = MaterialTheme.typography.bodyMedium)
-                else if (actual.original.isBlank()) Text("El programa no añade más detalle.", fontStyle = FontStyle.Italic)
+                else if (actual.original.isBlank()) Text(t.sinDetalle, fontStyle = FontStyle.Italic)
             }
         }
     }
@@ -409,6 +461,7 @@ internal fun Revelacion(
 
 @Composable
 private fun Coincidencias(actual: Iniciativa, todas: List<Iniciativa>) {
+    val t = LocalTextos.current
     val iguales = actual.coincidencias.filter { it.igual }
     val parecidas = actual.coincidencias.filter { !it.igual }
     Surface(
@@ -420,14 +473,13 @@ private fun Coincidencias(actual: Iniciativa, todas: List<Iniciativa>) {
             if (iguales.isNotEmpty()) {
                 val quienes = iguales.map { it.partido }.distinct()
                 Text(
-                    "🤝 Propuesta compartida: " + quienes.joinToString(", ") { it.conArticulo }.replace(Regex(", ([^,]*)$"), " y $1") +
-                        " también lo " + (if (quienes.size == 1) "propone" else "proponen"),
+                    t.compartidaCon(quienes),
                     style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold,
                 )
                 iguales.forEach { CoincidenciaFila(it, todas) }
             }
             if (parecidas.isNotEmpty()) {
-                Text("Propuestas parecidas en otros programas", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                Text(t.parecidas, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
                 parecidas.forEach { CoincidenciaFila(it, todas) }
             }
         }
@@ -439,7 +491,7 @@ private fun CoincidenciaFila(c: Coincidencia, todas: List<Iniciativa>) {
     val otra = Repositorio.buscar(todas, c.partido, c.numero)
     Column {
         Text(
-            "${c.partido.sigla} · medida nº ${c.numero}",
+            LocalTextos.current.medidaCorta(c.partido, c.numero),
             style = MaterialTheme.typography.labelMedium, color = colorDe(c.partido), fontWeight = FontWeight.Bold,
         )
         Text("«${otra?.texto() ?: c.resumen}»", style = MaterialTheme.typography.bodyMedium)
@@ -461,12 +513,10 @@ private fun Resultado(partida: Partida, onOtra: () -> Unit, onMenu: () -> Unit) 
         if (aciertos > recordAnterior) runCatching { prefs.edit().putInt(partida.claveRecord, aciertos).apply() }
     }
     val pct = aciertos * 100 / total
+    val t = LocalTextos.current
 
     Text(
-        when (partida.modo) {
-            Modo.ADIVINA -> "Adivina el partido"
-            Modo.VERDADERO_FALSO -> "¿Verdadero o falso? · ${partida.partido!!.sigla}"
-        },
+        t.tituloResultado(partida.modo, partida.partido),
         style = MaterialTheme.typography.titleMedium,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
@@ -478,20 +528,14 @@ private fun Resultado(partida: Partida, onOtra: () -> Unit, onMenu: () -> Unit) 
         ) {
             Text("$aciertos / $total", fontSize = 48.sp, fontWeight = FontWeight.Bold)
             Text(
-                when {
-                    pct == 100 -> "¡Perfecto! Te sabes los programas."
-                    pct >= 80 -> "¡Muy bien!"
-                    pct >= 60 -> "Nada mal."
-                    pct >= 40 -> "Regular: hay propuestas que sorprenden."
-                    else -> "Los programas tienen más sorpresas de lo que parece."
-                },
+                t.mensaje(pct),
                 style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center,
             )
             Text(
                 when {
-                    nuevoRecord -> "¡Nuevo récord! (antes: $recordAnterior)"
-                    recordAnterior >= 0 -> "Récord: ${maxOf(recordAnterior, aciertos)} / $total"
-                    else -> "Primera partida con esta configuración"
+                    nuevoRecord -> t.nuevoRecord(recordAnterior)
+                    recordAnterior >= 0 -> t.record(maxOf(recordAnterior, aciertos), total)
+                    else -> t.primeraPartida
                 },
                 style = MaterialTheme.typography.bodyMedium,
                 color = if (nuevoRecord) VERDE else MaterialTheme.colorScheme.onSurfaceVariant,
@@ -500,17 +544,17 @@ private fun Resultado(partida: Partida, onOtra: () -> Unit, onMenu: () -> Unit) 
         }
     }
 
-    Button(onClick = onOtra, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text("Jugar otra vez", fontSize = 16.sp) }
-    OutlinedButton(onClick = onMenu, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) { Text("Menú principal") }
+    Button(onClick = onOtra, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text(t.jugarOtra, fontSize = 16.sp) }
+    OutlinedButton(onClick = onMenu, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) { Text(t.menu) }
 
     val compartidas = partida.preguntas.count { it.compartida }
     if (compartidas > 0) {
         Text(
-            "🤝 $compartidas de estas $total propuestas las comparten varios partidos.",
+            t.compartidasPartida(compartidas, total),
             style = MaterialTheme.typography.bodyMedium,
         )
     }
-    Text("Repaso", style = MaterialTheme.typography.titleMedium)
+    Text(t.repaso, style = MaterialTheme.typography.titleMedium)
     partida.preguntas.forEachIndexed { i, ini ->
         val ok = partida.resultados.getOrNull(i) == true
         Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -518,8 +562,8 @@ private fun Resultado(partida: Partida, onOtra: () -> Unit, onMenu: () -> Unit) 
             Column(Modifier.weight(1f)) {
                 Text(ini.texto(), style = MaterialTheme.typography.bodyMedium, maxLines = 3, overflow = TextOverflow.Ellipsis)
                 Text(
-                    "${ini.partido.sigla} · medida nº ${ini.numero}" +
-                        (if (ini.compartida) "  🤝 también " + (ini.partidosValidos - ini.partido).joinToString(", ") { it.sigla } else ""),
+                    t.medidaCorta(ini.partido, ini.numero) +
+                        (if (ini.compartida) "  " + t.tambien((ini.partidosValidos - ini.partido).joinToString(", ") { it.sigla }) else ""),
                     style = MaterialTheme.typography.labelMedium, color = colorDe(ini.partido), fontWeight = FontWeight.Bold,
                 )
             }
