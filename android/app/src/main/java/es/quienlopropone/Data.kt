@@ -3,10 +3,21 @@ package es.quienlopropone
 import android.content.Context
 import org.json.JSONArray
 
-enum class Partido(val sigla: String, val nombre: String, val programa: String) {
-    ERC("ERC", "Esquerra Republicana", "«Pel país. Per la gent. Pel futur.» (elecciones generales 2026)"),
-    PP("PP", "Partido Popular", "«La Reconstrucción Nacional» (elecciones generales 2026)"),
-    VOX("VOX", "Castilla y León", "«Un programa con sentido común» (autonómicas de Castilla y León 2026)"),
+enum class Partido(
+    val sigla: String,
+    val nombre: String,
+    val programa: String,
+    /** Texto pequeño bajo la sigla en los botones. */
+    val subtitulo: String = nombre,
+    /** Con artículo, para frases: «el PP también lo propone». */
+    val conArticulo: String = sigla,
+) {
+    PSOE("PSOE", "Partido Socialista Obrero Español", "programa «La fuerza de seguir avanzando» (elecciones generales 2026)", "Partido Socialista", "el PSOE"),
+    PP("PP", "Partido Popular", "programa «La Reconstrucción Nacional» (elecciones generales 2026)", conArticulo = "el PP"),
+    VOX("VOX", "VOX", "programa «Un programa con sentido común» (autonómicas de Castilla y León 2026)", "Castilla y León"),
+    FA("FA", "Frente Amplio", "programa electoral (elecciones generales 2026)", conArticulo = "Frente Amplio"),
+    ERC("ERC", "Esquerra Republicana", "programa «Pel país. Per la gent. Pel futur.» (elecciones generales 2026)"),
+    JUNTS("Junts", "Junts per Catalunya", "propuestas publicadas en su web (elecciones generales 2026)"),
 }
 
 /** Otra propuesta, de otro partido, que coincide con esta. */

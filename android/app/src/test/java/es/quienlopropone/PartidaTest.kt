@@ -16,9 +16,9 @@ class PartidaTest {
             val partida = Partida.adivina(todas, 10, Random(semilla))
             assertEquals(10, partida.preguntas.size)
             assertEquals(10, partida.preguntas.distinct().size)
-            val porPartido = partida.preguntas.groupingBy { it.partido }.eachCount()
-            assertEquals(3, porPartido.size)
-            assertTrue(porPartido.values.all { it in 3..4 })
+            val porPartido = Partido.entries.associateWith { p -> partida.preguntas.count { it.partido == p } }
+            val base = 10 / Partido.entries.size
+            assertTrue(porPartido.values.all { it == base || it == base + 1 })
         }
     }
 
@@ -28,10 +28,8 @@ class PartidaTest {
             assertEquals(n, partida.preguntas.size)
             assertEquals(n, partida.preguntas.distinct().size)
             assertEquals(n / 2, partida.preguntas.count { it.partido == p })
-            val otros = partida.preguntas.filter { it.partido != p }.groupingBy { it.partido }.eachCount()
-            assertEquals(2, otros.size)
-            val (a, b) = otros.values.toList()
-            assertTrue(kotlin.math.abs(a - b) <= 1)
+            val otros = (Partido.entries - p).map { o -> partida.preguntas.count { it.partido == o } }
+            assertTrue(otros.max() - otros.min() <= 1)
         }
     }
 

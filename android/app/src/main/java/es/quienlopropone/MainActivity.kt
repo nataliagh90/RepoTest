@@ -40,16 +40,19 @@ fun Tema(content: @Composable () -> Unit) {
 }
 
 fun colorDe(p: Partido): Color = when (p) {
-    Partido.ERC -> Color(0xFFE8A317)
+    Partido.PSOE -> Color(0xFFD7141A)
     Partido.PP -> Color(0xFF1D6FB8)
     Partido.VOX -> Color(0xFF4E9A23)
+    Partido.FA -> Color(0xFF7B3294)
+    Partido.ERC -> Color(0xFFE8A317)
+    Partido.JUNTS -> Color(0xFF00A3A1)
 }
 
 private val VERDE = Color(0xFF2E7D32)
 private val ROJO = Color(0xFFC62828)
 
 /** «del PP», «de ERC», «de VOX». */
-fun Partido.conDe() = if (this == Partido.PP) "del PP" else "de $sigla"
+fun Partido.conDe() = if (conArticulo.startsWith("el ")) "del " + conArticulo.removePrefix("el ") else "de $conArticulo"
 
 /** true: se muestra «lo esencial» de cada propuesta; false: el título literal del programa. */
 val LocalVerEsencial = compositionLocalOf { true }
@@ -119,7 +122,7 @@ private fun Inicio(
 ) {
     Text("¿Quién lo propone?", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
     Text(
-        "Pon a prueba lo que sabes de los programas electorales de ERC, PP y VOX.",
+        "Pon a prueba lo que sabes de los programas electorales: " + Partido.entries.joinToString(", ") { it.nombre } + ".",
         style = MaterialTheme.typography.bodyLarge,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
@@ -180,8 +183,9 @@ private fun TarjetaModo(titulo: String, texto: String, boton: String, onClick: (
 @Composable
 private fun Fuentes() {
     Text(
-        "Fuentes: programas de ERC y PP para las elecciones generales de 2026 y de VOX para las " +
-            "autonómicas de Castilla y León 2026. Los títulos de ERC están traducidos del catalán. " +
+        "Fuentes: programas del PSOE, PP, Frente Amplio y ERC para las elecciones generales de 2026; " +
+            "propuestas publicadas en la web de Junts (junts.cat/propostes), y programa de VOX para las " +
+            "autonómicas de Castilla y León 2026. Los textos de ERC y Junts están traducidos del catalán. " +
             "Faltan los programas de otros partidos porque todavía no se han publicado; se añadirán cuando estén disponibles.",
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -278,15 +282,17 @@ private fun Jugando(partida: Partida, todas: List<Iniciativa>, onSalir: () -> Un
     when (partida.modo) {
         Modo.ADIVINA -> {
             Text("¿De qué partido es?", style = MaterialTheme.typography.titleMedium)
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Partido.entries.forEach { p ->
-                    BotonRespuesta(
-                        texto = p.sigla, subtitulo = if (p == Partido.VOX) "Castilla y León" else p.nombre,
-                        color = colorDe(p),
-                        activo = respuesta == null || respuesta == p || p in actual.partidosValidos,
-                        modifier = Modifier.weight(1f),
-                    ) {
-                        if (respuesta == null) { respuesta = p; partida.resultados += partida.corregir(actual, p) }
+            Partido.entries.chunked(3).forEach { fila ->
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    fila.forEach { p ->
+                        BotonRespuesta(
+                            texto = p.sigla, subtitulo = p.subtitulo,
+                            color = colorDe(p),
+                            activo = respuesta == null || respuesta == p || p in actual.partidosValidos,
+                            modifier = Modifier.weight(1f),
+                        ) {
+                            if (respuesta == null) { respuesta = p; partida.resultados += partida.corregir(actual, p) }
+                        }
                     }
                 }
             }
@@ -363,14 +369,14 @@ internal fun Revelacion(
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(
                 (if (acierto) "¡Correcto! " else "¡No! ") +
-                    if (tambien) "${if (elegido == Partido.PP) "El PP" else elegido!!.sigla} también lo propone"
+                    if (tambien) "${elegido!!.conArticulo.replaceFirstChar { it.uppercase() }} también lo propone"
                     else "Es ${actual.partido.conDe()}",
                 style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold,
                 color = if (acierto) VERDE else ROJO,
             )
             Text(
-                if (actual.partido == Partido.VOX) "VOX — programa ${actual.partido.programa}"
-                else "${actual.partido.nombre} (${actual.partido.sigla}) — programa ${actual.partido.programa}",
+                if (actual.partido.nombre == actual.partido.sigla) "${actual.partido.sigla} — ${actual.partido.programa}"
+                else "${actual.partido.nombre} (${actual.partido.sigla}) — ${actual.partido.programa}",
                 style = MaterialTheme.typography.bodyMedium,
             )
             Text(
@@ -414,7 +420,7 @@ private fun Coincidencias(actual: Iniciativa, todas: List<Iniciativa>) {
             if (iguales.isNotEmpty()) {
                 val quienes = iguales.map { it.partido }.distinct()
                 Text(
-                    "🤝 Propuesta compartida: " + quienes.joinToString(" y ") { if (it == Partido.PP) "el PP" else it.sigla } +
+                    "🤝 Propuesta compartida: " + quienes.joinToString(", ") { it.conArticulo }.replace(Regex(", ([^,]*)$"), " y $1") +
                         " también lo " + (if (quienes.size == 1) "propone" else "proponen"),
                     style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold,
                 )
