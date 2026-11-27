@@ -111,7 +111,7 @@ abstract class Textos {
 object TextosES : Textos() {
     override val idioma = Idioma.ES
     override val elegirIdioma = "Elige el idioma"
-    override val avisoIA = "⚠️ Las traducciones de la app y de los resúmenes se han hecho con inteligencia artificial. Pueden tener errores… o directamente decir cosas raras: quién sabe. El texto literal de cada programa se muestra siempre en su idioma original."
+    override val avisoIA = "⚠️ Aviso: los textos de la aplicación y los resúmenes de las propuestas se han traducido mediante inteligencia artificial y pueden contener errores o imprecisiones. El texto literal de cada programa se muestra siempre en su idioma original."
     override val continuar = "Continuar"
     override val cambiarIdioma = "Idioma"
     override val titulo = "¿Quién lo propone?"
@@ -200,7 +200,7 @@ fun Partido.nombreCorto() = if (this == Partido.FA) "Frente Amplio" else sigla
 object TextosCA : Textos() {
     override val idioma = Idioma.CA
     override val elegirIdioma = "Tria l'idioma"
-    override val avisoIA = "⚠️ Les traduccions de l'app i dels resums s'han fet amb intel·ligència artificial. Poden tenir errors… o dir directament coses estranyes: qui sap. El text literal de cada programa es mostra sempre en la seva llengua original."
+    override val avisoIA = "⚠️ Avís: els textos de l'aplicació i els resums de les propostes s'han traduït mitjançant intel·ligència artificial i poden contenir errors o imprecisions. El text literal de cada programa es mostra sempre en la seva llengua original."
     override val continuar = "Continua"
     override val cambiarIdioma = "Idioma"
     override val titulo = "Qui ho proposa?"
@@ -309,7 +309,7 @@ object TextosCA : Textos() {
 object TextosGL : Textos() {
     override val idioma = Idioma.GL
     override val elegirIdioma = "Escolle o idioma"
-    override val avisoIA = "⚠️ As traducións da app e dos resumos fixéronse con intelixencia artificial. Poden ter erros… ou dicir directamente cousas raras: quen sabe. O texto literal de cada programa móstrase sempre na súa lingua orixinal."
+    override val avisoIA = "⚠️ Aviso: os textos da aplicación e os resumos das propostas traducíronse mediante intelixencia artificial e poden conter erros ou imprecisións. O texto literal de cada programa móstrase sempre na súa lingua orixinal."
     override val continuar = "Continuar"
     override val cambiarIdioma = "Idioma"
     override val titulo = "Quen o propón?"
@@ -418,7 +418,7 @@ object TextosGL : Textos() {
 object TextosEU : Textos() {
     override val idioma = Idioma.EU
     override val elegirIdioma = "Aukeratu hizkuntza"
-    override val avisoIA = "⚠️ Aplikazioaren eta laburpenen itzulpenak adimen artifizialarekin egin dira. Akatsak izan ditzakete… edo gauza bitxiak esan zuzenean: nork daki. Programa bakoitzaren testu literala jatorrizko hizkuntzan erakusten da beti."
+    override val avisoIA = "⚠️ Oharra: aplikazioaren testuak eta proposamenen laburpenak adimen artifizialaren bidez itzuli dira, eta akatsak edo zehaztasun-ezak izan ditzakete. Programa bakoitzaren testu literala jatorrizko hizkuntzan erakusten da beti."
     override val continuar = "Jarraitu"
     override val cambiarIdioma = "Hizkuntza"
     override val titulo = "Nork proposatzen du?"
@@ -521,7 +521,7 @@ object TextosEU : Textos() {
 object TextosOC : Textos() {
     override val idioma = Idioma.OC
     override val elegirIdioma = "Tria era lengua"
-    override val avisoIA = "⚠️ Es traduccions dera aplicacion e des resums s'an hèt damb intelligéncia artificiau. Pòden auer errors… o díder dirèctament causes estranhes: qui sap. Eth tèxte literau de cada programa se mòstre tostemps ena sua lengua originau."
+    override val avisoIA = "⚠️ Avís: es tèxtes dera aplicacion e es resums des prepauses s'an tradusit damb intelligéncia artificiau e pòden contier errors o imprecisions. Eth tèxte literau de cada programa se mòstre tostemps ena sua lengua originau."
     override val continuar = "Contunhar"
     override val cambiarIdioma = "Lengua"
     override val titulo = "Qui ac prepause?"
@@ -630,7 +630,7 @@ object TextosOC : Textos() {
 object TextosEN : Textos() {
     override val idioma = Idioma.EN
     override val elegirIdioma = "Choose your language"
-    override val avisoIA = "⚠️ The app and the summaries were translated with artificial intelligence. They may contain mistakes… or just say odd things: who knows. The literal text of each manifesto is always shown in its original language."
+    override val avisoIA = "⚠️ Notice: the app's texts and the summaries of the proposals have been translated using artificial intelligence and may contain errors or inaccuracies. The literal text of each manifesto is always shown in its original language."
     override val continuar = "Continue"
     override val cambiarIdioma = "Language"
     override val titulo = "Who proposes it?"
