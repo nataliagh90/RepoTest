@@ -37,6 +37,11 @@ abstract class Textos {
     // Bienvenida (3 pantallas: la app, Adivina el partido, ¿Verdadero o falso?)
     abstract val bienvenida: List<Pair<String, String>>
     abstract val saltar: String
+    // Inicio compacto
+    abstract val modoAdivinaCorto: String
+    abstract val modoVFCorto: String
+    abstract fun compartidasCorto(n: Int): String
+    abstract val verFuentes: String
     abstract val empezarApp: String
     abstract val ayuda: String
     // Inicio
@@ -140,6 +145,10 @@ abstract class Textos {
 // =====================================================================================
 object TextosES : Textos() {
     override val idioma = Idioma.ES
+    override val modoAdivinaCorto = "10 preguntas"
+    override val modoVFCorto = "10, 20 o 50 preguntas"
+    override fun compartidasCorto(n: Int) = "🤝 $n propuestas compartidas entre partidos"
+    override val verFuentes = "Fuentes"
     override val bienvenida = listOf(
         "¿Quién lo propone?" to "Propuestas reales de los programas electorales, resumidas sin retórica. Descubre de qué partido es cada una… y cuántas comparten varios.",
         "Adivina el partido" to "10 propuestas de todos los partidos. Elige quién propone cada una.",
@@ -239,6 +248,10 @@ fun Partido.nombreCorto() = if (this == Partido.FA) "Frente Amplio" else sigla
 // =====================================================================================
 object TextosCA : Textos() {
     override val idioma = Idioma.CA
+    override val modoAdivinaCorto = "10 preguntes"
+    override val modoVFCorto = "10, 20 o 50 preguntes"
+    override fun compartidasCorto(n: Int) = "🤝 $n propostes compartides entre partits"
+    override val verFuentes = "Fonts"
     override val bienvenida = listOf(
         "Qui ho proposa?" to "Propostes reals dels programes electorals, resumides sense retòrica. Descobreix de quin partit és cadascuna… i quantes en comparteixen diversos.",
         "Endevina el partit" to "10 propostes de tots els partits. Tria qui proposa cadascuna.",
@@ -358,6 +371,10 @@ object TextosCA : Textos() {
 // =====================================================================================
 object TextosGL : Textos() {
     override val idioma = Idioma.GL
+    override val modoAdivinaCorto = "10 preguntas"
+    override val modoVFCorto = "10, 20 ou 50 preguntas"
+    override fun compartidasCorto(n: Int) = "🤝 $n propostas compartidas entre partidos"
+    override val verFuentes = "Fontes"
     override val bienvenida = listOf(
         "Quen o propón?" to "Propostas reais dos programas electorais, resumidas sen retórica. Descubre de que partido é cada unha… e cantas comparten varios.",
         "Adiviña o partido" to "10 propostas de todos os partidos. Escolle quen propón cada unha.",
@@ -477,6 +494,10 @@ object TextosGL : Textos() {
 // =====================================================================================
 object TextosEU : Textos() {
     override val idioma = Idioma.EU
+    override val modoAdivinaCorto = "10 galdera"
+    override val modoVFCorto = "10, 20 edo 50 galdera"
+    override fun compartidasCorto(n: Int) = "🤝 $n proposamen partekatu alderdien artean"
+    override val verFuentes = "Iturriak"
     override val bienvenida = listOf(
         "Nork proposatzen du?" to "Hauteskunde-programetako benetako proposamenak, erretorikarik gabe laburtuta. Asmatu zein alderdirena den bakoitza… eta zenbat partekatzen dituzten.",
         "Asmatu alderdia" to "Alderdi guztien 10 proposamen. Aukeratu nork proposatzen duen bakoitza.",
@@ -598,6 +619,10 @@ object TextosEU : Textos() {
 // =====================================================================================
 object TextosOC : Textos() {
     override val idioma = Idioma.OC
+    override val modoAdivinaCorto = "10 questions"
+    override val modoVFCorto = "10, 20 o 50 questions"
+    override fun compartidasCorto(n: Int) = "🤝 $n prepauses compartides entre partits"
+    override val verFuentes = "Hònts"
     override val bienvenida = listOf(
         "Qui ac prepause?" to "Prepauses reaus des programes electoraus, resumides sense retorica. Descobrís de quin partit ei cada ua… e quantes ne compartissen diuèrsi.",
         "Endevina eth partit" to "10 prepauses de toti es partits. Tria qui prepause cada ua.",
@@ -717,6 +742,10 @@ object TextosOC : Textos() {
 // =====================================================================================
 object TextosEN : Textos() {
     override val idioma = Idioma.EN
+    override val modoAdivinaCorto = "10 questions"
+    override val modoVFCorto = "10, 20 or 50 questions"
+    override fun compartidasCorto(n: Int) = "🤝 $n proposals shared between parties"
+    override val verFuentes = "Sources"
     override val bienvenida = listOf(
         "Who proposes it?" to "Real proposals from the election manifestos, summarised without the rhetoric. Find out which party each one comes from… and how many are shared.",
         "Guess the party" to "10 proposals from all the parties. Choose who proposes each one.",

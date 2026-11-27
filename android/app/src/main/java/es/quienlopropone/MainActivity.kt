@@ -173,6 +173,7 @@ private fun Inicio(
     onAdivina: () -> Unit, onVerdaderoFalso: () -> Unit,
 ) {
     val t = LocalTextos.current
+    var verFuentes by remember { mutableStateOf(false) }
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Text(t.titulo, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
         TextButton(onClick = onIdioma) { Text("🌐 ${idioma.codigo.uppercase()}") }
@@ -180,12 +181,18 @@ private fun Inicio(
             Text("?", fontWeight = FontWeight.Bold, fontSize = 18.sp, modifier = Modifier.semantics { contentDescription = t.ayuda })
         }
     }
-    Text(
-        t.subtitulo(Partido.entries.joinToString(", ") { it.nombre }),
-        style = MaterialTheme.typography.bodyLarge,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-    )
-    Text(t.comoVer, style = MaterialTheme.typography.titleSmall)
+    // Los partidos, solo con sus colores y siglas.
+    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        Partido.entries.forEach { p ->
+            Box(Modifier.background(colorDe(p), CircleShape).padding(horizontal = 8.dp, vertical = 4.dp)) {
+                Text(p.sigla, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 11.sp)
+            }
+        }
+    }
+    Spacer(Modifier.height(4.dp))
+    TarjetaModo(t.modoAdivina, t.modoAdivinaCorto, onAdivina) { IconoAdivina() }
+    TarjetaModo(t.modoVF, t.modoVFCorto, onVerdaderoFalso) { IconoVF() }
+    Spacer(Modifier.height(4.dp))
     SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
         SegmentedButton(selected = verEsencial, onClick = { onVerEsencial(true) }, shape = SegmentedButtonDefaults.itemShape(0, 2)) {
             Text(t.loEsencial)
@@ -194,36 +201,50 @@ private fun Inicio(
             Text(t.textoLiteral)
         }
     }
-    Text(
-        if (verEsencial) t.explicaEsencial else t.explicaLiteral,
-        style = MaterialTheme.typography.bodySmall,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-    )
-    Spacer(Modifier.height(4.dp))
-    TarjetaModo(
-        titulo = t.modoAdivina,
-        texto = t.modoAdivinaDesc,
-        boton = t.jugar,
-        onClick = onAdivina,
-    )
-    TarjetaModo(
-        titulo = t.modoVF,
-        texto = t.modoVFDesc,
-        boton = t.elegirPartido,
-        onClick = onVerdaderoFalso,
-    )
-    Card(
-        Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
-    ) {
-        Text(
-            t.compartidasInicio(compartidas),
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.padding(16.dp),
-        )
+    Text(t.compartidasCorto(compartidas), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    TextButton(onClick = { verFuentes = !verFuentes }, contentPadding = PaddingValues(0.dp)) {
+        Text((if (verFuentes) "▾ " else "▸ ") + t.verFuentes)
     }
-    Spacer(Modifier.height(8.dp))
-    Fuentes()
+    if (verFuentes) Fuentes()
+}
+
+@Composable
+private fun TarjetaModo(titulo: String, detalle: String, onClick: () -> Unit, icono: @Composable () -> Unit) {
+    ElevatedCard(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
+        Row(Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
+            Box(Modifier.size(64.dp), contentAlignment = Alignment.Center) { icono() }
+            Spacer(Modifier.width(16.dp))
+            Column(Modifier.weight(1f)) {
+                Text(titulo, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Text(detalle, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Text("›", fontSize = 32.sp, color = MaterialTheme.colorScheme.primary)
+        }
+    }
+}
+
+/** Icono del modo «Adivina»: los seis partidos en dos filas. */
+@Composable
+private fun IconoAdivina() {
+    Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
+        Partido.entries.chunked(3).forEach { fila ->
+            Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                fila.forEach { p -> Box(Modifier.size(width = 16.dp, height = 12.dp).background(colorDe(p), RoundedCornerShape(6.dp))) }
+            }
+        }
+    }
+}
+
+/** Icono del modo «Verdadero o falso»: ✓ y ✕. */
+@Composable
+private fun IconoVF() {
+    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        listOf("✓" to VERDE, "✕" to ROJO).forEach { (s, c) ->
+            Box(Modifier.size(28.dp).background(c, CircleShape), contentAlignment = Alignment.Center) {
+                Text(s, color = Color.White, fontWeight = FontWeight.Black, fontSize = 16.sp)
+            }
+        }
+    }
 }
 
 @Composable
@@ -257,16 +278,6 @@ private fun ElegirIdioma(actual: Idioma, onElegir: (Idioma) -> Unit) {
     )
 }
 
-@Composable
-private fun TarjetaModo(titulo: String, texto: String, boton: String, onClick: () -> Unit) {
-    ElevatedCard(Modifier.fillMaxWidth()) {
-        Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text(titulo, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-            Text(texto, style = MaterialTheme.typography.bodyMedium)
-            Button(onClick = onClick, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) { Text(boton, fontSize = 16.sp) }
-        }
-    }
-}
 
 @Composable
 private fun Fuentes() {

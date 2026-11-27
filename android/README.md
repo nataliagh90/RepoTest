@@ -15,6 +15,12 @@ Faltan los programas de otros partidos porque todavía no se han publicado. Se a
 
 ![Capturas: inicio, configuración de verdadero/falso, modo adivina, modo verdadero/falso y resultados](capturas-modos.png)
 
+## Pantalla de inicio
+
+Muy poco texto, porque la explicación está en la bienvenida: los dos juegos en tarjetas grandes que se pulsan enteras, el selector «Lo esencial / Texto literal», el número de propuestas compartidas y un enlace desplegable a las fuentes.
+
+<img src="captura-inicio.png" width="600">
+
 ## Bienvenida
 
 La primera vez que se abre la app, después de elegir el idioma, tres pantallas explican de qué va: qué es la app y cómo funciona cada modo de juego, cada una con una ilustración y poco texto. Se pueden saltar y se vuelven a abrir con el botón **?** de la pantalla de inicio.
