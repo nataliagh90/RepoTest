@@ -34,6 +34,11 @@ abstract class Textos {
     abstract val avisoIA: String
     abstract val continuar: String
     abstract val cambiarIdioma: String
+    // Bienvenida (3 pantallas: la app, Adivina el partido, ¿Verdadero o falso?)
+    abstract val bienvenida: List<Pair<String, String>>
+    abstract val saltar: String
+    abstract val empezarApp: String
+    abstract val ayuda: String
     // Inicio
     abstract val titulo: String
     abstract fun subtitulo(partidos: String): String
@@ -135,6 +140,14 @@ abstract class Textos {
 // =====================================================================================
 object TextosES : Textos() {
     override val idioma = Idioma.ES
+    override val bienvenida = listOf(
+        "¿Quién lo propone?" to "Propuestas reales de los programas electorales, resumidas sin retórica. Descubre de qué partido es cada una… y cuántas comparten varios.",
+        "Adivina el partido" to "10 propuestas de todos los partidos. Elige quién propone cada una.",
+        "¿Verdadero o falso?" to "Elige un partido y responde si cada propuesta es suya. 10, 20 o 50 preguntas.",
+    )
+    override val saltar = "Saltar"
+    override val empezarApp = "Empezar"
+    override val ayuda = "Ayuda"
     override val elegirIdioma = "Elige el idioma"
     override val avisoIA = "⚠️ Aviso: los textos de la aplicación y los resúmenes de las propuestas se han traducido mediante inteligencia artificial y pueden contener errores o imprecisiones. El texto literal de cada programa se muestra siempre en su idioma original."
     override val continuar = "Continuar"
@@ -226,6 +239,14 @@ fun Partido.nombreCorto() = if (this == Partido.FA) "Frente Amplio" else sigla
 // =====================================================================================
 object TextosCA : Textos() {
     override val idioma = Idioma.CA
+    override val bienvenida = listOf(
+        "Qui ho proposa?" to "Propostes reals dels programes electorals, resumides sense retòrica. Descobreix de quin partit és cadascuna… i quantes en comparteixen diversos.",
+        "Endevina el partit" to "10 propostes de tots els partits. Tria qui proposa cadascuna.",
+        "Vertader o fals?" to "Tria un partit i respon si cada proposta és seva. 10, 20 o 50 preguntes.",
+    )
+    override val saltar = "Salta"
+    override val empezarApp = "Comença"
+    override val ayuda = "Ajuda"
     override val elegirIdioma = "Tria l'idioma"
     override val avisoIA = "⚠️ Avís: els textos de l'aplicació i els resums de les propostes s'han traduït mitjançant intel·ligència artificial i poden contenir errors o imprecisions. El text literal de cada programa es mostra sempre en la seva llengua original."
     override val continuar = "Continua"
@@ -337,6 +358,14 @@ object TextosCA : Textos() {
 // =====================================================================================
 object TextosGL : Textos() {
     override val idioma = Idioma.GL
+    override val bienvenida = listOf(
+        "Quen o propón?" to "Propostas reais dos programas electorais, resumidas sen retórica. Descubre de que partido é cada unha… e cantas comparten varios.",
+        "Adiviña o partido" to "10 propostas de todos os partidos. Escolle quen propón cada unha.",
+        "Verdadeiro ou falso?" to "Escolle un partido e responde se cada proposta é súa. 10, 20 ou 50 preguntas.",
+    )
+    override val saltar = "Saltar"
+    override val empezarApp = "Comezar"
+    override val ayuda = "Axuda"
     override val elegirIdioma = "Escolle o idioma"
     override val avisoIA = "⚠️ Aviso: os textos da aplicación e os resumos das propostas traducíronse mediante intelixencia artificial e poden conter erros ou imprecisións. O texto literal de cada programa móstrase sempre na súa lingua orixinal."
     override val continuar = "Continuar"
@@ -448,6 +477,14 @@ object TextosGL : Textos() {
 // =====================================================================================
 object TextosEU : Textos() {
     override val idioma = Idioma.EU
+    override val bienvenida = listOf(
+        "Nork proposatzen du?" to "Hauteskunde-programetako benetako proposamenak, erretorikarik gabe laburtuta. Asmatu zein alderdirena den bakoitza… eta zenbat partekatzen dituzten.",
+        "Asmatu alderdia" to "Alderdi guztien 10 proposamen. Aukeratu nork proposatzen duen bakoitza.",
+        "Egia ala gezurra?" to "Aukeratu alderdi bat eta erantzun proposamen bakoitza berea den. 10, 20 edo 50 galdera.",
+    )
+    override val saltar = "Saltatu"
+    override val empezarApp = "Hasi"
+    override val ayuda = "Laguntza"
     override val elegirIdioma = "Aukeratu hizkuntza"
     override val avisoIA = "⚠️ Oharra: aplikazioaren testuak eta proposamenen laburpenak adimen artifizialaren bidez itzuli dira, eta akatsak edo zehaztasun-ezak izan ditzakete. Programa bakoitzaren testu literala jatorrizko hizkuntzan erakusten da beti."
     override val continuar = "Jarraitu"
@@ -561,6 +598,14 @@ object TextosEU : Textos() {
 // =====================================================================================
 object TextosOC : Textos() {
     override val idioma = Idioma.OC
+    override val bienvenida = listOf(
+        "Qui ac prepause?" to "Prepauses reaus des programes electoraus, resumides sense retorica. Descobrís de quin partit ei cada ua… e quantes ne compartissen diuèrsi.",
+        "Endevina eth partit" to "10 prepauses de toti es partits. Tria qui prepause cada ua.",
+        "Vertadèr o faus?" to "Tria un partit e respon se cada prepausa ei sua. 10, 20 o 50 questions.",
+    )
+    override val saltar = "Sautar"
+    override val empezarApp = "Començar"
+    override val ayuda = "Ajuda"
     override val elegirIdioma = "Tria era lengua"
     override val avisoIA = "⚠️ Avís: es tèxtes dera aplicacion e es resums des prepauses s'an tradusit damb intelligéncia artificiau e pòden contier errors o imprecisions. Eth tèxte literau de cada programa se mòstre tostemps ena sua lengua originau."
     override val continuar = "Contunhar"
@@ -672,6 +717,14 @@ object TextosOC : Textos() {
 // =====================================================================================
 object TextosEN : Textos() {
     override val idioma = Idioma.EN
+    override val bienvenida = listOf(
+        "Who proposes it?" to "Real proposals from the election manifestos, summarised without the rhetoric. Find out which party each one comes from… and how many are shared.",
+        "Guess the party" to "10 proposals from all the parties. Choose who proposes each one.",
+        "True or false?" to "Pick a party and say whether each proposal is theirs. 10, 20 or 50 questions.",
+    )
+    override val saltar = "Skip"
+    override val empezarApp = "Start"
+    override val ayuda = "Help"
     override val elegirIdioma = "Choose your language"
     override val avisoIA = "⚠️ Notice: the app's texts and the summaries of the proposals have been translated using artificial intelligence and may contain errors or inaccuracies. The literal text of each manifesto is always shown in its original language."
     override val continuar = "Continue"

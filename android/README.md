@@ -15,6 +15,12 @@ Faltan los programas de otros partidos porque todavía no se han publicado. Se a
 
 ![Capturas: inicio, configuración de verdadero/falso, modo adivina, modo verdadero/falso y resultados](capturas-modos.png)
 
+## Bienvenida
+
+La primera vez que se abre la app, después de elegir el idioma, tres pantallas explican de qué va: qué es la app y cómo funciona cada modo de juego, cada una con una ilustración y poco texto. Se pueden saltar y se vuelven a abrir con el botón **?** de la pantalla de inicio.
+
+<img src="captura-bienvenida.png" width="900">
+
 ## Modos de juego
 
 **Adivina el partido.** 10 propuestas equilibradas: cada partido aparece una vez y las cuatro restantes son de partidos al azar, sin que ninguno salga más de dos veces. Para cada propuesta se elige entre los seis partidos.

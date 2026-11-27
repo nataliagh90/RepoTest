@@ -17,6 +17,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -77,6 +79,7 @@ val LocalTraduccion = compositionLocalOf<Map<String, String>> { emptyMap() }
 
 sealed interface Pantalla {
     data object Idioma : Pantalla
+    data object Bienvenida : Pantalla
     data object Inicio : Pantalla
     data object ConfigVF : Pantalla
     class Jugando(val partida: Partida) : Pantalla
@@ -92,8 +95,18 @@ fun App(inicial: Pantalla = Pantalla.Inicio, idiomaInicial: Idioma? = null) {
     var verEsencial by remember { mutableStateOf(runCatching { prefs.getBoolean("verEsencial", true) }.getOrDefault(true)) }
     val idiomaGuardado = remember { runCatching { prefs.getString("idioma", null) }.getOrNull() }
     var idioma by remember { mutableStateOf(idiomaInicial ?: Idioma.entries.firstOrNull { it.codigo == idiomaGuardado } ?: Idioma.ES) }
-    // La primera vez se pide el idioma antes de nada.
-    LaunchedEffect(Unit) { if (idiomaInicial == null && idiomaGuardado == null && pantalla == Pantalla.Inicio) pantalla = Pantalla.Idioma }
+    val bienvenidaVista = remember { runCatching { prefs.getBoolean("bienvenidaVista", false) }.getOrDefault(false) }
+    // La primera vez: idioma y después la bienvenida. Quien ya eligió idioma ve la bienvenida una vez.
+    LaunchedEffect(Unit) {
+        if (idiomaInicial == null && pantalla == Pantalla.Inicio) {
+            if (idiomaGuardado == null) pantalla = Pantalla.Idioma
+            else if (!bienvenidaVista) pantalla = Pantalla.Bienvenida
+        }
+    }
+    fun terminarBienvenida() {
+        runCatching { prefs.edit().putBoolean("bienvenidaVista", true).apply() }
+        pantalla = Pantalla.Inicio
+    }
     val traduccion = remember(idioma) { Repositorio.traduccion(context, idioma) }
 
     BackHandler(enabled = pantalla != Pantalla.Inicio) { pantalla = Pantalla.Inicio }
@@ -102,7 +115,7 @@ fun App(inicial: Pantalla = Pantalla.Inicio, idiomaInicial: Idioma? = null) {
         LocalVerEsencial provides verEsencial,
         LocalTextos provides textosDe(idioma),
         LocalTraduccion provides traduccion,
-    ) { Column(
+    ) { if (pantalla == Pantalla.Bienvenida) Bienvenida(onTerminar = ::terminarBienvenida) else Column(
         Modifier
             .fillMaxSize()
             .systemBarsPadding()
@@ -114,17 +127,22 @@ fun App(inicial: Pantalla = Pantalla.Inicio, idiomaInicial: Idioma? = null) {
             Pantalla.Idioma -> ElegirIdioma(
                 actual = idioma,
                 onElegir = { i -> idioma = i; runCatching { prefs.edit().putString("idioma", i.codigo).apply() } },
-                onContinuar = { runCatching { prefs.edit().putString("idioma", idioma.codigo).apply() }; pantalla = Pantalla.Inicio },
+                onContinuar = {
+                    runCatching { prefs.edit().putString("idioma", idioma.codigo).apply() }
+                    pantalla = if (bienvenidaVista) Pantalla.Inicio else Pantalla.Bienvenida
+                },
             )
             Pantalla.Inicio -> Inicio(
                 idioma = idioma,
                 onIdioma = { pantalla = Pantalla.Idioma },
+                onAyuda = { pantalla = Pantalla.Bienvenida },
                 compartidas = todas.count { it.compartida },
                 verEsencial = verEsencial,
                 onVerEsencial = { v -> verEsencial = v; runCatching { prefs.edit().putBoolean("verEsencial", v).apply() } },
                 onAdivina = { pantalla = Pantalla.Jugando(Partida.adivina(todas)) },
                 onVerdaderoFalso = { pantalla = Pantalla.ConfigVF },
             )
+            Pantalla.Bienvenida -> Unit
             Pantalla.ConfigVF -> ConfigVF(
                 onVolver = { pantalla = Pantalla.Inicio },
                 onEmpezar = { partido, n -> pantalla = Pantalla.Jugando(Partida.verdaderoFalso(todas, partido, n)) },
@@ -148,7 +166,7 @@ fun App(inicial: Pantalla = Pantalla.Inicio, idiomaInicial: Idioma? = null) {
 
 @Composable
 private fun Inicio(
-    idioma: Idioma, onIdioma: () -> Unit,
+    idioma: Idioma, onIdioma: () -> Unit, onAyuda: () -> Unit,
     compartidas: Int, verEsencial: Boolean, onVerEsencial: (Boolean) -> Unit,
     onAdivina: () -> Unit, onVerdaderoFalso: () -> Unit,
 ) {
@@ -156,6 +174,9 @@ private fun Inicio(
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Text(t.titulo, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
         TextButton(onClick = onIdioma) { Text("🌐 ${idioma.codigo.uppercase()}") }
+        OutlinedIconButton(onClick = onAyuda) {
+            Text("?", fontWeight = FontWeight.Bold, fontSize = 18.sp, modifier = Modifier.semantics { contentDescription = t.ayuda })
+        }
     }
     Text(
         t.subtitulo(Partido.entries.joinToString(", ") { it.nombre }),
